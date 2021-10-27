@@ -4,18 +4,21 @@
 namespace ft{
 
 template<typename T>
-struct containerData{
-	T value;
-	containerData *next;
-};
-
-template<typename T>
 class Container{
+public:
+	typedef T			value_type;
+	typedef T&			reference;
+	typedef const T&	const_reference;
+	typedef size_t		size_type;
 private:
-	containerData<T> *_data;
-	size_t _size;
-	containerData<T> *newElem(const T &newValue){
-		containerData<T> *elem = new containerData<T>;
+	struct containerData{
+		value_type value;
+		containerData *next;
+	};
+	containerData *_data;
+	size_type _size;
+	containerData *newElem(const value_type& newValue){
+		containerData *elem = new containerData;
 		elem->value = newValue;
 		elem->next = NULL;
 		return (elem);
@@ -23,40 +26,41 @@ private:
 public:
 	Container(void) : _size(0), _data(NULL){}
 	~Container(void){
-		containerData<T> *freeData;
+		containerData *freeData;
 		while (_data){
 			freeData = _data;
 			_data = _data->next;
 			delete freeData;
 		}
+		_data = NULL;
 	}
-	Container(const Container &copy){
+	Container(const Container& copy){
 		this->operator=(copy);
 	}
-	Container &operator=(const Container &op){
+	Container &operator=(const Container& op){
 		if (this == &op)
 			return (*this);
-		this->_size = op.size();
-		containerData<T> *elem = op._data;
-		for (int i = 0; i < (int)this->_size; ++i){
+		this->_size = 0;
+		const containerData *elem = op._data;
+		for (size_type i = 0; i < op.size(); ++i){
 			this->push_back(elem->value);
 			elem = elem->next;
 		}
 		return (*this);
 	}
-	void push_back(const T &newValue){
+	void push_back(const value_type& newValue){
 		if (!_data)
 			_data = newElem(newValue);
 		else{
-			containerData<T> *i = _data;
+			containerData *i = _data;
 			while (i->next)
 				i = i->next;
 			i->next = newElem(newValue);
 		}
-		_size++;
+		this->_size++;
 	}
-	void push_front(const T &newValue){
-		containerData<T> *oldBegin = _data;
+	void push_front(const value_type& newValue){
+		containerData *oldBegin = _data;
 		_data = newElem(newValue);
 		_data->next = oldBegin;
 		_size++;
@@ -69,7 +73,7 @@ public:
 			_data = NULL;
 			return ;
 		}
-		containerData<T> *i = _data;
+		containerData *i = _data;
 		while (i->next->next)
 			i = i->next;
 		delete i->next;
@@ -84,16 +88,16 @@ public:
 			_data = NULL;
 			return ;
 		}
-		containerData<T> *newBegin = _data->next;
+		containerData *newBegin = _data->next;
 		delete _data;
 		_data = newBegin;
 		_size--;
 	}
-	T &begin(void) const{
+	reference begin(void) const{
 		return (_data->value);
 	}
-	T &end(void) const{
-		containerData<T> *i = _data;
+	reference end(void) const{
+		containerData *i = _data;
 		while (i->next)
 			i = i->next;
 		return (i->value);
@@ -101,11 +105,11 @@ public:
 	bool isEmpty(void) const{
 		return (_data?false:true);
 	}
-	size_t size(void) const{
+	size_type size(void) const{
 		return (_size);
 	}
 };
 
-};
+}//end namespace ft
 
 #endif
