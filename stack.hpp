@@ -8,11 +8,11 @@ namespace ft{
 template <typename T>
 class stack{
 public:
-	typedef Container<T>                             container_type;
-	typedef typename container_type::value_type      value_type;
-	typedef typename container_type::reference       reference;
-	typedef typename container_type::const_reference const_reference;
-	typedef typename container_type::size_type       size_type;
+	typedef Container<T>								container_type;
+	typedef typename container_type::value_type			value_type;
+	typedef typename container_type::reference			reference;
+	typedef typename container_type::const_reference	const_reference;
+	typedef typename container_type::size_type			size_type;
 private:
 	container_type c;
 public:

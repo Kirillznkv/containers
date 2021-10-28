@@ -24,7 +24,7 @@ private:
 		return (elem);
 	}
 public:
-	Container(void) : _size(0), _data(NULL){}
+	Container(void) : _data(NULL), _size(0){}
 	~Container(void){
 		containerData *freeData;
 		while (_data){
