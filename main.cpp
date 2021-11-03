@@ -1,6 +1,6 @@
-// #include <deque>//??
+#include <deque>//??
 // #include <map>
-// #include <vector>
+#include <vector>//
 #include <iostream>
 
 #define BLOCK_COLOR "\033[38;2;0;0;0;48;2;255;255;0m"

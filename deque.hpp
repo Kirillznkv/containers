@@ -1,15 +1,23 @@
-#ifndef CONTAINER_HPP
-#define CONTAINER_HPP
+#ifndef DEQUE_HPP
+#define DEQUE_HPP
 
 namespace ft{
 
-template<typename T>
-class Container{
+template<typename T, class Allocator = std::allocator<T> >
+class deque{
 public:
 	typedef T			value_type;
 	typedef T&			reference;
 	typedef const T&	const_reference;
 	typedef size_t		size_type;
+
+	typedef Allocator									allocator_type;
+	typedef typename allocator_type::reference			reference;
+	typedef typename allocator_type::const_reference	const_reference;
+	typedef typename allocator_type::size_type			size_type;
+	typedef typename allocator_type::difference_type	difference_type;
+	typedef typename allocator_type::pointer			pointer;
+	typedef typename allocator_type::const_pointer		const_pointer;
 private:
 	struct containerData{
 		value_type value;
@@ -24,8 +32,8 @@ private:
 		return (elem);
 	}
 public:
-	Container(void) : _data(NULL), _size(0){}
-	~Container(void){
+	deque(void) : _data(NULL), _size(0){}
+	~deque(void){
 		containerData *freeData;
 		while (_data){
 			freeData = _data;
@@ -34,10 +42,10 @@ public:
 		}
 		_data = NULL;
 	}
-	Container(const Container& copy){
+	deque(const deque& copy){
 		this->operator=(copy);
 	}
-	Container &operator=(const Container& op){
+	deque &operator=(const deque& op){
 		if (this == &op)
 			return (*this);
 		this->_size = 0;
@@ -59,12 +67,6 @@ public:
 		}
 		this->_size++;
 	}
-	void push_front(const value_type& newValue){
-		containerData *oldBegin = _data;
-		_data = newElem(newValue);
-		_data->next = oldBegin;
-		_size++;
-	}
 	void pop_back(void){
 		if (!_data)
 			return ;
@@ -79,22 +81,6 @@ public:
 		delete i->next;
 		i->next = NULL;
 		_size--;
-	}
-	void pop_front(void){
-		if (!_data)
-			return ;
-		if (!(_data->next)){
-			delete _data;
-			_data = NULL;
-			return ;
-		}
-		containerData *newBegin = _data->next;
-		delete _data;
-		_data = newBegin;
-		_size--;
-	}
-	reference begin(void) const{
-		return (_data->value);
 	}
 	reference end(void) const{
 		containerData *i = _data;

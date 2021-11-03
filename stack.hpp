@@ -1,14 +1,14 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include "container.hpp"
+#include "deque.hpp"
 
 namespace ft{
 
-template <typename T>
+template <class T, class Container = deque<T> >//
 class stack{
 public:
-	typedef Container<T>								container_type;
+	typedef Container									container_type;
 	typedef typename container_type::value_type			value_type;
 	typedef typename container_type::reference			reference;
 	typedef typename container_type::const_reference	const_reference;
