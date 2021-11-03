@@ -26,7 +26,7 @@ public:
 		return (*this);
 	}
 	size_type size(void) const{ return c.size(); }
-	reference top(void) const{ return c.end(); }
+	reference top(void) const{ return c.back(); }
 	bool empty(void) const{ return c.isEmpty(); }
 	void push(const value_type& value) { c.push_back(value); }
 	void pop(void) { c.pop_back(); }

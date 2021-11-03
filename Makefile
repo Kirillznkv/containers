@@ -7,10 +7,10 @@ O_FILE = $(TEST1:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(O_FILE) $(HPP_FILE)
+$(NAME): $(O_FILE)
 	clang++ -std=c++98 $(O_FILE) -o $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HPP_FILE)
 	@clang++ -std=c++98 -c -Wall -Wextra -Werror $< -o $@
 
 clean:

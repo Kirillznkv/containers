@@ -37,12 +37,12 @@ private:
 public:
 	deque(void) : _data(NULL), _size(0){}
 	~deque(void){
-		containerData *freeData;
+		containerData *freeNode;
 		while (_data){
-			freeData = _data;
+			freeNode = _data;
 			_data = _data->next;
-			_allocatorData.deallocate(freeData->value, 1);
-			_allocatorNode.deallocate(freeData, 1);
+			_allocatorData.deallocate(freeNode->value, 1);
+			_allocatorNode.deallocate(freeNode, 1);
 		}
 		_data = NULL;
 	}
@@ -83,12 +83,12 @@ public:
 		containerData *i = _data;
 		while (i->next->next)
 			i = i->next;
-		_allocatorData.deallocate(i->next->value, 1);
-		_allocatorNode.deallocate(i->next, 1);
+		// _allocatorData.deallocate(i->next->value, 1);
+		// _allocatorNode.deallocate(i->next, 1);
 		i->next = NULL;
 		_size--;
 	}
-	reference end(void) const{
+	reference back(void) const{
 		containerData *i = _data;
 		while (i->next)
 			i = i->next;
