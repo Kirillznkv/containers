@@ -2,11 +2,12 @@ NAME = a.out
 
 TEST1 =	main.cpp StackTests.cpp
 TEST2 = main.cpp
+HPP_FILE = deque.hpp stack.hpp vector.hpp##
 O_FILE = $(TEST1:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(O_FILE)
+$(NAME): $(O_FILE) $(HPP_FILE)
 	clang++ -std=c++98 $(O_FILE) -o $(NAME)
 
 %.o: %.cpp
