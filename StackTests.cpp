@@ -88,44 +88,46 @@ void stackTestString(void){
 	out(s1_copy2.empty(), s2_copy2.empty());
 }
 
-// Test whis template into arg
-void stackTestList(void){
+// Test whis template into arg////ффффффф
+void stackTestList(void){////фффффффф
 	std::cout<<TYPE_COLOR"(List)"RESET_COLOR<<std::endl;
-	std::stack<std::list<int> > s1;
-	ft::stack<std::list<int> > s2;
-	std::list<int> myList;
+	std::stack<std::stack<int> > s1;
+	ft::stack<ft::stack<int> > s2;
+	std::stack<int> myList;
+	ft::stack<int> myList2;
 	out(s1.empty(), s2.empty()); // Empty
-	myList.push_back(5);
+	myList.push(5);
+	myList2.push(5);
 	s1.push(myList); // Push
-	s2.push(myList);
-	out(s1.top().back(), s2.top().back()); //Top
-	myList.push_back(10);
+	s2.push(myList2);
+	out(s1.top().top(), s2.top().top()); //Top
+	myList.push(10);
+	myList2.push(10);
 	s1.push(myList);
-	s2.push(myList);
-	out(s1.top().back(), s2.top().back());
+	s2.push(myList2);
+	out(s1.top().top(), s2.top().top());
 	s1.pop(); // Pop
 	s2.pop();
-	out(s1.top().back(), s2.top().back());
-	myList.pop_back();
-	myList.pop_back();
+	out(s1.top().top(), s2.top().top());
 	for (int i = 0; i < 100; ++i){
-		myList.push_back(i);
+		myList.push(i);
 		s1.push(myList);
-		s2.push(myList);
+		s2.push(myList2);
 	}
-	out(s1.top().back(), s2.top().back());
+	out(s1.top().top(), s2.top().top());
 	out(s1.size(), s2.size()); // Size
 	out(s1.empty(), s2.empty());
-	std::stack<std::list<int> > s1_copy(s1);
-	ft::stack<std::list<int> > s2_copy(s2);
-	out(s1.top().back(), s2.top().back());
+	std::stack<std::stack<int> > s1_copy(s1);
+	ft::stack<ft::stack<int> > s2_copy(s2);
+	out(s1.top().top(), s2.top().top());
 	out(s1_copy.size(), s2_copy.size());
 	out(s1_copy.empty(), s2_copy.empty());
-	std::stack<std::list<int> > s1_copy2;
-	ft::stack<std::list<int> > s2_copy2;
+	std::stack<std::stack<int> > s1_copy2;
+	ft::stack<ft::stack<int> > s2_copy2;
 	s1_copy2 = s1;
 	s2_copy2 = s2;
-	out(s1.top().back(), s2.top().back());
+	out(s1.top().top(), s2.top().top());
 	out(s1_copy2.size(), s2_copy2.size());
 	out(s1_copy2.empty(), s2_copy2.empty());
+	out(s2_copy2.top().top() != s2_copy2.top().top(), s2_copy2.top().top() <= s2_copy2.top().top());
 }

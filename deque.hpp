@@ -104,6 +104,10 @@ public:
 	size_type size(void) const{
 		return (_size);
 	}
+	/*----relational-operators----*/
+	//  bool operator==(const stack<value_type>& rhs){
+	// 	 return
+	//  }
 };
 
 }//end namespace ft

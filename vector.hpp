@@ -3,12 +3,18 @@
 
 #include <memory>
 
+// Вопросы:
+// Чем отличается max_size от capacity?
+// Зачем нужен resize?
+// Что будет если вызвать reserve, когда уже есть эллементы и что будет если задать его меньше чем есть эллементов?
+// Что будет если увеличить или уменьшить resize?
+
 namespace ft{
 
-template <class T, class Allocator = std::allocator<T> >
+template<typename T, class Allocator = std::allocator<T> >
 class vector{
 public:
-	typedef T											value_type;
+	typedef T											value_type;//
 	typedef Allocator									allocator_type;
 	typedef typename allocator_type::reference			reference;
 	typedef typename allocator_type::const_reference	const_reference;
@@ -21,17 +27,27 @@ public:
 	// typedef std::reverse_iterator<iterator>				reverse_iterator;
 	// typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
 private:
+	size_t	_size;
+	size_t	_max_size;
+	size_t	_resize;
+	size_t	_capacity;
+	size_t	_empty;
+	size_t	_reserve;
+	allocator_type	_alloc;
 public:
 	vector(void){};
 	vector(const vector& copy){}
 	~vector(void) {}
-	vector &operator=(const vector& op){
-		if (this == &op)
-			return (*this);
-		return (*this);
+	// vector &operator=(const vector& op){
+	// 	if (this == &op)
+	// 		return (*this);
+	// 	return (*this);
+	// }
+	allocator_type get_allocator() const{
+		return _alloc;
 	}
 };
 
-}
+}//end namespace ft
 
 #endif
