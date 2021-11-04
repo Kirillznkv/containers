@@ -25,12 +25,15 @@ private:
 	};
 	containerData *_data;
 	size_type _size;
-	std::allocator<containerData> _allocatorNode;
-	std::allocator<value_type> _allocatorData;
+	std::allocator<containerData > _allocatorNode;
+	std::allocator<value_type > _allocatorData;
 	containerData *newElem(const value_type& newValue){
 		containerData *elem = _allocatorNode.allocate(1);
 		elem->value = _allocatorData.allocate(1);
-		*(elem->value) = newValue;
+		_allocatorData.construct(elem->value, newValue);
+		// *(elem->value) = newValue;
+		value_type a = newValue;
+		a = (value_type)a;
 		elem->next = NULL;
 		return (elem);
 	}
@@ -41,6 +44,7 @@ public:
 		while (_data){
 			freeNode = _data;
 			_data = _data->next;
+			_allocatorData.destroy(freeNode->value);
 			_allocatorData.deallocate(freeNode->value, 1);
 			_allocatorNode.deallocate(freeNode, 1);
 		}
@@ -83,8 +87,8 @@ public:
 		containerData *i = _data;
 		while (i->next->next)
 			i = i->next;
-		// _allocatorData.deallocate(i->next->value, 1);
-		// _allocatorNode.deallocate(i->next, 1);
+		_allocatorData.deallocate(i->next->value, 1);
+		_allocatorNode.deallocate(i->next, 1);
 		i->next = NULL;
 		_size--;
 	}

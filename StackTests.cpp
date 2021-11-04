@@ -98,14 +98,14 @@ void stackTestList(void){
 	myList.push_back(5);
 	s1.push(myList); // Push
 	s2.push(myList);
-	// out(s1.top(), s2.top()); //Top
+	out(s1.top().back(), s2.top().back()); //Top
 	myList.push_back(10);
 	s1.push(myList);
 	s2.push(myList);
-	// out(s1.top(), s2.top());
+	out(s1.top().back(), s2.top().back());
 	s1.pop(); // Pop
 	s2.pop();
-	// out(s1.top(), s2.top());
+	out(s1.top().back(), s2.top().back());
 	myList.pop_back();
 	myList.pop_back();
 	for (int i = 0; i < 100; ++i){
@@ -113,19 +113,19 @@ void stackTestList(void){
 		s1.push(myList);
 		s2.push(myList);
 	}
-	// out(s1.top(), s2.top());
+	out(s1.top().back(), s2.top().back());
 	out(s1.size(), s2.size()); // Size
 	out(s1.empty(), s2.empty());
 	std::stack<std::list<int> > s1_copy(s1);
 	ft::stack<std::list<int> > s2_copy(s2);
-	// out(s1_copy.top(), s2_copy.top());
+	out(s1.top().back(), s2.top().back());
 	out(s1_copy.size(), s2_copy.size());
 	out(s1_copy.empty(), s2_copy.empty());
 	std::stack<std::list<int> > s1_copy2;
 	ft::stack<std::list<int> > s2_copy2;
 	s1_copy2 = s1;
 	s2_copy2 = s2;
-	// out(s1_copy2.top(), s2_copy2.top());
+	out(s1.top().back(), s2.top().back());
 	out(s1_copy2.size(), s2_copy2.size());
 	out(s1_copy2.empty(), s2_copy2.empty());
 }
