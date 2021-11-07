@@ -36,7 +36,7 @@ private:
 	// size_t	_reserve;
 	allocator_type	_alloc;
 public:
-	vector(void) : _size(0), _capacity(0), _arr(NULL){};
+	vector() : _size(0), _capacity(0), _arr(NULL){};
 	vector(const vector& copy){}//
 	~vector(void) {}
 	// vector &operator=(const vector& op){
@@ -44,27 +44,56 @@ public:
 	// 		return (*this);
 	// 	return (*this);
 	// }
-	allocator_type get_allocator() const{
+	allocator_type	get_allocator() const{
 		return _alloc;
+	}
+	bool		empty() const{
+		return (_size ? false : true);
+	}
+	size_type	capacity() const{
+		return (_capacity);
+	}
+	size_type	size() const{
+		return (_size);
+	}
+	size_type	max_size() const{
+		return (4294967296 / sizeof(value_type));///?????
+	}
+	void	resize(size_type n, value_type val = value_type()){///????Затестить
+		while (_size < n)
+			push_back(val);
+		while (_size > n)
+			pop_back();
+	}
+	void	reserve(size_type n){//тест
+		if (n != _size){
+			value_type *new_arr = _alloc.allocate(n);
+			for (size_type i = 0; i < _size; ++i){
+				_alloc.construct(new_arr + i, _arr[i]);
+				_alloc.destroy(_arr + i);
+			}
+			if (_capacity)
+				_alloc.deallocate(_arr, _capacity);
+			_arr = new_arr;
+			_capacity = n;
+		}
 	}
 	void	push_back(const value_type &val){
 		if (!_capacity){
-			_capacity = 2;
-			_arr = _alloc.allocate(_capacity);
-			_alloc.construct(_arr, val);
+			_arr = _alloc.allocate(_capacity = 1);
 		}
 		else if (_size == _capacity){
-			value_type *new_arr = _alloc.allocate(_capacity <<= 2);
+			value_type *new_arr = _alloc.allocate(_capacity <<= 1);
 			for (size_t i = 0; i < _size; ++i){
 				_alloc.construct(new_arr + i, arr[i]);
 				_alloc.destroy(_arr + i);
 			}
-			_alloc.deallocate(_arr, _size);
+			_alloc.deallocate(_arr, _capacity>>1);//?
 			_arr = new_arr;
 		}
-		++_size;
+		_alloc.construct(_arr + _size++, val);
 	}
-	void	pop_back(void){//исключения
+	void	pop_back(){//исключения
 		if (_size)
 			_alloc.destroy(_arr + --_size);
 	}
