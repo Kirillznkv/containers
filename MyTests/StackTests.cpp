@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stack>
-#include "stack.hpp"
+#include "../srcs/stack.hpp"
 #include <sstream>
 
 

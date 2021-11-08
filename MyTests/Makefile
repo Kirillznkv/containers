@@ -1,8 +1,9 @@
 NAME = a.out
 
+SRCS = ../srcs/
 TEST1 =	main.cpp StackTests.cpp
 TEST2 = main.cpp
-HPP_FILE = deque.hpp stack.hpp vector.hpp##
+HPP_FILE = $(SRCS)deque.hpp $(SRCS)stack.hpp $(SRCS)vector.hpp##
 O_FILE = $(TEST1:.cpp=.o)
 
 all: $(NAME)
