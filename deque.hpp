@@ -79,6 +79,7 @@ public:
 		if (!_data)
 			return ;
 		if (!(_data->next)){
+			_allocatorData.destroy(_data->value);
 			_allocatorData.deallocate(_data->value, 1);
 			_allocatorNode.deallocate(_data, 1);
 			_data = NULL;
@@ -87,6 +88,7 @@ public:
 		containerData *i = _data;
 		while (i->next->next)
 			i = i->next;
+		_allocatorData.destroy(i->next->value);
 		_allocatorData.deallocate(i->next->value, 1);
 		_allocatorNode.deallocate(i->next, 1);
 		i->next = NULL;
