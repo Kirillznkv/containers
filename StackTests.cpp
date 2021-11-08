@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stack>
-#include <list>
 #include "stack.hpp"
 #include <sstream>
 
@@ -111,6 +110,7 @@ void stackTestList(void){////фффффффф
 	out(s1.top().top(), s2.top().top());
 	for (int i = 0; i < 100; ++i){
 		myList.push(i);
+		myList2.push(i);
 		s1.push(myList);
 		s2.push(myList2);
 	}
@@ -129,5 +129,5 @@ void stackTestList(void){////фффффффф
 	out(s1.top().top(), s2.top().top());
 	out(s1_copy2.size(), s2_copy2.size());
 	out(s1_copy2.empty(), s2_copy2.empty());
-	out(s2_copy2.top().top() != s2_copy2.top().top(), s2_copy2.top().top() <= s2_copy2.top().top());
+	out(s1_copy2.top().top() == s1_copy2.top().top(), s2_copy2.top().top() == s2_copy2.top().top());
 }
