@@ -19,7 +19,7 @@ void outSizes(const std::vector<T>& v1,const ft::vector<T>& v2){
 }
 
 void	vectorTestInt(){
-	std::cout<<TYPE_COLOR"(Int)"RESET_COLOR<<std::endl;
+	std::cout<<TYPE_COLOR"(INT)"RESET_COLOR<<std::endl;
 	std::vector<int> v1;
 	ft::vector<int> v2;
 	outSizes(v1, v2);
