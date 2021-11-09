@@ -7,11 +7,11 @@ void stackTestInt();
 void stackTestString();
 void stackTestList();
 
-// void vectorTestInt();
-// void vectorTestString();
-// void vectorTestList();
+void vectorTestInt();
+void vectorTestString();
+void vectorTestList();
 
-void stackTest(){
+void	stackTest(){
 	std::cout<<BLOCK_COLOR"----------STACK-TEST----------"RESET_COLOR<<std::endl;
 	stackTestInt();
 	stackTestString();
@@ -20,12 +20,12 @@ void stackTest(){
 
 void	vectorTest(){
 	std::cout<<BLOCK_COLOR"----------VECTOR-TEST----------"RESET_COLOR<<std::endl;
-	// vectorTestInt();
+	vectorTestInt();
 	// vectorTestString();
 	// vectorTestList();
 }
 
-int	main() {
+int		main() {
 	stackTest();
 	vectorTest();
 	return (0);

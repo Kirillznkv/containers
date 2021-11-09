@@ -1,10 +1,9 @@
 NAME = a.out
 
 SRCS = ../srcs/
-TEST1 =	main.cpp StackTests.cpp
-TEST2 = main.cpp
-HPP_FILE = $(SRCS)deque.hpp $(SRCS)stack.hpp $(SRCS)vector.hpp##
-O_FILE = $(TEST1:.cpp=.o)
+CPP_FILE =	main.cpp StackTests.cpp VectorTests.cpp
+HPP_FILE = $(SRCS)deque.hpp $(SRCS)stack.hpp $(SRCS)vector.hpp
+O_FILE = $(CPP_FILE:.cpp=.o)
 
 all: $(NAME)
 
@@ -16,7 +15,6 @@ $(NAME): $(O_FILE)
 
 clean:
 	@rm -f $(O_FILE)
-	@rm -f *_shrubbery
 
 fclean: clean
 	@rm -f $(NAME)

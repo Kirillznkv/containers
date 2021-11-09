@@ -27,8 +27,8 @@ public:
 	// typedef std::reverse_iterator<iterator>				reverse_iterator;
 	// typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
 private:
-	size_t	_size;
-	size_t	_capacity;
+	size_type	_size;
+	size_type	_capacity;
 	value_type *_arr;
 	// size_t	_max_size;
 	// size_t	_resize;
@@ -37,13 +37,27 @@ private:
 	allocator_type	_alloc;
 public:
 	vector() : _size(0), _capacity(0), _arr(NULL){};
-	vector(const vector& copy){}//
-	~vector(void) {}
-	// vector &operator=(const vector& op){
-	// 	if (this == &op)
-	// 		return (*this);
-	// 	return (*this);
-	// }
+	vector(const vector& copy){
+		this->operator=(copy);
+	}//
+	~vector(void) {
+		for (size_type i = 0; i < _size; ++i)
+			_alloc.destroy(_arr + i);
+		if (_capacity)
+			_alloc.deallocate(_arr, _capacity);
+	}
+	vector &operator=(const vector& op){
+		if (this == &op)
+			return (*this);
+		if (op._capacity){
+			this->_capacity = op._capacity;
+			this->_size = op._size;
+			_arr = _alloc.allocate(this->_capacity);
+			for (size_type i = 0; i < this->_size; ++i)
+				_alloc.construct(_arr + i, op._arr + i);
+		}
+		return (*this);
+	}
 	allocator_type	get_allocator() const{
 		return _alloc;
 	}
@@ -57,7 +71,9 @@ public:
 		return (_size);
 	}
 	size_type	max_size() const{
-		return (4294967296 / sizeof(value_type));///?????
+		size_type val = (pow(2, 64) / sizeof(value_type));
+		val--;
+		return (val);///?????
 	}
 	void	resize(size_type n, value_type val = value_type()){///????Затестить
 		while (_size < n)
@@ -85,7 +101,7 @@ public:
 		else if (_size == _capacity){
 			value_type *new_arr = _alloc.allocate(_capacity <<= 1);
 			for (size_t i = 0; i < _size; ++i){
-				_alloc.construct(new_arr + i, arr[i]);
+				_alloc.construct(new_arr + i, _arr[i]);
 				_alloc.destroy(_arr + i);
 			}
 			_alloc.deallocate(_arr, _capacity>>1);//?
