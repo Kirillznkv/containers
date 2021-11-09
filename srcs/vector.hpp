@@ -76,8 +76,22 @@ public:
 		return (val);///?????
 	}
 	void	resize(size_type n, value_type val = value_type()){///????Затестить
-		while (_size < n)
-			push_back(val);
+		if (_capacity >= n)
+			while (_size < n)
+				push_back(val);
+		else{
+			value_type *new_arr = _alloc.allocate(n);
+			for (size_t i = 0; i < _size; ++i){
+				_alloc.construct(new_arr + i, _arr[i]);
+				_alloc.destroy(_arr + i);
+			}
+			for (size_t i = _size; i < n; ++i)
+				_alloc.construct(new_arr + i, val);
+			_alloc.deallocate(_arr, _capacity);
+			_arr = new_arr;
+			_capacity = n;
+			_size = n;
+		}
 		while (_size > n)
 			pop_back();
 	}
