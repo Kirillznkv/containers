@@ -8,8 +8,7 @@ void stackTestString();
 void stackTestList();
 
 void vectorTestBase();
-void vectorTestInt();
-void vectorTestString();
+void vectorTestDouble();
 void vectorTestList();
 
 void	stackTest(){
@@ -22,9 +21,8 @@ void	stackTest(){
 void	vectorTest(){
 	std::cout<<BLOCK_COLOR"----------VECTOR-TEST----------"RESET_COLOR<<std::endl;
 	vectorTestBase();
-	// vectorTestInt();
-	// vectorTestString();
-	// vectorTestList();
+	vectorTestDouble();
+	// vectorTestList();  //error
 }
 
 int		main() {

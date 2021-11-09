@@ -49,12 +49,15 @@ public:
 	vector &operator=(const vector& op){
 		if (this == &op)
 			return (*this);
+		this->_capacity = 0;
+		this->_size = 0;
+		this->_arr = NULL;
 		if (op._capacity){
 			this->_capacity = op._capacity;
 			this->_size = op._size;
-			_arr = _alloc.allocate(this->_capacity);
+			this->_arr = _alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; ++i)
-				_alloc.construct(_arr + i, op._arr + i);
+				_alloc.construct(this->_arr + i, op._arr + i);
 		}
 		return (*this);
 	}
