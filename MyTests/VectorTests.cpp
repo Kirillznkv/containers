@@ -93,7 +93,12 @@ void	vectorTestList(){
 	// 	v1.push_back(vec1[i]);
 	// 	v2.push_back(vec2[i]);//error
 	// }
-	vec2[0].push_back(1);
-	v2.push_back(vec2[0]);
-	outSizes(v1, v2);
+	// vec2[0].push_back(1);
+	// v2.push_back(vec2[0]);
+	// outSizes(v1, v2);
+	// ft::vector<int> n;
+	// n.push_back(10);
+	// int t = n.front();
+	// t++;
+	// std::cout<<t;
 }

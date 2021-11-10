@@ -30,10 +30,6 @@ private:
 	size_type	_size;
 	size_type	_capacity;
 	value_type *_arr;
-	// size_t	_max_size;
-	// size_t	_resize;
-	// size_t	_empty;
-	// size_t	_reserve;
 	allocator_type	_alloc;
 public:
 	vector() : _size(0), _capacity(0), _arr(NULL){};
@@ -129,6 +125,32 @@ public:
 	void	pop_back(){//исключения
 		if (_size)
 			_alloc.destroy(_arr + --_size);
+	}
+	class error_index: public std::exception{//Заменить на орегинальный
+	public:
+		const char* what(void) const _NOEXCEPT{
+			return "bad index";
+		}
+	}
+	// const_reference	front() const{
+	// 	return (*_arr);
+	// }
+	reference	front(){
+		return (*_arr);
+	}
+	// const_reference	back() const{
+	// 	return (_arr[_size - 1]);
+	// }
+	reference	back(){
+		return (_arr[_size - 1]);
+	}
+	reference	operator[](size_type i){
+		return (_arr[i]);
+	}
+	reference	at(size_type i){
+		if (i < 0 || i >= _size)
+			throw error_index;
+		return (_arr[i]);
 	}
 };
 

@@ -22,7 +22,7 @@ void	vectorTest(){
 	std::cout<<BLOCK_COLOR"----------VECTOR-TEST----------"RESET_COLOR<<std::endl;
 	vectorTestBase();
 	vectorTestDouble();
-	// vectorTestList();  //error
+	vectorTestList();  //error
 }
 
 int		main() {
