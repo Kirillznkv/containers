@@ -85,17 +85,17 @@ void	vectorTestList(){
 	ft::vector<ft::vector<int> > v2;
 	std::vector<int> vec1[5];
 	ft::vector<int> vec2[5];
-	// for (int i = 0; i < 5; ++i){
-	// 	for (int val = 10; val < 1000; val += 13 + i){
-	// 		vec1[i].push_back(val);
-	// 		vec2[i].push_back(val);
-	// 	}
-	// 	v1.push_back(vec1[i]);
-	// 	v2.push_back(vec2[i]);//error
-	// }
+	for (int i = 0; i < 5; ++i){
+		for (int val = 10; val < 1000; val += 13 + i){
+			vec1[i].push_back(val);
+			vec2[i].push_back(val);
+		}
+		v1.push_back(vec1[i]);
+		v2.push_back(vec2[i]);//error
+	}
+	outSizes(v1, v2);
 	// vec2[0].push_back(1);
 	// v2.push_back(vec2[0]);
-	// outSizes(v1, v2);
 	// ft::vector<int> n;
 	// n.push_back(10);
 	// int t = n.front();

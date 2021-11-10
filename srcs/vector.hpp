@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <cmath>
 #include <memory>
 
 // Вопросы:
@@ -29,7 +30,7 @@ public:
 private:
 	size_type	_size;
 	size_type	_capacity;
-	value_type *_arr;
+	value_type	*_arr;
 	allocator_type	_alloc;
 public:
 	vector() : _size(0), _capacity(0), _arr(NULL){};
@@ -53,7 +54,7 @@ public:
 			this->_size = op._size;
 			this->_arr = _alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; ++i)
-				_alloc.construct(this->_arr + i, op._arr + i);
+				_alloc.construct(this->_arr + i, *(op._arr + i));
 		}
 		return (*this);
 	}
@@ -81,7 +82,7 @@ public:
 		else{
 			value_type *new_arr = _alloc.allocate(n);
 			for (size_t i = 0; i < _size; ++i){
-				_alloc.construct(new_arr + i, _arr[i]);
+				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
 			for (size_t i = _size; i < n; ++i)
@@ -98,7 +99,7 @@ public:
 		if (n != _size){
 			value_type *new_arr = _alloc.allocate(n);
 			for (size_type i = 0; i < _size; ++i){
-				_alloc.construct(new_arr + i, _arr[i]);
+				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
 			if (_capacity)
@@ -113,8 +114,8 @@ public:
 		}
 		else if (_size == _capacity){
 			value_type *new_arr = _alloc.allocate(_capacity <<= 1);
-			for (size_t i = 0; i < _size; ++i){
-				_alloc.construct(new_arr + i, _arr[i]);
+			for (size_type i = 0; i < _size; ++i){
+				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
 			_alloc.deallocate(_arr, _capacity>>1);//?
@@ -126,12 +127,12 @@ public:
 		if (_size)
 			_alloc.destroy(_arr + --_size);
 	}
-	class error_index: public std::exception{//Заменить на орегинальный
+	class errorIndex: public std::exception{//Заменить на орегинальный
 	public:
 		const char* what(void) const _NOEXCEPT{
 			return "bad index";
 		}
-	}
+	};
 	// const_reference	front() const{
 	// 	return (*_arr);
 	// }
@@ -145,12 +146,12 @@ public:
 		return (_arr[_size - 1]);
 	}
 	reference	operator[](size_type i){
-		return (_arr[i]);
+		return (*(_arr + i));
 	}
 	reference	at(size_type i){
 		if (i < 0 || i >= _size)
-			throw error_index;
-		return (_arr[i]);
+			throw errorIndex();
+		return (*(_arr + i));
 	}
 };
 
