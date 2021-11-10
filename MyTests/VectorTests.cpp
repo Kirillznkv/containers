@@ -30,6 +30,14 @@ void	vectorTestBase(){
 	v1.push_back(42);
 	v2.push_back(42);
 	outSizes(v1, v2);
+	//Test front/back
+	out(v1.front(), v2.front());
+	out(++(v1.front()), ++(v2.front()));
+	out(v1.back(), v2.back());
+	out(++(v1.back()), ++(v2.back()));
+	//Test [] / at()
+	out(v1[1], v2[1]);
+	out(v1.at(1), v2.at(1));
 	//Test reserve
 	std::vector<int> vec1;
 	ft::vector<int> vec2;
@@ -94,11 +102,12 @@ void	vectorTestList(){
 		v2.push_back(vec2[i]);//error
 	}
 	outSizes(v1, v2);
-	// vec2[0].push_back(1);
-	// v2.push_back(vec2[0]);
-	// ft::vector<int> n;
-	// n.push_back(10);
-	// int t = n.front();
-	// t++;
-	// std::cout<<t;
+
+
+	//
+	ft::vector<int> vec;
+	for (int i = 0; i < 100; ++i)
+		vec.push_back(i);
+	for (ft::vector<int>::iterator it = vec.begin(); it < vec.end(); it+=11)
+		std::cout<<*it<<std::endl;
 }

@@ -14,6 +14,81 @@ namespace ft{
 
 template<typename T, class Allocator = std::allocator<T> >
 class vector{
+private:
+	class myItertor{
+	private:
+		T *pVal;
+	public:
+		myItertor(T& val){
+			pVal = &val;
+		}
+		myItertor(const myItertor& copy){
+			this->operator=(copy);
+		}
+		~myItertor(){};
+		myItertor &operator=(const myItertor& op){
+			if (this == &op)
+				return (*this);
+			pVal = op.pVal;
+			return (*this);
+		}
+		myItertor &operator ++ (void){//Исключения если выход за пределы
+			++pVal;
+			return (*this);
+		}
+		myItertor operator ++ (int){
+			myItertor it(pVal++);
+			return (it);
+		}
+		myItertor &operator -- (void){
+			--pVal;
+			return (*this);
+		}
+		myItertor operator -- (int){
+			myItertor it(pVal--);
+			return (it);
+		}
+		myItertor &operator -= (int rVal){
+			pVal -= rVal;
+			return (*this);
+		}
+		myItertor &operator += (int rVal){
+			pVal += rVal;
+			return (*this);
+		}
+		int		operator - (const myItertor& rVal){
+			return (pVal - rVal.pVal);
+		}
+		myItertor operator - (int rVal){
+			pVal -= rVal;
+			return (*this);
+		}
+		myItertor operator + (int rVal){
+			pVal += rVal;
+			return (*this);
+		}
+		bool	operator == (const myItertor& rVal){
+			return (pVal == rVal.pVal);
+		}
+		bool	operator != (const myItertor& rVal){
+			return (pVal != rVal.pVal);
+		}
+		bool	operator <= (const myItertor& rVal){
+			return (pVal <= rVal.pVal);
+		}
+		bool	operator >= (const myItertor& rVal){
+			return (pVal >= rVal.pVal);
+		}
+		bool	operator < (const myItertor& rVal){
+			return (pVal < rVal.pVal);
+		}
+		bool	operator > (const myItertor& rVal){
+			return (pVal > rVal.pVal);
+		}
+		T&	operator* (){
+			return (*pVal);
+		}
+	};
 public:
 	typedef T											value_type;//
 	typedef Allocator									allocator_type;
@@ -23,7 +98,7 @@ public:
 	typedef typename allocator_type::difference_type	difference_type;
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
-	// typedef implementation-defined						iterator;
+	typedef myItertor									iterator;
 	// typedef implementation-defined						const_iterator;
 	// typedef std::reverse_iterator<iterator>				reverse_iterator;
 	// typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
@@ -152,6 +227,12 @@ public:
 		if (i < 0 || i >= _size)
 			throw errorIndex();
 		return (*(_arr + i));
+	}
+	iterator begin(){//const вариант?
+		return (iterator(*_arr));//исключения
+	}
+	iterator end(){
+		return (iterator(*(_arr + _size)));
 	}
 };
 
