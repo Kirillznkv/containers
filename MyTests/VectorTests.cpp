@@ -85,6 +85,10 @@ void	vectorTestDouble(){
 		vec2.push_back(i);
 	}
 	outSizes(vec1, vec2);
+	std::vector<double>::iterator it1 = vec1.begin();
+	ft::vector<double>::iterator it2 = vec2.begin();
+	for (;it1 < vec1.end() && it2 < vec2.end(); it1 += 10, it2 += 10)
+		std::cout<<*it1<<"\t\t"<<*it2<<std::endl;
 }
 
 void	vectorTestList(){
@@ -102,12 +106,4 @@ void	vectorTestList(){
 		v2.push_back(vec2[i]);//error
 	}
 	outSizes(v1, v2);
-
-
-	//
-	ft::vector<int> vec;
-	for (int i = 0; i < 100; ++i)
-		vec.push_back(i);
-	for (ft::vector<int>::iterator it = vec.begin(); it < vec.end(); it+=11)
-		std::cout<<*it<<std::endl;
 }
