@@ -10,6 +10,8 @@
 // Что будет если вызвать reserve, когда уже есть эллементы и что будет если задать его меньше чем есть эллементов?
 // Что будет если увеличить или уменьшить resize?
 
+// iterator base()?
+
 namespace ft{
 
 template<typename T, class Allocator = std::allocator<T> >
@@ -19,73 +21,73 @@ private:
 	private:
 		T *pVal;
 	public:
-		myItertor(T& val){
-			pVal = &val;
+		myItertor(T *val){
+			pVal = val;
 		}
 		myItertor(const myItertor& copy){
 			this->operator=(copy);
 		}
-		~myItertor(){};
-		myItertor &operator=(const myItertor& op){
+		virtual ~myItertor(){};
+		virtual myItertor &operator=(const myItertor& op){
 			if (this == &op)
 				return (*this);
 			pVal = op.pVal;
 			return (*this);
 		}
-		myItertor &operator ++ (void){//Исключения если выход за пределы
+		virtual myItertor &operator ++ (void){//Исключения если выход за пределы
 			++pVal;
 			return (*this);
 		}
-		myItertor operator ++ (int){
+		virtual myItertor operator ++ (int){
 			myItertor it(pVal++);
 			return (it);
 		}
-		myItertor &operator -- (void){
+		virtual myItertor &operator -- (void){
 			--pVal;
 			return (*this);
 		}
-		myItertor operator -- (int){
+		virtual myItertor operator -- (int){
 			myItertor it(pVal--);
 			return (it);
 		}
-		myItertor &operator -= (int rVal){
+		virtual myItertor &operator -= (int rVal){
 			pVal -= rVal;
 			return (*this);
 		}
-		myItertor &operator += (int rVal){
+		virtual myItertor &operator += (int rVal){
 			pVal += rVal;
 			return (*this);
 		}
-		int		operator - (const myItertor& rVal){
+		virtual int	 operator - (const myItertor& rVal){
 			return (pVal - rVal.pVal);
 		}
-		myItertor operator - (int rVal){
+		virtual myItertor operator - (int rVal){
 			pVal -= rVal;
 			return (*this);
 		}
-		myItertor operator + (int rVal){
+		virtual myItertor operator + (int rVal){
 			pVal += rVal;
 			return (*this);
 		}
-		bool	operator == (const myItertor& rVal){
+		virtual bool operator == (const myItertor& rVal){
 			return (pVal == rVal.pVal);
 		}
-		bool	operator != (const myItertor& rVal){
+		virtual bool operator != (const myItertor& rVal){
 			return (pVal != rVal.pVal);
 		}
-		bool	operator <= (const myItertor& rVal){
+		virtual bool operator <= (const myItertor& rVal){
 			return (pVal <= rVal.pVal);
 		}
-		bool	operator >= (const myItertor& rVal){
+		virtual bool operator >= (const myItertor& rVal){
 			return (pVal >= rVal.pVal);
 		}
-		bool	operator < (const myItertor& rVal){
+		virtual bool operator < (const myItertor& rVal){
 			return (pVal < rVal.pVal);
 		}
-		bool	operator > (const myItertor& rVal){
+		virtual bool operator > (const myItertor& rVal){
 			return (pVal > rVal.pVal);
 		}
-		T&	operator* (){
+		virtual T&	operator* (){
 			return (*pVal);
 		}
 	};
@@ -229,10 +231,10 @@ public:
 		return (*(_arr + i));
 	}
 	iterator begin(){//const вариант?
-		return (iterator(*_arr));//исключения
+		return (iterator(_arr));//исключения
 	}
 	iterator end(){
-		return (iterator(*(_arr + _size)));
+		return (iterator(_arr + _size));
 	}
 };
 
