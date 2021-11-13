@@ -5,11 +5,6 @@
 #include <memory>
 
 // Вопросы:
-// Чем отличается max_size от capacity?
-// Зачем нужен resize?
-// Что будет если вызвать reserve, когда уже есть эллементы и что будет если задать его меньше чем есть эллементов?
-// Что будет если увеличить или уменьшить resize?
-
 // iterator base()?
 
 namespace ft{
@@ -21,6 +16,7 @@ private:
 	private:
 		T *pVal;
 	public:
+		myItertor() : pVal(NULL){}
 		myItertor(T *val){
 			pVal = val;
 		}
@@ -34,7 +30,7 @@ private:
 			pVal = op.pVal;
 			return (*this);
 		}
-		virtual myItertor &operator ++ (void){//Исключения если выход за пределы
+		virtual myItertor &operator ++ (void){
 			++pVal;
 			return (*this);
 		}
@@ -101,9 +97,7 @@ public:
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
 	typedef myItertor									iterator;
-	// typedef implementation-defined						const_iterator;
 	// typedef std::reverse_iterator<iterator>				reverse_iterator;
-	// typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
 private:
 	size_type	_size;
 	size_type	_capacity;
@@ -150,9 +144,9 @@ public:
 	size_type	max_size() const{
 		size_type val = (pow(2, 64) / sizeof(value_type));
 		val--;
-		return (val);///?????
+		return (val);
 	}
-	void	resize(size_type n, value_type val = value_type()){///????Затестить
+	void	resize(size_type n, value_type val = value_type()){
 		if (_capacity >= n)
 			while (_size < n)
 				push_back(val);
@@ -172,7 +166,7 @@ public:
 		while (_size > n)
 			pop_back();
 	}
-	void	reserve(size_type n){//тест
+	void	reserve(size_type n){
 		if (n != _size){
 			value_type *new_arr = _alloc.allocate(n);
 			for (size_type i = 0; i < _size; ++i){
@@ -195,7 +189,7 @@ public:
 				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
-			_alloc.deallocate(_arr, _capacity>>1);//?
+			_alloc.deallocate(_arr, _capacity>>1);
 			_arr = new_arr;
 		}
 		_alloc.construct(_arr + _size++, val);
@@ -230,7 +224,7 @@ public:
 			throw errorIndex();
 		return (*(_arr + i));
 	}
-	iterator begin(){//const вариант?
+	iterator begin(){
 		return (iterator(_arr));//исключения
 	}
 	iterator end(){

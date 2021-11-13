@@ -10,6 +10,7 @@ void stackTestList();
 void vectorTestBase();
 void vectorTestDouble();
 void vectorTestList();
+void vectorTestIterator();
 
 void	stackTest(){
 	std::cout<<BLOCK_COLOR"----------STACK-TEST----------"RESET_COLOR<<std::endl;
@@ -22,7 +23,8 @@ void	vectorTest(){
 	std::cout<<BLOCK_COLOR"----------VECTOR-TEST----------"RESET_COLOR<<std::endl;
 	vectorTestBase();
 	vectorTestDouble();
-	vectorTestList();  //error
+	vectorTestList();
+	vectorTestIterator();
 }
 
 int		main() {

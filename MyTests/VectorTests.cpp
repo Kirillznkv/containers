@@ -85,6 +85,7 @@ void	vectorTestDouble(){
 		vec2.push_back(i);
 	}
 	outSizes(vec1, vec2);
+	// Test base iterators
 	std::vector<double>::iterator it1 = vec1.begin();
 	ft::vector<double>::iterator it2 = vec2.begin();
 	for (;it1 < vec1.end() && it2 < vec2.end(); it1 += 10, it2 += 10)
@@ -103,7 +104,69 @@ void	vectorTestList(){
 			vec2[i].push_back(val);
 		}
 		v1.push_back(vec1[i]);
-		v2.push_back(vec2[i]);//error
+		v2.push_back(vec2[i]);
 	}
 	outSizes(v1, v2);
+}
+
+void	vectorTestIterator(){
+	std::cout<<TYPE_COLOR"(Iterator)"RESET_COLOR<<std::endl;
+	std::vector<char> stdVec;
+	ft::vector<char> ftVec;
+	for (char i = 'f'; i < 'z'; ++i){
+		stdVec.push_back(i);
+		ftVec.push_back(i);
+	}
+	std::vector<char>::iterator itStd;
+	ft::vector<char>::iterator itFt;
+	for (itStd = stdVec.begin(); itStd != stdVec.end(); ++itStd)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.begin(); itFt != ftVec.end(); ++itFt)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	for (itStd = stdVec.begin(); itStd != stdVec.end(); itStd += 1)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.begin(); itFt != ftVec.end(); itFt += 1)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	for (itStd = stdVec.begin(); itStd != stdVec.end(); itStd = itStd + 1)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.begin(); itFt != ftVec.end(); itFt = itFt + 1)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	/////////////////////
+	int i = 0;
+	for (itStd = stdVec.begin(); itStd < stdVec.end(); itStd += 3, i += 3){
+		++(*itStd);
+		std::cout<<*itStd<<stdVec[i];
+	}
+	std::cout<<std::endl;
+	i = 0;
+	for (itFt = ftVec.begin(); itFt < ftVec.end(); itFt += 3, i += 3){
+		++(*itFt);
+		std::cout<<*itFt<<ftVec[i];
+	}
+	std::cout<<std::endl;
+	i = stdVec.size() - 1;
+	for (itStd = stdVec.end() - 1; itStd >= stdVec.begin(); itStd--, i--){
+		std::cout<<*itStd<<stdVec[i];
+	}
+	std::cout<<std::endl;
+	i = ftVec.size() - 1;
+	for (itFt = ftVec.end() - 1; itFt >= ftVec.begin(); itFt--, i--){
+		std::cout<<*itFt<<ftVec[i];
+	}
+	std::cout<<std::endl;
+	/////////////////////
+	std::vector<char> stdVec2;
+	ft::vector<char> ftVec2;
+	for (char i = 'A'; i <= 'Z'; ++i){
+		stdVec2.push_back(i);
+		ftVec2.push_back(i);
+	}
+	std::cout<<*(++stdVec2.begin())<<"   "<<*(++ftVec2.begin())<<std::endl;
+	std::cout<<*(stdVec2.begin()++)<<"   "<<*(ftVec2.begin()++)<<std::endl;
 }
