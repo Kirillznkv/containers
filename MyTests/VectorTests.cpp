@@ -170,3 +170,8 @@ void	vectorTestIterator(){
 	std::cout<<*(++stdVec2.begin())<<"   "<<*(++ftVec2.begin())<<std::endl;
 	std::cout<<*(stdVec2.begin()++)<<"   "<<*(ftVec2.begin()++)<<std::endl;
 }
+
+void vectorTestReverseIterator(){
+	std::cout<<TYPE_COLOR"(Reverse Iterator)"RESET_COLOR<<std::endl;
+	std::vector<int> stdVec;
+}
