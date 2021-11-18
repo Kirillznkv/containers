@@ -13,7 +13,7 @@ template<typename T, class Allocator = std::allocator<T> >
 class vector{
 private:
 	class myItertor{
-	private:
+	protected:
 		T *pVal;
 	public:
 		myItertor() : pVal(NULL){}
@@ -54,39 +54,110 @@ private:
 			pVal += rVal;
 			return (*this);
 		}
-		virtual int	 operator - (const myItertor& rVal){
+		virtual int	 operator - (const myItertor& rVal) const{
 			return (pVal - rVal.pVal);
 		}
 		virtual myItertor operator - (int rVal){
-			pVal -= rVal;
-			return (*this);
+			return (myItertor(pVal - rVal));
 		}
 		virtual myItertor operator + (int rVal){
-			pVal += rVal;
-			return (*this);
+			return (myItertor(pVal + rVal));
 		}
-		virtual bool operator == (const myItertor& rVal){
+		virtual bool operator == (const myItertor& rVal) const{
 			return (pVal == rVal.pVal);
 		}
-		virtual bool operator != (const myItertor& rVal){
+		virtual bool operator != (const myItertor& rVal) const{
 			return (pVal != rVal.pVal);
 		}
-		virtual bool operator <= (const myItertor& rVal){
+		virtual bool operator <= (const myItertor& rVal) const{
 			return (pVal <= rVal.pVal);
 		}
-		virtual bool operator >= (const myItertor& rVal){
+		virtual bool operator >= (const myItertor& rVal) const{
 			return (pVal >= rVal.pVal);
 		}
-		virtual bool operator < (const myItertor& rVal){
+		virtual bool operator < (const myItertor& rVal) const{
 			return (pVal < rVal.pVal);
 		}
-		virtual bool operator > (const myItertor& rVal){
+		virtual bool operator > (const myItertor& rVal) const{
 			return (pVal > rVal.pVal);
 		}
 		virtual T&	operator* (){
 			return (*pVal);
 		}
 	};
+	// class myReverseItertor : public myItertor{
+	// public:
+	// 	myReverseItertor() : pVal(NULL){}
+	// 	myReverseItertor(T *val){
+	// 		pVal = val - 1;
+	// 	}
+	// 	myReverseItertor(const myItertor& copy){
+	// 		this->operator=(copy);
+	// 	}
+	// 	virtual ~myReverseItertor(){};
+	// 	virtual myReverseItertor &operator=(const myReverseItertor& op){
+	// 		if (this == &op)
+	// 			return (*this);
+	// 		pVal = op.pVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual myReverseItertor &operator ++ (void){
+	// 		--pVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual myReverseItertor operator ++ (int){
+	// 		myReverseItertor it(pVal--);
+	// 		return (it);
+	// 	}
+	// 	virtual myReverseItertor &operator -- (void){
+	// 		++pVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual myReverseItertor operator -- (int){
+	// 		myReverseItertor it(pVal++);
+	// 		return (it);
+	// 	}
+	// 	virtual myReverseItertor &operator -= (int rVal){
+	// 		pVal += rVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual myReverseItertor &operator += (int rVal){
+	// 		pVal -= rVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual int	 operator - (const myReverseItertor& rVal) const{
+	// 		return (pVal - rVal.pVal);
+	// 	}
+	// 	virtual myReverseItertor operator - (int rVal){
+	// 		pVal -= rVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual myReverseItertor operator + (int rVal){
+	// 		pVal += rVal;
+	// 		return (*this);
+	// 	}
+	// 	virtual bool operator == (const myReverseItertor& rVal) const{
+	// 		return (pVal == rVal.pVal);
+	// 	}
+	// 	virtual bool operator != (const myReverseItertor& rVal) const{
+	// 		return (pVal != rVal.pVal);
+	// 	}
+	// 	virtual bool operator <= (const myReverseItertor& rVal) const{
+	// 		return (pVal <= rVal.pVal);
+	// 	}
+	// 	virtual bool operator >= (const myReverseItertor& rVal) const{
+	// 		return (pVal >= rVal.pVal);
+	// 	}
+	// 	virtual bool operator < (const myReverseItertor& rVal) const{
+	// 		return (pVal < rVal.pVal);
+	// 	}
+	// 	virtual bool operator > (const myReverseItertor& rVal) const{
+	// 		return (pVal > rVal.pVal);
+	// 	}
+	// 	virtual T&	operator* (){
+	// 		return (*pVal);
+	// 	}
+	// };
 public:
 	typedef T											value_type;//
 	typedef Allocator									allocator_type;

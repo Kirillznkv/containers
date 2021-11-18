@@ -111,6 +111,7 @@ void	vectorTestList(){
 
 void	vectorTestIterator(){
 	std::cout<<TYPE_COLOR"(Iterator)"RESET_COLOR<<std::endl;
+	// Test ++ -- += -= ...
 	std::vector<char> stdVec;
 	ft::vector<char> ftVec;
 	for (char i = 'f'; i < 'z'; ++i){
@@ -137,7 +138,7 @@ void	vectorTestIterator(){
 	for (itFt = ftVec.begin(); itFt != ftVec.end(); itFt = itFt + 1)
 		std::cout<<*itFt;
 	std::cout<<std::endl;
-	/////////////////////
+	///////////////////// Test rewrite Variable value
 	int i = 0;
 	for (itStd = stdVec.begin(); itStd < stdVec.end(); itStd += 3, i += 3){
 		++(*itStd);
@@ -160,15 +161,22 @@ void	vectorTestIterator(){
 		std::cout<<*itFt<<ftVec[i];
 	}
 	std::cout<<std::endl;
-	/////////////////////
+	///////////////////// Test post++ prev++ iterator
 	std::vector<char> stdVec2;
 	ft::vector<char> ftVec2;
 	for (char i = 'A'; i <= 'Z'; ++i){
 		stdVec2.push_back(i);
 		ftVec2.push_back(i);
 	}
-	std::cout<<*(++stdVec2.begin())<<"   "<<*(++ftVec2.begin())<<std::endl;
-	std::cout<<*(stdVec2.begin()++)<<"   "<<*(ftVec2.begin()++)<<std::endl;
+	std::cout<<*(++stdVec2.begin())<<"\t"<<*(++ftVec2.begin())<<std::endl;
+	std::cout<<*(stdVec2.begin()++)<<"\t"<<*(ftVec2.begin()++)<<std::endl;
+	///////////////////// Test it - it and it - variable
+	std::vector<char>::iterator it1Beg = stdVec2.begin();
+	std::vector<char>::iterator it1End = stdVec2.end();
+	ft::vector<char>::iterator it2Beg = ftVec2.begin();
+	ft::vector<char>::iterator it2End = ftVec2.end();
+	std::cout<<*(it1End - 1)<<"\t"<<*(it2End - 1)<<std::endl;
+	std::cout<<it1End - it1Beg<<"\t"<<it2End - it2Beg<<std::endl;
 }
 
 void vectorTestReverseIterator(){
