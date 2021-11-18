@@ -1,8 +1,10 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include <cmath>
-#include <memory>
+# include <cmath>///
+# include <memory>///
+# include "iterator.hpp"
+# include "reverse_iterator.hpp"
 
 // Вопросы:
 // iterator base()?
@@ -11,155 +13,8 @@ namespace ft{
 
 template<typename T, class Allocator = std::allocator<T> >
 class vector{
-private:
-	class myItertor{
-	protected:
-		T *pVal;
-	public:
-		myItertor() : pVal(NULL){}
-		myItertor(T *val){
-			pVal = val;
-		}
-		myItertor(const myItertor& copy){
-			this->operator=(copy);
-		}
-		virtual ~myItertor(){};
-		virtual myItertor &operator=(const myItertor& op){
-			if (this == &op)
-				return (*this);
-			pVal = op.pVal;
-			return (*this);
-		}
-		virtual myItertor &operator ++ (void){
-			++pVal;
-			return (*this);
-		}
-		virtual myItertor operator ++ (int){
-			myItertor it(pVal++);
-			return (it);
-		}
-		virtual myItertor &operator -- (void){
-			--pVal;
-			return (*this);
-		}
-		virtual myItertor operator -- (int){
-			myItertor it(pVal--);
-			return (it);
-		}
-		virtual myItertor &operator -= (int rVal){
-			pVal -= rVal;
-			return (*this);
-		}
-		virtual myItertor &operator += (int rVal){
-			pVal += rVal;
-			return (*this);
-		}
-		virtual int	 operator - (const myItertor& rVal) const{
-			return (pVal - rVal.pVal);
-		}
-		virtual myItertor operator - (int rVal){
-			return (myItertor(pVal - rVal));
-		}
-		virtual myItertor operator + (int rVal){
-			return (myItertor(pVal + rVal));
-		}
-		virtual bool operator == (const myItertor& rVal) const{
-			return (pVal == rVal.pVal);
-		}
-		virtual bool operator != (const myItertor& rVal) const{
-			return (pVal != rVal.pVal);
-		}
-		virtual bool operator <= (const myItertor& rVal) const{
-			return (pVal <= rVal.pVal);
-		}
-		virtual bool operator >= (const myItertor& rVal) const{
-			return (pVal >= rVal.pVal);
-		}
-		virtual bool operator < (const myItertor& rVal) const{
-			return (pVal < rVal.pVal);
-		}
-		virtual bool operator > (const myItertor& rVal) const{
-			return (pVal > rVal.pVal);
-		}
-		virtual T&	operator* (){
-			return (*pVal);
-		}
-	};
-	// class myReverseItertor : public myItertor{
-	// public:
-	// 	myReverseItertor() : pVal(NULL){}
-	// 	myReverseItertor(T *val){
-	// 		pVal = val - 1;
-	// 	}
-	// 	myReverseItertor(const myItertor& copy){
-	// 		this->operator=(copy);
-	// 	}
-	// 	virtual ~myReverseItertor(){};
-	// 	virtual myReverseItertor &operator=(const myReverseItertor& op){
-	// 		if (this == &op)
-	// 			return (*this);
-	// 		pVal = op.pVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual myReverseItertor &operator ++ (void){
-	// 		--pVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual myReverseItertor operator ++ (int){
-	// 		myReverseItertor it(pVal--);
-	// 		return (it);
-	// 	}
-	// 	virtual myReverseItertor &operator -- (void){
-	// 		++pVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual myReverseItertor operator -- (int){
-	// 		myReverseItertor it(pVal++);
-	// 		return (it);
-	// 	}
-	// 	virtual myReverseItertor &operator -= (int rVal){
-	// 		pVal += rVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual myReverseItertor &operator += (int rVal){
-	// 		pVal -= rVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual int	 operator - (const myReverseItertor& rVal) const{
-	// 		return (pVal - rVal.pVal);
-	// 	}
-	// 	virtual myReverseItertor operator - (int rVal){
-	// 		pVal -= rVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual myReverseItertor operator + (int rVal){
-	// 		pVal += rVal;
-	// 		return (*this);
-	// 	}
-	// 	virtual bool operator == (const myReverseItertor& rVal) const{
-	// 		return (pVal == rVal.pVal);
-	// 	}
-	// 	virtual bool operator != (const myReverseItertor& rVal) const{
-	// 		return (pVal != rVal.pVal);
-	// 	}
-	// 	virtual bool operator <= (const myReverseItertor& rVal) const{
-	// 		return (pVal <= rVal.pVal);
-	// 	}
-	// 	virtual bool operator >= (const myReverseItertor& rVal) const{
-	// 		return (pVal >= rVal.pVal);
-	// 	}
-	// 	virtual bool operator < (const myReverseItertor& rVal) const{
-	// 		return (pVal < rVal.pVal);
-	// 	}
-	// 	virtual bool operator > (const myReverseItertor& rVal) const{
-	// 		return (pVal > rVal.pVal);
-	// 	}
-	// 	virtual T&	operator* (){
-	// 		return (*pVal);
-	// 	}
-	// };
 public:
-	typedef T											value_type;//
+	typedef T											value_type;
 	typedef Allocator									allocator_type;
 	typedef typename allocator_type::reference			reference;
 	typedef typename allocator_type::const_reference	const_reference;
@@ -167,8 +22,8 @@ public:
 	typedef typename allocator_type::difference_type	difference_type;
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
-	typedef myItertor									iterator;
-	// typedef std::reverse_iterator<iterator>				reverse_iterator;
+	typedef myItertor<T>								iterator;
+	typedef myReverseItertor<T>							reverse_iterator;
 private:
 	size_type	_size;
 	size_type	_capacity;
@@ -300,6 +155,12 @@ public:
 	}
 	iterator end(){
 		return (iterator(_arr + _size));
+	}
+	reverse_iterator rbegin(){
+		return (reverse_iterator(_arr + _size));//исключения
+	}
+	reverse_iterator rend(){
+		return (reverse_iterator(_arr));
 	}
 };
 

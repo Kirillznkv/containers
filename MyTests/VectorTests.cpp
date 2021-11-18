@@ -181,5 +181,70 @@ void	vectorTestIterator(){
 
 void vectorTestReverseIterator(){
 	std::cout<<TYPE_COLOR"(Reverse Iterator)"RESET_COLOR<<std::endl;
-	std::vector<int> stdVec;
+	// Test ++ -- += -= ...
+	std::vector<char> stdVec;
+	ft::vector<char> ftVec;
+	for (char i = 'f'; i < 'z'; ++i){
+		stdVec.push_back(i);
+		ftVec.push_back(i);
+	}
+	std::vector<char>::reverse_iterator itStd;
+	ft::vector<char>::reverse_iterator itFt;
+	for (itStd = stdVec.rbegin(); itStd != stdVec.rend(); ++itStd)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.rbegin(); itFt != ftVec.rend(); ++itFt)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	for (itStd = stdVec.rbegin(); itStd != stdVec.rend(); itStd += 1)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.rbegin(); itFt != ftVec.rend(); itFt += 1)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	for (itStd = stdVec.rbegin(); itStd != stdVec.rend(); itStd = itStd + 1)
+		std::cout<<*itStd;
+	std::cout<<std::endl;
+	for (itFt = ftVec.rbegin(); itFt != ftVec.rend(); itFt = itFt + 1)
+		std::cout<<*itFt;
+	std::cout<<std::endl;
+	///////////////////// Test rewrite Variable value
+	int i = 0;
+	for (itStd = stdVec.rbegin(); itStd < stdVec.rend(); itStd += 3, i += 3){
+		++(*itStd);
+		std::cout<<*itStd<<stdVec[i];
+	}
+	std::cout<<std::endl;
+	i = 0;
+	for (itFt = ftVec.rbegin(); itFt < ftVec.rend(); itFt += 3, i += 3){
+		++(*itFt);
+		std::cout<<*itFt<<ftVec[i];
+	}
+	std::cout<<std::endl;
+	i = stdVec.size() - 1;
+	for (itStd = stdVec.rend() - 1; itStd >= stdVec.rbegin(); itStd--, i--){
+		std::cout<<*itStd<<stdVec[i];
+	}
+	std::cout<<std::endl;
+	i = ftVec.size() - 1;
+	for (itFt = ftVec.rend() - 1; itFt >= ftVec.rbegin(); itFt--, i--){
+		std::cout<<*itFt<<ftVec[i];
+	}
+	std::cout<<std::endl;
+	///////////////////// Test post++ prev++ iterator
+	std::vector<char> stdVec2;
+	ft::vector<char> ftVec2;
+	for (char i = 'A'; i <= 'Z'; ++i){
+		stdVec2.push_back(i);
+		ftVec2.push_back(i);
+	}
+	std::cout<<*(++stdVec2.rbegin())<<"\t"<<*(++ftVec2.rbegin())<<std::endl;
+	std::cout<<*(stdVec2.rbegin()++)<<"\t"<<*(ftVec2.rbegin()++)<<std::endl;
+	///////////////////// Test it - it and it - variable
+	std::vector<char>::reverse_iterator it1Beg = stdVec2.rbegin();
+	std::vector<char>::reverse_iterator it1End = stdVec2.rend();
+	ft::vector<char>::reverse_iterator it2Beg = ftVec2.rbegin();
+	ft::vector<char>::reverse_iterator it2End = ftVec2.rend();
+	std::cout<<*(it1End - 1)<<"\t"<<*(it2End - 1)<<std::endl;
+	std::cout<<it1End - it1Beg<<"\t"<<it2End - it2Beg<<std::endl;
 }

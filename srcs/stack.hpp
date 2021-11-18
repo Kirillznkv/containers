@@ -1,7 +1,7 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include "deque.hpp"
+# include "deque.hpp"
 
 namespace ft{
 
