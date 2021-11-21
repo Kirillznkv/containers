@@ -84,7 +84,8 @@ public:
 			}
 			for (size_t i = _size; i < n; ++i)
 				_alloc.construct(new_arr + i, val);
-			_alloc.deallocate(_arr, _capacity);
+			if (_capacity)
+				_alloc.deallocate(_arr, _capacity);//add if
 			_arr = new_arr;
 			_capacity = n;
 			_size = n;
@@ -93,7 +94,7 @@ public:
 			pop_back();
 	}
 	void	reserve(size_type n){
-		if (n != _size){
+		if (n != _capacity){//проверить изменение заменил _size
 			value_type *new_arr = _alloc.allocate(n);
 			for (size_type i = 0; i < _size; ++i){
 				_alloc.construct(new_arr + i, *(_arr + i));
@@ -105,9 +106,25 @@ public:
 			_capacity = n;
 		}
 	}
-	void	assign(size_type n, const value_type &val){
-		resize(n, val);
+	template <class InputIterator>
+	void	assign(InputIterator first, InputIterator last){//можно мапу?    //есть исключения, если будет отрицательная разница?
+		if (size_type(last - first) <= _capacity){
+			while (_size)
+				pop_back();
+			while (first != last)
+				push_back(*(first++));
+		}
+		else{
+			while (_size)
+				pop_back();
+			reserve(last - first);
+			while (first != last)
+				push_back(*(first++));
+		}
 	}
+	// void	assign(size_type n, const value_type &val){
+	// 	resize(n, val);
+	// }
 	void	push_back(const value_type &val){
 		if (!_capacity){
 			_arr = _alloc.allocate(_capacity = 1);

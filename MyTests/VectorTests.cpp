@@ -262,13 +262,19 @@ void	vectorTestModifiers(){
 		v1New.push_back(i);
 		v2New.push_back(i);
 	}
-	outSizes(v1, v2);
-	outSizes(v1New, v2New);
-	v1.assign(5, 123);
-	v2.assign(5, 123);
-	outSizes(v1, v2);
-	v1.assign(50, 2);
-	v2.assign(50, 2);
-	outSizes(v1, v2);
+	// outSizes(v1, v2);
+	// outSizes(v1New, v2New);
+	// v1.assign(5, 123);
+	// v2.assign(5, 123);
+	// outSizes(v1, v2);
+	// v1.assign(50, 2);
+	// v2.assign(50, 2);
+	// outSizes(v1, v2);
 	///////////////////// Test assign #2
+	v1.assign(v1New.begin(), v1New.end());
+	v2.assign(v2New.begin(), v2New.end());
+	outSizes(v1, v2);
+	v1.assign(v1New.begin(), v1New.begin() + 10);
+	v2.assign(v2New.begin(), v2New.begin() + 10);
+	outSizes(v1, v2);
 }
