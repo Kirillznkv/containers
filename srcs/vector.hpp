@@ -22,8 +22,8 @@ public:
 	typedef typename allocator_type::difference_type	difference_type;
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
-	typedef myItertor<T>								iterator;
-	typedef myReverseItertor<T>							reverse_iterator;
+	typedef myIterator<T>								iterator;
+	typedef myReverseIterator<T>						reverse_iterator;
 private:
 	size_type	_size;
 	size_type	_capacity;
@@ -157,10 +157,10 @@ public:
 		return (iterator(_arr + _size));
 	}
 	reverse_iterator rbegin(){
-		return (reverse_iterator(_arr + _size));//исключения
+		return (reverse_iterator(_arr + _size - 1));//исключения
 	}
 	reverse_iterator rend(){
-		return (reverse_iterator(_arr));
+		return (reverse_iterator(_arr - 1));
 	}
 };
 

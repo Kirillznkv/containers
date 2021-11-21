@@ -3,77 +3,84 @@
 
 # include "iterator.hpp"
 
+namespace ft{
+
 template<typename T>
-class myReverseItertor : public myItertor{
+class myReverseIterator : public myIterator<T>{
 public:
-	myReverseItertor() : myItertor()){}
-	myReverseItertor(T *val){
+	myReverseIterator() : myIterator<T>(){}
+	myReverseIterator(T *val){
 		this->pVal = val - 1;
 	}
-	myReverseItertor(const myReverseItertor& copy){
+	myReverseIterator(const myReverseIterator& copy){
 		this->operator=(copy);
 	}
-	virtual ~myReverseItertor(){};
-	virtual myReverseItertor &operator=(const myReverseItertor& op){//
+	~myReverseIterator(){};
+	myReverseIterator &operator=(const myReverseIterator& op){//
 		if (this == &op)
 			return (*this);
+		// std::cout<<std::endl<<(void*)this->pVal<<" = "<<(void*)op.pVal<<std::endl;
 		this->pVal = op.pVal;
 		return (*this);
 	}
-	virtual myReverseItertor &operator ++ (void){//
+	myReverseIterator &operator ++ (void){//
 		--this->pVal;
 		return (*this);
 	}
-	virtual myReverseItertor operator ++ (int){//
-		myReverseItertor it(this->pVal--);
+	myReverseIterator operator ++ (int){//
+		myReverseIterator it(this->pVal--);
 		return (it);
 	}
-	virtual myReverseItertor &operator -- (void){//
+	myReverseIterator &operator -- (void){//
 		++this->pVal;
 		return (*this);
 	}
-	virtual myReverseItertor operator -- (int){//
-		myReverseItertor it(this->pVal++);
+	myReverseIterator operator -- (int){//
+		myReverseIterator it(this->pVal++);
 		return (it);
 	}
-	virtual myReverseItertor &operator -= (int rVal){
+	myReverseIterator &operator -= (int rVal){
 		this->pVal += rVal;
 		return (*this);
 	}
-	virtual myReverseItertor &operator += (int rVal){
+	myReverseIterator &operator += (int rVal){
 		this->pVal -= rVal;
 		return (*this);
 	}
-	virtual int	 operator - (const myReverseItertor& rVal) const{/////////?
+	int	 operator - (const myReverseIterator& rVal) const{/////////?
 		return (this->pVal - rVal.pVal);
 	}
-	virtual myReverseItertor operator - (int rVal){//
-		return (myReverseItertor(this->pVal + rVal));
+	myReverseIterator operator - (int rVal){//
+		return (myReverseIterator(this->pVal + rVal));
 	}
-	virtual myReverseItertor operator + (int rVal){//
-		return (myReverseItertor(this->pVal - rVal));
+	myReverseIterator operator + (int rVal){//
+		// std::cout<<(void*)this->pVal<<" - "<<rVal<<" = "<<(void*)(this->pVal - rVal)<<std::endl;
+		return (myReverseIterator(this->pVal - rVal));
 	}
-	virtual bool operator == (const myReverseItertor& rVal) const{
+	bool operator == (const myReverseIterator& rVal) const{
 		return (this->pVal == rVal.pVal);
 	}
-	virtual bool operator != (const myReverseItertor& rVal) const{
+	bool operator != (const myReverseIterator& rVal) const{
 		return (this->pVal != rVal.pVal);
 	}
-	virtual bool operator <= (const myReverseItertor& rVal) const{
+	bool operator <= (const myReverseIterator& rVal) const{
 		return (this->pVal >= rVal.pVal);
 	}
-	virtual bool operator >= (const myReverseItertor& rVal) const{
+	bool operator >= (const myReverseIterator& rVal) const{
 		return (this->pVal <= rVal.pVal);
 	}
-	virtual bool operator < (const myReverseItertor& rVal) const{
+	bool operator < (const myReverseIterator& rVal) const{
 		return (this->pVal > rVal.pVal);
 	}
-	virtual bool operator > (const myReverseItertor& rVal) const{
+	bool operator > (const myReverseIterator& rVal) const{
 		return (this->pVal < rVal.pVal);
 	}
-	virtual T&	operator* (){
+	T&	operator* (){
+		// std::cout<<"* "<<(void*)this->pVal<<std::endl;
 		return (*(this->pVal + 1));
 	}
 };
+
+}//end ft
 
 #endif
