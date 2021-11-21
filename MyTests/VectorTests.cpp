@@ -248,3 +248,27 @@ void vectorTestReverseIterator(){
 	std::cout<<*(it1End - 1)<<"\t"<<*(it2End - 1)<<std::endl;
 	std::cout<<it1End - it1Beg<<"\t"<<it2End - it2Beg<<std::endl;
 }
+
+void	vectorTestModifiers(){
+	std::cout<<TYPE_COLOR"(Modifiers)"RESET_COLOR<<std::endl;
+	///////////////////// Test assign #1
+	std::vector<int> v1, v1New;
+	ft::vector<int> v2, v2New;
+	for (int i = 0; i < 10; ++i){
+		v1.push_back(i);
+		v2.push_back(i);
+	}
+	for (int i = 0; i < 100; ++i){
+		v1New.push_back(i);
+		v2New.push_back(i);
+	}
+	outSizes(v1, v2);
+	outSizes(v1New, v2New);
+	v1.assign(5, 123);
+	v2.assign(5, 123);
+	outSizes(v1, v2);
+	v1.assign(50, 2);
+	v2.assign(50, 2);
+	outSizes(v1, v2);
+	///////////////////// Test assign #2
+}

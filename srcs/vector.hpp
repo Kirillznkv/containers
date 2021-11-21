@@ -105,6 +105,9 @@ public:
 			_capacity = n;
 		}
 	}
+	void	assign(size_type n, const value_type &val){
+		resize(n, val);
+	}
 	void	push_back(const value_type &val){
 		if (!_capacity){
 			_arr = _alloc.allocate(_capacity = 1);
