@@ -29,8 +29,21 @@ private:
 	size_type	_capacity;
 	value_type	*_arr;
 	allocator_type	_alloc;
+
+	void	doublingCapacity(){
+		value_type *new_arr = _alloc.allocate(_capacity <<= 1);
+		for (size_type i = 0; i < _size; ++i){
+			_alloc.construct(new_arr + i, *(_arr + i));
+			_alloc.destroy(_arr + i);
+		}
+		_alloc.deallocate(_arr, _capacity>>1);
+		_arr = new_arr;
+	}
 public:
 	vector() : _size(0), _capacity(0), _arr(NULL){};
+	vector(size_type size, value_type val = value_type()) : _size(0), _capacity(0), _arr(NULL){
+		resize(size, val);
+	};
 	vector(const vector& copy){
 		this->operator=(copy);
 	}//
@@ -125,19 +138,46 @@ public:
 	// void	assign(size_type n, const value_type &val){
 	// 	resize(n, val);
 	// }
+	iterator insert(iterator position, const value_type& val){
+		if (_size == _capacity)
+			doublingCapacity();
+		for (iterator i = end() - 1; i >= position; --i){
+			_alloc.construct(&(*i) + 1, *i);
+			_alloc.destroy(&(*i));
+		}
+		_alloc.construct(&(*position), val);
+		++_size;
+		return (position);
+	}
+	void	insert(iterator position, size_type n, const value_type& val){
+		while (_size + n >= _capacity)
+			doublingCapacity();
+		for (iterator i = end() - 1; i >= position; --i){
+			_alloc.construct(&(*i) + n, *i);
+			_alloc.destroy(&(*i));
+		}
+		for (int i = 0; i < (int)n; ++i)
+			_alloc.construct(&(*(position + i)), val);
+		_size += n;
+	}
+	template <class InputIterator>//дописать, чтобы заработало
+    void	insert(iterator position, InputIterator first, InputIterator last){
+		size_type n = (last - first);
+		while (_size + n >= _capacity)
+			doublingCapacity();
+		for (iterator i = end() - 1; i >= position; --i){
+			_alloc.construct(&(*i) + n, *i);
+			_alloc.destroy(&(*i));
+		}
+		for (int i = 0; i < (int)n; ++i)
+			_alloc.construct(&(*(position + i)), *(first++));
+		_size += n;
+	}
 	void	push_back(const value_type &val){
-		if (!_capacity){
+		if (!_capacity)
 			_arr = _alloc.allocate(_capacity = 1);
-		}
-		else if (_size == _capacity){
-			value_type *new_arr = _alloc.allocate(_capacity <<= 1);
-			for (size_type i = 0; i < _size; ++i){
-				_alloc.construct(new_arr + i, *(_arr + i));
-				_alloc.destroy(_arr + i);
-			}
-			_alloc.deallocate(_arr, _capacity>>1);
-			_arr = new_arr;
-		}
+		else if (_size == _capacity)
+			doublingCapacity();
 		_alloc.construct(_arr + _size++, val);
 	}
 	void	pop_back(){//исключения

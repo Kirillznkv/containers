@@ -65,6 +65,15 @@ void	vectorTestBase(){
 	t1.resize(20);
 	t2.resize(20);
 	outSizes(t1, t2);
+	//Test create
+	std::vector<int> ve(2, 1);
+	ft::vector<int> ve2(2, 1);
+	outSizes(ve, ve2);
+	out(ve.front(), ve2.front());
+	std::vector<int> ve1(2);
+	ft::vector<int> ve12(2);
+	outSizes(ve1, ve12);
+	out(ve1.front(), ve12.front());
 }
 
 void	vectorTestDouble(){
@@ -262,19 +271,55 @@ void	vectorTestModifiers(){
 		v1New.push_back(i);
 		v2New.push_back(i);
 	}
-	// outSizes(v1, v2);
-	// outSizes(v1New, v2New);
-	// v1.assign(5, 123);
-	// v2.assign(5, 123);
-	// outSizes(v1, v2);
-	// v1.assign(50, 2);
-	// v2.assign(50, 2);
-	// outSizes(v1, v2);
+		// outSizes(v1, v2);
+		// outSizes(v1New, v2New);
+		// v1.assign(5, 123);
+		// v2.assign(5, 123);
+		// outSizes(v1, v2);
+		// v1.assign(50, 2);
+		// v2.assign(50, 2);
+		// outSizes(v1, v2);
 	///////////////////// Test assign #2
 	v1.assign(v1New.begin(), v1New.end());
 	v2.assign(v2New.begin(), v2New.end());
 	outSizes(v1, v2);
 	v1.assign(v1New.begin(), v1New.begin() + 10);
 	v2.assign(v2New.begin(), v2New.begin() + 10);
+	outSizes(v1, v2);
+	int myints[] = {1776,7,4};
+	v1.assign(myints,myints+3);
+	v2.assign(myints,myints+3);
+	outSizes(v1, v2);
+	///////////////////// Test insert #1
+	std::vector<int>::iterator it = v1.insert(v1.begin(), 100);
+	ft::vector<int>::iterator it2 = v2.insert(v2.begin(), 100);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		std::cout<<v1[i]<<" ";
+	std::cout<<"\t"<<*it<<std::endl;
+	for (int i = 0; i < (int)v2.size(); ++i)
+		std::cout<<v2[i]<<" ";
+	std::cout<<"\t"<<*it2<<std::endl;
+	outSizes(v1, v2);
+	///////////////////// Test insert #2
+		// v1.insert(v1.begin(), 5, 1);
+		// v2.insert(v2.begin(), 5, 1);
+		// for (int i = 0; i < (int)v1.size(); ++i)
+		// 	std::cout<<v1[i]<<" ";
+		// std::cout<<"\t"<<*it<<std::endl;
+		// for (int i = 0; i < (int)v2.size(); ++i)
+		// 	std::cout<<v2[i]<<" ";
+		// std::cout<<"\t"<<*it2<<std::endl;
+		// outSizes(v1, v2);
+	///////////////////// Test insert #3
+	std::vector<int> putVec1(10, 0);
+	ft::vector<int> putVec2(10, 0);
+	v1.insert(v1.begin() + 1, putVec1.begin(), putVec1.end());
+	v2.insert(v2.begin() + 1, putVec2.begin(), putVec2.end());
+	for (int i = 0; i < (int)v1.size(); ++i)
+		std::cout<<v1[i]<<" ";
+	std::cout<<"\t"<<*it<<std::endl;
+	for (int i = 0; i < (int)v2.size(); ++i)
+		std::cout<<v2[i]<<" ";
+	std::cout<<"\t"<<*it2<<std::endl;
 	outSizes(v1, v2);
 }
