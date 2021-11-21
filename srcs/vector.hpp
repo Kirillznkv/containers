@@ -157,10 +157,10 @@ public:
 		return (iterator(_arr + _size));
 	}
 	reverse_iterator rbegin(){
-		return (reverse_iterator(_arr + _size - 1));//исключения
+		return (reverse_iterator(_arr + _size - 2));//исключения
 	}
 	reverse_iterator rend(){
-		return (reverse_iterator(_arr - 1));
+		return (reverse_iterator(_arr - 2));
 	}
 };
 

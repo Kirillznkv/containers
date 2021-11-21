@@ -10,32 +10,31 @@ class myReverseIterator : public myIterator<T>{
 public:
 	myReverseIterator() : myIterator<T>(){}
 	myReverseIterator(T *val){
-		this->pVal = val - 1;
+		this->pVal = val;
 	}
 	myReverseIterator(const myReverseIterator& copy){
 		this->operator=(copy);
 	}
 	~myReverseIterator(){};
-	myReverseIterator &operator=(const myReverseIterator& op){//
+	myReverseIterator &operator=(const myReverseIterator& op){
 		if (this == &op)
 			return (*this);
-		// std::cout<<std::endl<<(void*)this->pVal<<" = "<<(void*)op.pVal<<std::endl;
 		this->pVal = op.pVal;
 		return (*this);
 	}
-	myReverseIterator &operator ++ (void){//
+	myReverseIterator &operator ++ (void){
 		--this->pVal;
 		return (*this);
 	}
-	myReverseIterator operator ++ (int){//
+	myReverseIterator operator ++ (int){
 		myReverseIterator it(this->pVal--);
 		return (it);
 	}
-	myReverseIterator &operator -- (void){//
+	myReverseIterator &operator -- (void){
 		++this->pVal;
 		return (*this);
 	}
-	myReverseIterator operator -- (int){//
+	myReverseIterator operator -- (int){
 		myReverseIterator it(this->pVal++);
 		return (it);
 	}
@@ -47,14 +46,13 @@ public:
 		this->pVal -= rVal;
 		return (*this);
 	}
-	int	 operator - (const myReverseIterator& rVal) const{/////////?
-		return (this->pVal - rVal.pVal);
+	int	 operator - (const myReverseIterator& rVal) const{
+		return (rVal.pVal - this->pVal);
 	}
-	myReverseIterator operator - (int rVal){//
+	myReverseIterator operator - (int rVal){
 		return (myReverseIterator(this->pVal + rVal));
 	}
-	myReverseIterator operator + (int rVal){//
-		// std::cout<<(void*)this->pVal<<" - "<<rVal<<" = "<<(void*)(this->pVal - rVal)<<std::endl;
+	myReverseIterator operator + (int rVal){
 		return (myReverseIterator(this->pVal - rVal));
 	}
 	bool operator == (const myReverseIterator& rVal) const{
@@ -76,7 +74,6 @@ public:
 		return (this->pVal < rVal.pVal);
 	}
 	T&	operator* (){
-		// std::cout<<"* "<<(void*)this->pVal<<std::endl;
 		return (*(this->pVal + 1));
 	}
 };

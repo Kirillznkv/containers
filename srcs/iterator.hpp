@@ -15,7 +15,7 @@ public:
 	myIterator(const myIterator& copy){
 		this->operator=(copy);
 	}
-	/*virtual */~myIterator(){};
+	virtual ~myIterator(){};
 	/*virtual */myIterator &operator=(const myIterator& op){
 		if (this == &op)
 			return (*this);
