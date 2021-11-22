@@ -120,6 +120,12 @@ public:
 		}
 	}
 	template <class InputIterator>
+    //     typename std::enable_if
+    //     <
+    //          std::__is_input_iterator  <InputIterator>::value &&
+    //         !std::__is_forward_iterator<InputIterator>::value,
+    //         void
+    //     >::type
 	void	assign(InputIterator first, InputIterator last){//можно мапу?    //есть исключения, если будет отрицательная разница?
 		if (size_type(last - first) <= _capacity){
 			while (_size)
@@ -172,6 +178,25 @@ public:
 		for (int i = 0; i < (int)n; ++i)
 			_alloc.construct(&(*(position + i)), *(first++));
 		_size += n;
+	}
+	iterator	erase(iterator position){
+		_alloc.destroy(&(*position));
+		for (iterator it = position; it != end(); ++it){
+			_alloc.construct(&(*it), *(it + 1));
+			_alloc.destroy(&(*(it + 1)));
+		}
+		--_size;
+		return (position);
+	}
+	iterator	erase(iterator first, iterator last){
+		for (iterator it = first; it != last; ++it)
+			_alloc.destroy(&(*it));
+		for (iterator it = last, itToPast = first; it != end(); ++it){
+			_alloc.construct(&(*(itToPast++)), *it);
+			_alloc.destroy(&(*it));
+		}
+		_size -= (last - first);
+		return (first);
 	}
 	void	push_back(const value_type &val){
 		if (!_capacity)

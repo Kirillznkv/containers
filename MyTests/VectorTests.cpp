@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>//
 #include <vector>
 #include <stack>
 #include "../srcs/vector.hpp"
@@ -271,14 +272,14 @@ void	vectorTestModifiers(){
 		v1New.push_back(i);
 		v2New.push_back(i);
 	}
-		// outSizes(v1, v2);
-		// outSizes(v1New, v2New);
-		// v1.assign(5, 123);
-		// v2.assign(5, 123);
-		// outSizes(v1, v2);
-		// v1.assign(50, 2);
-		// v2.assign(50, 2);
-		// outSizes(v1, v2);
+								// outSizes(v1, v2);
+								// outSizes(v1New, v2New);
+								// v1.assign(5, 123);
+								// v2.assign(5, 123);
+								// outSizes(v1, v2);
+								// v1.assign(50, 2);
+								// v2.assign(50, 2);
+								// outSizes(v1, v2);
 	///////////////////// Test assign #2
 	v1.assign(v1New.begin(), v1New.end());
 	v2.assign(v2New.begin(), v2New.end());
@@ -321,5 +322,27 @@ void	vectorTestModifiers(){
 	for (int i = 0; i < (int)v2.size(); ++i)
 		std::cout<<v2[i]<<" ";
 	std::cout<<"\t"<<*it2<<std::endl;
+	outSizes(v1, v2);
+	///////////////////// Test erase #1
+	std::vector<int>::iterator itEr1 = v1.erase(v1.end() - 3);
+	ft::vector<int>::iterator itEr2 = v2.erase(v2.end() - 3);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		std::cout<<v1[i]<<" ";
+	std::cout<<"\t"<<*it<<std::endl;
+	for (int i = 0; i < (int)v2.size(); ++i)
+		std::cout<<v2[i]<<" ";
+	std::cout<<"\t"<<*it2<<std::endl;
+	out(*itEr1, *itEr2);
+	outSizes(v1, v2);
+	///////////////////// Test erase #1
+	std::vector<int>::iterator itEr12 = v1.erase(v1.begin(), v1.end() - 3);
+	ft::vector<int>::iterator itEr22 = v2.erase(v2.begin(), v2.end() - 3);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		std::cout<<v1[i]<<" ";
+	std::cout<<"\t"<<*it<<std::endl;
+	for (int i = 0; i < (int)v2.size(); ++i)
+		std::cout<<v2[i]<<" ";
+	std::cout<<"\t"<<*it2<<std::endl;
+	out(*itEr12, *itEr22);
 	outSizes(v1, v2);
 }

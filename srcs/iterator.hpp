@@ -4,7 +4,7 @@
 namespace ft{
 
 template<typename T>
-class myIterator{
+class myIterator{//перегрузить вывод?
 protected:
 	T *pVal;
 public:
