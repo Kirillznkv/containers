@@ -368,4 +368,37 @@ void	vectorTestModifiers(){
 	outSizes(v1, v2);
 	outSizes(putVec1, putVec2);
 	}
+	///////////////////// Test clear
+	std::vector<int> myvector;
+	myvector.push_back (100);
+	myvector.push_back (200);
+	myvector.push_back (300);
+	std::cout << "myvector contains:";
+	for (unsigned i=0; i<myvector.size(); i++)
+		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
+	myvector.clear();
+	myvector.push_back (1101);
+	myvector.push_back (2202);
+	std::cout << "myvector contains:";
+	for (unsigned i=0; i<myvector.size(); i++)
+		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
+
+	ft::vector<int> myvector2;
+	myvector2.push_back (100);
+	myvector2.push_back (200);
+	myvector2.push_back (300);
+	std::cout << "myvector contains:";
+	for (unsigned i=0; i<myvector2.size(); i++)
+		std::cout << ' ' << myvector2[i];
+	std::cout << std::endl;
+	myvector2.clear();
+	myvector2.push_back (1101);
+	myvector2.push_back (2202);
+	std::cout << "myvector contains:";
+	for (unsigned i=0; i<myvector2.size(); i++)
+		std::cout << ' ' << myvector2[i];
+	std::cout << std::endl;
+	outSizes(myvector, myvector2);
 }

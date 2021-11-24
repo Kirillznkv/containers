@@ -209,6 +209,10 @@ public:
 		this->operator=(x);
 		x = vec;
 	}
+	void	clear(){
+		while (_size)
+			_alloc.destroy(this->_arr + --_size);
+	}
 	void	push_back(const value_type &val){
 		if (!_capacity)
 			_arr = _alloc.allocate(_capacity = 1);
