@@ -334,7 +334,7 @@ void	vectorTestModifiers(){
 	std::cout<<"\t"<<*it2<<std::endl;
 	out(*itEr1, *itEr2);
 	outSizes(v1, v2);
-	///////////////////// Test erase #1
+	///////////////////// Test erase #2
 	std::vector<int>::iterator itEr12 = v1.erase(v1.begin(), v1.end() - 3);
 	ft::vector<int>::iterator itEr22 = v2.erase(v2.begin(), v2.end() - 3);
 	for (int i = 0; i < (int)v1.size(); ++i)
@@ -345,4 +345,27 @@ void	vectorTestModifiers(){
 	std::cout<<"\t"<<*it2<<std::endl;
 	out(*itEr12, *itEr22);
 	outSizes(v1, v2);
+	///////////////////// Test swap
+	{
+	std::vector<int> v1(20, 5);
+	std::vector<int> putVec1(10, 0);
+	ft::vector<int> v2(20, 5);
+	ft::vector<int>  putVec2(10, 0);
+	v1.swap(putVec1);
+	v2.swap(putVec2);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		std::cout<<v1[i];
+	std::cout<<" (";
+	for (int i = 0; i < (int)putVec1.size(); ++i)
+		std::cout<<putVec1[i];
+	std::cout<<")"<<std::endl;
+	for (int i = 0; i < (int)v2.size(); ++i)
+		std::cout<<v2[i];
+	std::cout<<" (";
+	for (int i = 0; i < (int)putVec2.size(); ++i)
+		std::cout<<putVec2[i];
+	std::cout<<")"<<std::endl;
+	outSizes(v1, v2);
+	outSizes(putVec1, putVec2);
+	}
 }

@@ -45,6 +45,9 @@ public:
 		resize(size, val);
 	};
 	vector(const vector& copy){
+		this->_capacity = 0;
+		this->_size = 0;
+		this->_arr = NULL;
 		this->operator=(copy);
 	}//
 	~vector(void) {
@@ -56,9 +59,12 @@ public:
 	vector &operator=(const vector& op){
 		if (this == &op)
 			return (*this);
-		this->_capacity = 0;
-		this->_size = 0;
-		this->_arr = NULL;
+		while (_size)
+			_alloc.destroy(this->_arr + --_size);
+		if (this->_capacity){
+			_alloc.deallocate(this->_arr, this->_capacity);
+			_capacity = 0;
+		}
 		if (op._capacity){
 			this->_capacity = op._capacity;
 			this->_size = op._size;
@@ -197,6 +203,11 @@ public:
 		}
 		_size -= (last - first);
 		return (first);
+	}
+	void	swap(vector& x){
+		vector vec(*this);
+		this->operator=(x);
+		x = vec;
 	}
 	void	push_back(const value_type &val){
 		if (!_capacity)
