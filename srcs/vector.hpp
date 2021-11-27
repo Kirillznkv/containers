@@ -11,6 +11,9 @@
 
 namespace ft{
 
+// template<bool Cond, class T = void> struct enable_if {};       //Почему так?
+// template<class T> struct enable_if<true, T> { typedef T type; };
+
 template<typename T, class Allocator = std::allocator<T> >
 class vector{
 public:
@@ -50,7 +53,7 @@ public:
 		this->_arr = NULL;
 		this->operator=(copy);
 	}//
-	~vector(void) {
+	~vector() {
 		for (size_type i = 0; i < _size; ++i)
 			_alloc.destroy(_arr + i);
 		if (_capacity)
@@ -92,6 +95,8 @@ public:
 		return (val);
 	}
 	void	resize(size_type n, value_type val = value_type()){
+		if (n < 0)
+			throw errorIndex();
 		if (_capacity >= n)
 			while (_size < n)
 				push_back(val);
@@ -104,7 +109,7 @@ public:
 			for (size_t i = _size; i < n; ++i)
 				_alloc.construct(new_arr + i, val);
 			if (_capacity)
-				_alloc.deallocate(_arr, _capacity);//add if
+				_alloc.deallocate(_arr, _capacity);
 			_arr = new_arr;
 			_capacity = n;
 			_size = n;
@@ -113,7 +118,7 @@ public:
 			pop_back();
 	}
 	void	reserve(size_type n){
-		if (n != _capacity){//проверить изменение заменил _size
+		if (n != _capacity){
 			value_type *new_arr = _alloc.allocate(n);
 			for (size_type i = 0; i < _size; ++i){
 				_alloc.construct(new_arr + i, *(_arr + i));
@@ -126,30 +131,27 @@ public:
 		}
 	}
 	template <class InputIterator>
-    //     typename std::enable_if
-    //     <
-    //          std::__is_input_iterator  <InputIterator>::value &&
-    //         !std::__is_forward_iterator<InputIterator>::value,
-    //         void
-    //     >::type
-	void	assign(InputIterator first, InputIterator last){//можно мапу?    //есть исключения, если будет отрицательная разница?
+        typename std::enable_if
+        <
+             std::__is_input_iterator  <InputIterator>::value,
+            void
+        >::type
+	assign(InputIterator first, InputIterator last){
 		if (size_type(last - first) <= _capacity){
-			while (_size)
-				pop_back();
+			clear();
 			while (first != last)
 				push_back(*(first++));
 		}
 		else{
-			while (_size)
-				pop_back();
+			clear();
 			reserve(last - first);
 			while (first != last)
 				push_back(*(first++));
 		}
 	}
-	// void	assign(size_type n, const value_type &val){
-	// 	resize(n, val);
-	// }
+	void	assign(size_type n, const value_type &val){
+		resize(n, val);
+	}
 	iterator insert(iterator position, const value_type& val){
 		if (_size == _capacity)
 			doublingCapacity();
@@ -172,8 +174,13 @@ public:
 			_alloc.construct(&(*(position + i)), val);
 		_size += n;
 	}
-	template <class InputIterator>//дописать, чтобы заработало
-    void	insert(iterator position, InputIterator first, InputIterator last){
+	template <class InputIterator>
+        typename std::enable_if
+        <
+             std::__is_input_iterator  <InputIterator>::value,
+            void
+        >::type
+    insert(iterator position, InputIterator first, InputIterator last){
 		size_type n = (last - first);
 		while (_size + n >= _capacity)
 			doublingCapacity();
@@ -227,7 +234,7 @@ public:
 	class errorIndex: public std::exception{//Заменить на орегинальный
 	public:
 		const char* what(void) const _NOEXCEPT{
-			return "bad index";
+			return "vector";
 		}
 	};
 	// const_reference	front() const{
@@ -250,6 +257,11 @@ public:
 			throw errorIndex();
 		return (*(_arr + i));
 	}
+	// const_reference	at(size_type i){
+	// 	if (i < 0 || i >= _size)
+	// 		throw errorIndex();
+	// 	return (*(_arr + i));
+	// }
 	iterator begin(){
 		return (iterator(_arr));//исключения
 	}

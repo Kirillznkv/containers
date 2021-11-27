@@ -272,14 +272,14 @@ void	vectorTestModifiers(){
 		v1New.push_back(i);
 		v2New.push_back(i);
 	}
-								// outSizes(v1, v2);
-								// outSizes(v1New, v2New);
-								// v1.assign(5, 123);
-								// v2.assign(5, 123);
-								// outSizes(v1, v2);
-								// v1.assign(50, 2);
-								// v2.assign(50, 2);
-								// outSizes(v1, v2);
+								outSizes(v1, v2);
+								outSizes(v1New, v2New);
+								v1.assign(5, 123);
+								v2.assign(5, 123);
+								outSizes(v1, v2);
+								v1.assign(50, 2);
+								v2.assign(50, 2);
+								outSizes(v1, v2);
 	///////////////////// Test assign #2
 	v1.assign(v1New.begin(), v1New.end());
 	v2.assign(v2New.begin(), v2New.end());
@@ -302,15 +302,15 @@ void	vectorTestModifiers(){
 	std::cout<<"\t"<<*it2<<std::endl;
 	outSizes(v1, v2);
 	///////////////////// Test insert #2
-		// v1.insert(v1.begin(), 5, 1);
-		// v2.insert(v2.begin(), 5, 1);
-		// for (int i = 0; i < (int)v1.size(); ++i)
-		// 	std::cout<<v1[i]<<" ";
-		// std::cout<<"\t"<<*it<<std::endl;
-		// for (int i = 0; i < (int)v2.size(); ++i)
-		// 	std::cout<<v2[i]<<" ";
-		// std::cout<<"\t"<<*it2<<std::endl;
-		// outSizes(v1, v2);
+		v1.insert(v1.begin(), 5, 1);
+		v2.insert(v2.begin(), 5, 1);
+		for (int i = 0; i < (int)v1.size(); ++i)
+			std::cout<<v1[i]<<" ";
+		std::cout<<"\t"<<*it<<std::endl;
+		for (int i = 0; i < (int)v2.size(); ++i)
+			std::cout<<v2[i]<<" ";
+		std::cout<<"\t"<<*it2<<std::endl;
+		outSizes(v1, v2);
 	///////////////////// Test insert #3
 	std::vector<int> putVec1(10, 0);
 	ft::vector<int> putVec2(10, 0);
@@ -401,4 +401,21 @@ void	vectorTestModifiers(){
 		std::cout << ' ' << myvector2[i];
 	std::cout << std::endl;
 	outSizes(myvector, myvector2);
+}
+
+void vectorTestExept(){
+	std::cout<<TYPE_COLOR"(Exeption)"RESET_COLOR<<std::endl;
+	///////////////////// Test at
+	std::vector<long long> v1;
+	ft::vector<long long> v2;
+	try { std::cout<<v1.at(0)<<std::endl; }
+	catch (std::exception &e) { std::cout<<"Error1: "<<e.what()<<std::endl; }
+	try { std::cout<<v2.at(0)<<std::endl; }
+	catch (std::exception &e) { std::cout<<"Error1: "<<e.what()<<std::endl; }
+	///////////////////// Test erase
+	// v1.push_back(1);
+	try { v1.resize(-10, 12); }
+	catch (std::exception &e) { std::cout<<"Error2: "<<e.what()<<std::endl; }
+	try { v2.resize(-10, 12); }
+	catch (std::exception &e) { std::cout<<"Error2: "<<e.what()<<std::endl; }
 }

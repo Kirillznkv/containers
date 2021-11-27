@@ -4,7 +4,7 @@
 namespace ft{
 
 template<typename T>
-class myIterator{//перегрузить вывод?
+class myIterator : public std::iterator<std::random_access_iterator_tag, const T>{//перегрузить вывод?     //Почему так?
 protected:
 	T *pVal;
 public:
