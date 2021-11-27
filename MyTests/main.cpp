@@ -14,6 +14,7 @@ void vectorTestIterator();
 void vectorTestReverseIterator();
 void vectorTestModifiers();
 void vectorTestExept();
+void vectorTestRelationalOperators();
 
 void	stackTest(){
 	std::cout<<BLOCK_COLOR"----------STACK-TEST----------"RESET_COLOR<<std::endl;
@@ -31,6 +32,7 @@ void	vectorTest(){
 	vectorTestReverseIterator();
 	vectorTestModifiers();
 	vectorTestExept();
+	vectorTestRelationalOperators();
 }
 
 int		main() {

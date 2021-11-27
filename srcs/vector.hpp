@@ -131,11 +131,8 @@ public:
 		}
 	}
 	template <class InputIterator>
-        typename std::enable_if
-        <
-             std::__is_input_iterator  <InputIterator>::value,
-            void
-        >::type
+	typename std::enable_if
+	< std::__is_input_iterator< InputIterator >::value, void >::type
 	assign(InputIterator first, InputIterator last){
 		if (size_type(last - first) <= _capacity){
 			clear();
@@ -274,6 +271,46 @@ public:
 	reverse_iterator rend(){
 		return (reverse_iterator(_arr - 2));
 	}
+	// bool	operator==(const vector& rVal){
+	// 	int i = 0;
+	// 	while (i < _size && i < rVal.size() && _arr[i] == rVal[i])
+	// 		i++;
+	// 	if (i != _size || i != rVal.size)
+	// 		return (false);
+	// 	return (true);
+	// }
+	// bool	operator!=(const vector& rVal){
+	// 	int i = 0;
+	// 	while (i < _size && i < rVal.size() && _arr[i] != rVal[i])
+	// 		i++;
+	// 	if (i != _size || i != rVal.size)
+	// 		return (false);
+	// 	return (true);
+	// }
+	// bool	operator>=(const vector& rVal){
+	// 	int i = 0;
+	// 	while (i < _size && i < rVal.size() && _arr[i] >= rVal[i])
+	// 		i++;
+	// 	if (i != rVal.size)
+	// 		return (false);
+	// 	return (true);
+	// }
+	// bool	operator<=(const vector& rVal){
+	// 	int i = 0;
+	// 	while (i < _size && i < rVal.size() && _arr[i] <= rVal[i])
+	// 		i++;
+	// 	if (i != _size)
+	// 		return (false);
+	// 	return (true);
+	// }
+	// bool	operator>(const vector& rVal){
+	// 	int i = 0;
+	// 	while (i < _size && i < rVal.size() && _arr[i] > rVal[i])
+	// 		i++;
+	// 	if (i != rVal.size)
+	// 		return (false);
+	// 	return (true);
+	// }
 };
 
 }//end namespace ft

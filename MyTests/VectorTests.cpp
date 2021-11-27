@@ -419,3 +419,12 @@ void vectorTestExept(){
 	try { v2.resize(-10, 12); }
 	catch (std::exception &e) { std::cout<<"Error2: "<<e.what()<<std::endl; }
 }
+
+void vectorTestRelationalOperators(){
+	std::cout<<TYPE_COLOR"(vectorTestRelationalOperators)"RESET_COLOR<<std::endl;
+	///////////////////// Test at
+	std::vector<int> v1(3,3);
+	std::vector<int> v2(3,3);
+	v1[2] = 3;
+	std::cout<<(int)(v1==v2)<<std::endl;
+}
