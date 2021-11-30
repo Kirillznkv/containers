@@ -3,11 +3,17 @@
 
 namespace ft{
 
-template<typename T>
-class myIterator : public std::iterator<std::random_access_iterator_tag, const T>{//перегрузить вывод?     //Почему так?
+template <class T, class Category = std::random_access_iterator_tag, class Distance = ptrdiff_t,
+          class Pointer = T*, class Reference = T&>
+class myIterator{
 protected:
 	T *pVal;
 public:
+    typedef T         value_type;
+    typedef Distance  difference_type;
+    typedef Pointer   pointer;
+    typedef Reference reference;
+    typedef Category  iterator_category;
 	myIterator() : pVal(NULL){}
 	myIterator(T *val){
 		pVal = val;
