@@ -234,19 +234,22 @@ public:
 			return "vector";
 		}
 	};
-	// const_reference	front() const{
-	// 	return (*_arr);
-	// }
+	const_reference	front() const{
+		return (*_arr);
+	}
 	reference	front(){
 		return (*_arr);
 	}
-	// const_reference	back() const{
-	// 	return (_arr[_size - 1]);
-	// }
+	const_reference	back() const{
+		return (_arr[_size - 1]);
+	}
 	reference	back(){
 		return (_arr[_size - 1]);
 	}
 	reference	operator[](size_type i){
+		return (*(_arr + i));
+	}
+	const_reference	operator[](size_type i) const{
 		return (*(_arr + i));
 	}
 	reference	at(size_type i){
@@ -254,11 +257,11 @@ public:
 			throw errorIndex();
 		return (*(_arr + i));
 	}
-	// const_reference	at(size_type i){
-	// 	if (i < 0 || i >= _size)
-	// 		throw errorIndex();
-	// 	return (*(_arr + i));
-	// }
+	const_reference	at(size_type i) const{
+		if (i < 0 || i >= _size)
+			throw errorIndex();
+		return (*(_arr + i));
+	}
 	iterator begin(){
 		return (iterator(_arr));//исключения
 	}
@@ -271,46 +274,44 @@ public:
 	reverse_iterator rend(){
 		return (reverse_iterator(_arr - 2));
 	}
-	// bool	operator==(const vector& rVal){
-	// 	int i = 0;
-	// 	while (i < _size && i < rVal.size() && _arr[i] == rVal[i])
-	// 		i++;
-	// 	if (i != _size || i != rVal.size)
-	// 		return (false);
-	// 	return (true);
-	// }
-	// bool	operator!=(const vector& rVal){
-	// 	int i = 0;
-	// 	while (i < _size && i < rVal.size() && _arr[i] != rVal[i])
-	// 		i++;
-	// 	if (i != _size || i != rVal.size)
-	// 		return (false);
-	// 	return (true);
-	// }
-	// bool	operator>=(const vector& rVal){
-	// 	int i = 0;
-	// 	while (i < _size && i < rVal.size() && _arr[i] >= rVal[i])
-	// 		i++;
-	// 	if (i != rVal.size)
-	// 		return (false);
-	// 	return (true);
-	// }
-	// bool	operator<=(const vector& rVal){
-	// 	int i = 0;
-	// 	while (i < _size && i < rVal.size() && _arr[i] <= rVal[i])
-	// 		i++;
-	// 	if (i != _size)
-	// 		return (false);
-	// 	return (true);
-	// }
-	// bool	operator>(const vector& rVal){
-	// 	int i = 0;
-	// 	while (i < _size && i < rVal.size() && _arr[i] > rVal[i])
-	// 		i++;
-	// 	if (i != rVal.size)
-	// 		return (false);
-	// 	return (true);
-	// }
+	bool	operator==(const vector& rVal){
+		if (this->size() != rVal.size())
+			return (false);
+		int i = -1;
+		while (++i < (int)_size)
+			if (_arr[i] != rVal.at(i))
+				return (false);
+		return (true);
+	}
+	bool	operator!=(const vector& rVal){
+		return (!operator==(rVal));
+	}
+	bool	operator<(const vector& rVal){
+		int i = 0;
+		while (i < (int)_size && i < (int)rVal.size() && _arr[i] == rVal.at(i))
+			i++;
+		if (i == (int)rVal.size())
+			return (false);
+		else if (i == (int)_size)
+			return (true);
+		return (_arr[i] < rVal.at(i));
+	}
+	bool	operator>(const vector& rVal){
+		int i = 0;
+		while (i < (int)_size && i < (int)rVal.size() && _arr[i] == rVal.at(i))
+			i++;
+		if (i == (int)_size)
+			return (false);
+		else if (i == (int)rVal.size())
+			return (true);
+		return (_arr[i] > rVal.at(i));
+	}
+	bool	operator>=(const vector& rVal){
+		return (operator>(rVal) || operator==(rVal));
+	}
+	bool	operator<=(const vector& rVal){
+		return (operator<(rVal) || operator==(rVal));
+	}
 };
 
 }//end namespace ft

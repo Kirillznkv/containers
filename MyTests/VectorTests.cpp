@@ -18,6 +18,16 @@ void outSizes(const std::vector<T1>& v1,const ft::vector<T2>& v2){
 	std::cout<<"capacity:\t"<<v1.capacity()<<"\t\t\t\t\t"<<v2.capacity()<<std::endl;
 	std::cout<<"max_size:\t"<<v1.max_size()<<"\t\t\t"<<v2.max_size()<<std::endl;
 }
+template <typename T>
+void boolTest(T v1, T v2, int i){
+	std::cout	<<(int)(v1 == v2)<<" " \
+				<<(int)(v1 != v2)<<" " \
+				<<(int)(v1 <= v2)<<" " \
+				<<(int)(v1 >= v2)<<" " \
+				<<(int)(v1 < v2)<<" " \
+				<<(int)(v1 > v2)<<std::endl;
+	i++;
+}
 
 void	vectorTestBase(){
 	std::cout<<TYPE_COLOR"(Base)"RESET_COLOR<<std::endl;
@@ -422,9 +432,43 @@ void vectorTestExept(){
 
 void vectorTestRelationalOperators(){
 	std::cout<<TYPE_COLOR"(vectorTestRelationalOperators)"RESET_COLOR<<std::endl;
-	///////////////////// Test at
-	std::vector<int> v1(3,3);
-	std::vector<int> v2(3,3);
-	v1[2] = 3;
-	std::cout<<(int)(v1==v2)<<std::endl;
+	std::vector<int> std1;
+	std::vector<int> std2;
+	std::vector<int> std11;
+	std::vector<int> std12;
+	ft::vector<int> ft1;
+	ft::vector<int> ft2;
+	ft::vector<int> ft11;
+	ft::vector<int> ft12;
+	std1.push_back(1);
+	std2.push_back(2);
+	std11.push_back(1);
+	std11.push_back(1);
+	std12.push_back(1);
+	std12.push_back(2);
+	ft1.push_back(1);
+	ft2.push_back(2);
+	ft11.push_back(1);
+	ft11.push_back(1);
+	ft12.push_back(1);
+	ft12.push_back(2);
+	///////////////////// Test == != < <= > >=
+	boolTest(std11, std11, 100);
+	boolTest(ft11, ft11, 100);
+	std::cout<<"---";
+	boolTest(std11, std12, 100);
+	std::cout<<"---";
+	boolTest(ft11, ft12, 100);
+	boolTest(std1, std11, 100);
+	boolTest(ft1, ft11, 100);
+	std::cout<<"---";
+	boolTest(std12, std11, 100);
+	std::cout<<"---";
+	boolTest(ft12, ft11, 100);
+	boolTest(std11, std1, 100);
+	boolTest(ft11, ft1, 100);
+	std::cout<<"---";
+	boolTest(std11, std2, 100);
+	std::cout<<"---";
+	boolTest(ft11, ft2, 100);
 }
