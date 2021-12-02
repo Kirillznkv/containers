@@ -5,7 +5,10 @@ vector (InputIterator first, InputIterator last,
 			_array = _alloc_data.allocate(_capacity);
 			insert(begin(), first, last);
 		}
-
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+template <class InputIterator>
+         vector (InputIterator first, InputIterator last,
+                 const allocator_type& alloc = allocator_type());
 
 
 Исключение приведения типа в resize

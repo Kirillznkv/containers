@@ -22,61 +22,61 @@ public:
 		this->operator=(copy);
 	}
 	virtual ~myIterator(){};
-	/*virtual */myIterator &operator=(const myIterator& op){
+	myIterator &operator=(const myIterator& op){
 		if (this == &op)
 			return (*this);
 		pVal = op.pVal;
 		return (*this);
 	}
-	/*virtual */myIterator &operator ++ (void){
+	myIterator &operator ++ (void){
 		++pVal;
 		return (*this);
 	}
-	/*virtual */myIterator operator ++ (int){
+	myIterator operator ++ (int){
 		myIterator it(pVal++);
 		return (it);
 	}
-	/*virtual */myIterator &operator -- (void){
+	myIterator &operator -- (void){
 		--pVal;
 		return (*this);
 	}
-	/*virtual */myIterator operator -- (int){
+	myIterator operator -- (int){
 		myIterator it(pVal--);
 		return (it);
 	}
-	/*virtual */myIterator &operator -= (int rVal){
+	myIterator &operator -= (int rVal){
 		pVal -= rVal;
 		return (*this);
 	}
-	/*virtual */myIterator &operator += (int rVal){
+	myIterator &operator += (int rVal){
 		pVal += rVal;
 		return (*this);
 	}
-	/*virtual */int	 operator - (const myIterator& rVal) const{
+	int	 operator - (const myIterator& rVal) const{
 		return (pVal - rVal.pVal);
 	}
-	/*virtual */myIterator operator - (int rVal){
+	myIterator operator - (int rVal){
 		return (myIterator(pVal - rVal));
 	}
-	/*virtual */myIterator operator + (int rVal){
+	myIterator operator + (int rVal){
 		return (myIterator(pVal + rVal));
 	}
-	/*virtual */bool operator == (const myIterator& rVal) const{
+	bool operator == (const myIterator& rVal) const{
 		return (pVal == rVal.pVal);
 	}
-	/*virtual */bool operator != (const myIterator& rVal) const{
+	bool operator != (const myIterator& rVal) const{
 		return (pVal != rVal.pVal);
 	}
-	/*virtual */bool operator <= (const myIterator& rVal) const{
+	bool operator <= (const myIterator& rVal) const{
 		return (pVal <= rVal.pVal);
 	}
-	/*virtual */bool operator >= (const myIterator& rVal) const{
+	bool operator >= (const myIterator& rVal) const{
 		return (pVal >= rVal.pVal);
 	}
-	/*virtual */bool operator < (const myIterator& rVal) const{
+	bool operator < (const myIterator& rVal) const{
 		return (pVal < rVal.pVal);
 	}
-	/*virtual */bool operator > (const myIterator& rVal) const{
+	bool operator > (const myIterator& rVal) const{
 		return (pVal > rVal.pVal);
 	}
 	virtual T&	operator* (){
