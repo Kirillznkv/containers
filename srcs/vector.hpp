@@ -11,6 +11,16 @@
 
 namespace ft{
 
+///////////////////////
+/*-----Exception-----*/
+///////////////////////
+class errorIndex: public std::exception{
+public:
+	const char* what(void) const _NOEXCEPT{
+		return "vector";
+	}
+};
+
 template<typename T, class Allocator = std::allocator<T> >
 class vector{
 public:
@@ -305,15 +315,6 @@ public:
 		_size -= (last - first);
 		return (first);
 	}
-	///////////////////////
-	/*-----Exception-----*/
-	///////////////////////
-	class errorIndex: public std::exception{
-	public:
-		const char* what(void) const _NOEXCEPT{
-			return "vector";
-		}
-	};
 };
 
 }//end namespace ft
