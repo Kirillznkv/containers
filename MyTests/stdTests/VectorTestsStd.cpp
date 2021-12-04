@@ -2,6 +2,7 @@
 #include "TestsUtils.hpp"
 
 void	vectorTestBaseStd(){
+	fStdVector<<"---Vector-Test-Base-(namespace:std)---"<<std::endl;
 	//Test size, capacity, max_size
 	std::vector<int> v1;
 	outSizes(v1, fStdVector);
@@ -45,6 +46,7 @@ void	vectorTestBaseStd(){
 }
 
 void	vectorTestDoubleStd(){
+	fStdVector<<"---Vector-Test-Double-(namespace:std)---"<<std::endl;
 	std::vector<double> v1;
 	for (double i = 0.01; i < 5.078; i += 0.035)
 		v1.push_back(i);
@@ -61,6 +63,7 @@ void	vectorTestDoubleStd(){
 }
 
 void	vectorTestListStd(){
+	fStdVector<<"---Vector-Test-List-(namespace:std)---"<<std::endl;
 	std::vector<std::vector<int> > v1;
 	std::vector<int> vec1[5];
 	for (int i = 0; i < 5; ++i){
@@ -72,6 +75,7 @@ void	vectorTestListStd(){
 }
 
 void	vectorTestIteratorStd(){
+	fStdVector<<"---Vector-Test-Iterator-(namespace:std)---"<<std::endl;
 	// Test ++ -- += -= ...
 	std::vector<char> stdVec;
 	for (char i = 'f'; i < 'z'; ++i)
@@ -112,6 +116,7 @@ void	vectorTestIteratorStd(){
 }
 
 void vectorTestReverseIteratorStd(){
+	fStdVector<<"---Vector-Test-ReverseIterator-(namespace:std)---"<<std::endl;
 	// Test ++ -- += -= ...
 	std::vector<char> stdVec;
 	for (char i = 'f'; i < 'z'; ++i)
@@ -151,6 +156,7 @@ void vectorTestReverseIteratorStd(){
 }
 
 void	vectorTestModifiersStd(){
+	fStdVector<<"---Vector-Test-Modifiers-(namespace:std)---"<<std::endl;
 	///////////////////// Test assign #1
 	std::vector<int> v1, v1New;
 	for (int i = 0; i < 10; ++i)
@@ -236,6 +242,7 @@ void	vectorTestModifiersStd(){
 }
 
 void vectorTestExeptStd(){
+	fStdVector<<"---Vector-Test-Exept-(namespace:std)---"<<std::endl;
 	///////////////////// Test at
 	std::vector<long long> v1;
 	try { fStdVector<<v1.at(0)<<std::endl; }
@@ -246,6 +253,7 @@ void vectorTestExeptStd(){
 }
 
 void vectorTestRelationalOperatorsStd(){
+	fStdVector<<"---Vector-Test-RelationalOperators-(namespace:std)---"<<std::endl;
 	std::vector<int> std1;
 	std::vector<int> std2;
 	std::vector<int> std11;

@@ -1,8 +1,9 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-# include <cmath>///
-# include <memory>///
+# include <cmath>
+# include <iostream>
+# include <memory>
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
 

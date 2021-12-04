@@ -22,13 +22,13 @@ void vectorTestRelationalOperatorsStd();
 /////////////////////////////
 /*----------Tests----------*/
 /////////////////////////////
-void	stackTest(){
+void	stackTestStd() {
 	stackTestIntStd();
 	stackTestStringStd();
 	stackTestListStd();
 	fStdStack.close();
 }
-void	vectorTest(){
+void	vectorTestStd() {
 	vectorTestBaseStd();
 	vectorTestDoubleStd();
 	vectorTestListStd();
@@ -41,7 +41,7 @@ void	vectorTest(){
 }
 
 int		main() {
-	stackTest();
-	vectorTest();
+	stackTestStd();
+	vectorTestStd();
 	return (0);
 }

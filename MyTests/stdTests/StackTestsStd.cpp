@@ -5,6 +5,7 @@
 
 // Empty, Size, Push, Pop, Top + copy constructor + operator=
 void stackTestIntStd(void){
+	fStdStack<<"---Stack-Test-Int-(namespace:std)---"<<std::endl;
 	std::stack<int> s1;
 	fStdStack<<s1.empty()<<std::endl; // Empty
 	s1.push(4); // Push
@@ -31,6 +32,7 @@ void stackTestIntStd(void){
 
 // Test whis classes into arg
 void stackTestStringStd(void){
+	fStdStack<<"---Stack-Test-String-(namespace:std)---"<<std::endl;
 	std::stack<std::string> s1;
 	fStdStack<<s1.empty()<<std::endl; // Empty
 	s1.push("Hello"); // Push
@@ -61,6 +63,7 @@ void stackTestStringStd(void){
 
 // Test whis template into arg
 void stackTestListStd(void){
+	fStdStack<<"---Stack-Test-List-(namespace:std)---"<<std::endl;
 	std::stack<std::stack<int> > s1;
 	std::stack<int> myList;
 	fStdStack<<s1.empty()<<std::endl;

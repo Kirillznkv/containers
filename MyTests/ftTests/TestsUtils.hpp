@@ -20,7 +20,7 @@ void boolTest(T v1, T v2, std::ofstream & out){
 				<<(int)(v1 > v2)<<std::endl;
 }
 
-static std::ofstream fStdStack("./result/stdStack.txt");
-static std::ofstream fStdVector("./result/stdVector.txt");
+static std::ofstream fFtStack("allResult/ftStack.txt");
+static std::ofstream fFtVector("allResult/ftVector.txt");
 
 #endif

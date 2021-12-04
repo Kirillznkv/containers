@@ -1,6 +1,8 @@
 #ifndef DEQUE_HPP
 #define DEQUE_HPP
 
+#include <memory>
+
 namespace ft{
 
 template<typename T, class Allocator = std::allocator<T> >
