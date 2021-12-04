@@ -1,7 +1,4 @@
-#include <iostream>
-
-#define BLOCK_COLOR "\033[38;2;0;0;0;48;2;255;255;0m"
-#define RESET_COLOR "\033[38;2;255;255;255;48;2;30;30;30m"
+#include "TestsUtils.hpp"
 
 /////////////////////////////
 /*----------Stack----------*/
@@ -26,13 +23,12 @@ void vectorTestRelationalOperatorsStd();
 /*----------Tests----------*/
 /////////////////////////////
 void	stackTest(){
-	std::cout<<BLOCK_COLOR"----------STACK-TEST----------"RESET_COLOR<<std::endl;
 	stackTestIntStd();
 	stackTestStringStd();
 	stackTestListStd();
+	fStdStack.close();
 }
 void	vectorTest(){
-	std::cout<<BLOCK_COLOR"----------VECTOR-TEST----------"RESET_COLOR<<std::endl;
 	vectorTestBaseStd();
 	vectorTestDoubleStd();
 	vectorTestListStd();
@@ -41,6 +37,7 @@ void	vectorTest(){
 	vectorTestModifiersStd();
 	vectorTestExeptStd();
 	vectorTestRelationalOperatorsStd();
+	fStdVector.close();
 }
 
 int		main() {

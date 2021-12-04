@@ -1,6 +1,8 @@
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
 
+#include <iostream>
+
 namespace ft{
 
 template <class T, class Category = std::random_access_iterator_tag, class Distance = ptrdiff_t,
