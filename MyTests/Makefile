@@ -1,7 +1,7 @@
-NAME = a.out
+NAME = stdExec
 
 SRCS = ../srcs/
-CPP_FILE =	main.cpp StackTests.cpp VectorTests.cpp
+CPP_FILE =	mainStd.cpp StackTestsStd.cpp VectorTestsStd.cpp
 HPP_FILE = $(SRCS)deque.hpp $(SRCS)stack.hpp $(SRCS)vector.hpp
 O_FILE = $(CPP_FILE:.cpp=.o)
 

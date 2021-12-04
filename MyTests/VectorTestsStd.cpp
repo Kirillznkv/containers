@@ -1,17 +1,7 @@
-
-// #include <map>//
 #include <vector>
 #include "VectorTests.hpp"
-// #include <stack>
-// #include "../srcs/vector.hpp"
 
-
-// #define TYPE_COLOR "\033[38;2;0;255;255m"
-// #define RESET_COLOR "\033[38;2;255;255;255;48;2;30;30;30m"
-
-
-
-void	vectorTestBase(){
+void	vectorTestBaseStd(){
 	//Test size, capacity, max_size
 	std::vector<int> v1;
 	outSizes(v1);
@@ -54,7 +44,7 @@ void	vectorTestBase(){
 	std::cout<<ve1.front()<<std::endl;
 }
 
-void	vectorTestDouble(){
+void	vectorTestDoubleStd(){
 	std::vector<double> v1;
 	for (double i = 0.01; i < 5.078; i += 0.035)
 		v1.push_back(i);
@@ -70,7 +60,7 @@ void	vectorTestDouble(){
 		std::cout<<*it1<<std::endl;
 }
 
-void	vectorTestList(){
+void	vectorTestListStd(){
 	std::vector<std::vector<int> > v1;
 	std::vector<int> vec1[5];
 	for (int i = 0; i < 5; ++i){
@@ -81,7 +71,7 @@ void	vectorTestList(){
 	outSizes(v1);
 }
 
-void	vectorTestIterator(){
+void	vectorTestIteratorStd(){
 	// Test ++ -- += -= ...
 	std::vector<char> stdVec;
 	for (char i = 'f'; i < 'z'; ++i)
@@ -121,7 +111,7 @@ void	vectorTestIterator(){
 	std::cout<<it1End - it1Beg<<std::endl;
 }
 
-void vectorTestReverseIterator(){
+void vectorTestReverseIteratorStd(){
 	// Test ++ -- += -= ...
 	std::vector<char> stdVec;
 	for (char i = 'f'; i < 'z'; ++i)
@@ -160,7 +150,7 @@ void vectorTestReverseIterator(){
 	std::cout<<it1End - it1Beg<<std::endl;
 }
 
-void	vectorTestModifiers(){
+void	vectorTestModifiersStd(){
 	///////////////////// Test assign #1
 	std::vector<int> v1, v1New;
 	for (int i = 0; i < 10; ++i)
@@ -245,62 +235,32 @@ void	vectorTestModifiers(){
 	std::cout << std::endl;
 }
 
-void vectorTestExept(){
-	std::cout<<TYPE_COLOR"(Exeption)"RESET_COLOR<<std::endl;
+void vectorTestExeptStd(){
 	///////////////////// Test at
 	std::vector<long long> v1;
-	ft::vector<long long> v2;
 	try { std::cout<<v1.at(0)<<std::endl; }
 	catch (std::exception &e) { std::cout<<"Error1: "<<e.what()<<std::endl; }
-	try { std::cout<<v2.at(0)<<std::endl; }
-	catch (std::exception &e) { std::cout<<"Error1: "<<e.what()<<std::endl; }
 	///////////////////// Test erase
-	// v1.push_back(1);
 	try { v1.resize(-10, 12); }
-	catch (std::exception &e) { std::cout<<"Error2: "<<e.what()<<std::endl; }
-	try { v2.resize(-10, 12); }
 	catch (std::exception &e) { std::cout<<"Error2: "<<e.what()<<std::endl; }
 }
 
-void vectorTestRelationalOperators(){
-	std::cout<<TYPE_COLOR"(vectorTestRelationalOperators)"RESET_COLOR<<std::endl;
+void vectorTestRelationalOperatorsStd(){
 	std::vector<int> std1;
 	std::vector<int> std2;
 	std::vector<int> std11;
 	std::vector<int> std12;
-	ft::vector<int> ft1;
-	ft::vector<int> ft2;
-	ft::vector<int> ft11;
-	ft::vector<int> ft12;
 	std1.push_back(1);
 	std2.push_back(2);
 	std11.push_back(1);
 	std11.push_back(1);
 	std12.push_back(1);
 	std12.push_back(2);
-	ft1.push_back(1);
-	ft2.push_back(2);
-	ft11.push_back(1);
-	ft11.push_back(1);
-	ft12.push_back(1);
-	ft12.push_back(2);
 	///////////////////// Test == != < <= > >=
-	boolTest(std11, std11, 100);
-	boolTest(ft11, ft11, 100);
-	std::cout<<"---";
-	boolTest(std11, std12, 100);
-	std::cout<<"---";
-	boolTest(ft11, ft12, 100);
-	boolTest(std1, std11, 100);
-	boolTest(ft1, ft11, 100);
-	std::cout<<"---";
-	boolTest(std12, std11, 100);
-	std::cout<<"---";
-	boolTest(ft12, ft11, 100);
-	boolTest(std11, std1, 100);
-	boolTest(ft11, ft1, 100);
-	std::cout<<"---";
-	boolTest(std11, std2, 100);
-	std::cout<<"---";
-	boolTest(ft11, ft2, 100);
+	boolTest(std11, std11);
+	boolTest(std11, std12);
+	boolTest(std1, std11);
+	boolTest(std12, std11);
+	boolTest(std11, std1);
+	boolTest(std11, std2);
 }
