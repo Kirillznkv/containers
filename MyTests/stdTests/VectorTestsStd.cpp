@@ -222,6 +222,15 @@ void	vectorTestModifiersStd(){
 	fStdVector<<")"<<std::endl;
 	outSizes(v1, fStdVector);
 	outSizes(putVec1, fStdVector);
+	std::swap(v1,putVec1);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		fStdVector<<v1[i];
+	fStdVector<<" (";
+	for (int i = 0; i < (int)putVec1.size(); ++i)
+		fStdVector<<putVec1[i];
+	fStdVector<<")"<<std::endl;
+	outSizes(v1, fStdVector);
+	outSizes(putVec1, fStdVector);
 	}
 	///////////////////// Test clear
 	std::vector<int> myvector;

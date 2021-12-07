@@ -222,6 +222,15 @@ void	vectorTestModifiersFt(){
 	fFtVector<<")"<<std::endl;
 	outSizes(v1, fFtVector);
 	outSizes(putVec1, fFtVector);
+	ft::swap(v1, putVec1);
+	for (int i = 0; i < (int)v1.size(); ++i)
+		fFtVector<<v1[i];
+	fFtVector<<" (";
+	for (int i = 0; i < (int)putVec1.size(); ++i)
+		fFtVector<<putVec1[i];
+	fFtVector<<")"<<std::endl;
+	outSizes(v1, fFtVector);
+	outSizes(putVec1, fFtVector);
 	}
 	///////////////////// Test clear
 	ft::vector<int> myvector;

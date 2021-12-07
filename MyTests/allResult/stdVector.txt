@@ -136,6 +136,13 @@ max_size:	4611686018427387903
 size:		20
 capacity:	20
 max_size:	4611686018427387903
+55555555555555555555 (0000000000)
+size:		20
+capacity:	20
+max_size:	4611686018427387903
+size:		10
+capacity:	10
+max_size:	4611686018427387903
 myvector contains: 100 200 300
 myvector contains: 1101 2202
 ---Vector-Test-Exept-(namespace:std)---

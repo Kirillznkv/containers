@@ -180,7 +180,7 @@ public:
 	void	swap(vector& x){
 		vector vec(*this);
 		this->operator=(x);
-		x = vec;
+		x.operator=(vec);
 	}
 	void	clear(){
 		while (_size)
@@ -317,6 +317,16 @@ public:
 		return (first);
 	}
 };
+
+////////////////////////
+/*-----GlobalSwap-----*/
+////////////////////////
+template <class T, class Alloc>
+  void swap (vector<T,Alloc>& x, vector<T,Alloc>& y){
+	vector<T, Alloc> vec(x);
+	x.operator=(y);
+	y.operator=(vec);
+  }
 
 }//end namespace ft
 
