@@ -1,5 +1,17 @@
 #include "../../container/vector.hpp"
 #include "TestsUtils.hpp"
+#include "../../container/iterator_traits.hpp"
+
+template<class BidirIt>
+void my_reverse(BidirIt first, BidirIt last)
+{
+    typename ft::iterator_traits<BidirIt>::difference_type n = std::distance(first, last);
+    for (--n; n > 0; n -= 2) {
+        typename ft::iterator_traits<BidirIt>::value_type tmp = *first;
+        *first++ = *--last;
+        *last = tmp;
+    }
+}
 
 void	vectorTestBaseFt(){
 	fFtVector<<"---Vector-Test-Base-(namespace:ft)---"<<std::endl;
@@ -43,6 +55,36 @@ void	vectorTestBaseFt(){
 	ft::vector<int> ve1(2);
 	outSizes(ve1, fFtVector);
 	fFtVector<<ve1.front()<<std::endl;
+	fFtVector<<"---Vector-Test-Iterator_traits-(namespace:std)---"<<std::endl;
+    {
+		ft::vector<int> v;
+		v.push_back(1);
+		v.push_back(2);
+		v.push_back(3);
+		v.push_back(4);
+		v.push_back(5);
+		my_reverse(v.begin(), v.end());
+		for (int n = 0; n < (int)v.size();++n)
+			fFtVector << v[n] << ' ';
+		fFtVector << std::endl;
+	
+		ft::vector<int> l;
+		l.push_back(1);
+		l.push_back(2);
+		l.push_back(3);
+		l.push_back(4);
+		l.push_back(5);
+		my_reverse(l.begin(), l.end());
+		for (int n = 0; n < (int)l.size();++n)
+			fFtVector << l[n] << ' ';
+		fFtVector << std::endl;
+	
+		int a[] = {1, 2, 3, 4, 5};
+		my_reverse(a, a + 5);
+		for (int n = 0; n < 5;++n)
+			fFtVector << a[n] << ' ';
+		fFtVector << std::endl;
+	}
 }
 
 void	vectorTestDoubleFt(){
@@ -267,6 +309,7 @@ void vectorTestRelationalOperatorsFt(){
 	ft::vector<int> std2;
 	ft::vector<int> std11;
 	ft::vector<int> std12;
+	boolTest(std1, std2, fFtVector);
 	std1.push_back(1);
 	std2.push_back(2);
 	std11.push_back(1);
@@ -280,4 +323,7 @@ void vectorTestRelationalOperatorsFt(){
 	boolTest(std12, std11, fFtVector);
 	boolTest(std11, std1, fFtVector);
 	boolTest(std11, std2, fFtVector);
+	std1.clear();
+	std2.clear();
+	boolTest(std1, std2, fFtVector);
 }

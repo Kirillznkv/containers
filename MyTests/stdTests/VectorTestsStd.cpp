@@ -1,6 +1,17 @@
 #include <vector>
 #include "TestsUtils.hpp"
 
+template<class BidirIt>
+void my_reverse(BidirIt first, BidirIt last)
+{
+    typename std::iterator_traits<BidirIt>::difference_type n = std::distance(first, last);
+    for (--n; n > 0; n -= 2) {
+        typename std::iterator_traits<BidirIt>::value_type tmp = *first;
+        *first++ = *--last;
+        *last = tmp;
+    }
+}
+
 void	vectorTestBaseStd(){
 	fStdVector<<"---Vector-Test-Base-(namespace:std)---"<<std::endl;
 	//Test size, capacity, max_size
@@ -43,6 +54,36 @@ void	vectorTestBaseStd(){
 	std::vector<int> ve1(2);
 	outSizes(ve1, fStdVector);
 	fStdVector<<ve1.front()<<std::endl;
+	fStdVector<<"---Vector-Test-Iterator_traits-(namespace:std)---"<<std::endl;
+    {
+		std::vector<int> v;
+		v.push_back(1);
+		v.push_back(2);
+		v.push_back(3);
+		v.push_back(4);
+		v.push_back(5);
+		my_reverse(v.begin(), v.end());
+		for (int n = 0; n < (int)v.size();++n)
+			fStdVector << v[n] << ' ';
+		fStdVector << '\n';
+	
+		std::vector<int> l;
+		l.push_back(1);
+		l.push_back(2);
+		l.push_back(3);
+		l.push_back(4);
+		l.push_back(5);
+		my_reverse(l.begin(), l.end());
+		for (int n = 0; n < (int)l.size();++n)
+			fStdVector << l[n] << ' ';
+		fStdVector << '\n';
+	
+		int a[] = {1, 2, 3, 4, 5};
+		my_reverse(a, a + 5);
+		for (int n = 0; n < 5;++n)
+			fStdVector << a[n] << ' ';
+		fStdVector << '\n';
+	}
 }
 
 void	vectorTestDoubleStd(){
@@ -267,6 +308,7 @@ void vectorTestRelationalOperatorsStd(){
 	std::vector<int> std2;
 	std::vector<int> std11;
 	std::vector<int> std12;
+	boolTest(std1, std2, fStdVector);
 	std1.push_back(1);
 	std2.push_back(2);
 	std11.push_back(1);
@@ -280,4 +322,7 @@ void vectorTestRelationalOperatorsStd(){
 	boolTest(std12, std11, fStdVector);
 	boolTest(std11, std1, fStdVector);
 	boolTest(std11, std2, fStdVector);
+	std1.clear();
+	std2.clear();
+	boolTest(std1, std2, fStdVector);
 }

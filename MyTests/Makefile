@@ -20,7 +20,8 @@ HPP_FILE =	$(SRCS)deque.hpp \
 			$(SRCS)iterator.hpp \
 			$(SRCS)reverse_iterator.hpp \
 			$(SRCS)is_integral.hpp \
-			$(SRCS)enable_if.hpp
+			$(SRCS)enable_if.hpp \
+			$(SRCS)iterator_traits.hpp
 
 O_FILE_STD = $(CPP_FILE_STD:.cpp=.o)
 O_FILE_FT = $(CPP_FILE_FT:.cpp=.o)

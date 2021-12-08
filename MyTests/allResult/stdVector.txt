@@ -43,6 +43,10 @@ size:		2
 capacity:	2
 max_size:	4611686018427387903
 0
+---Vector-Test-Iterator_traits-(namespace:std)---
+5 4 3 2 1 
+5 4 3 2 1 
+5 4 3 2 1 
 ---Vector-Test-Double-(namespace:std)---
 size:		145
 capacity:	256
@@ -150,8 +154,10 @@ Error1: vector
 Error2: vector
 ---Vector-Test-RelationalOperators-(namespace:std)---
 1 0 1 1 0 0
+1 0 1 1 0 0
 0 1 1 0 1 0
 0 1 1 0 1 0
 0 1 0 1 0 1
 0 1 0 1 0 1
 0 1 1 0 1 0
+1 0 1 1 0 0
