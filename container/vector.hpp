@@ -7,6 +7,7 @@
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
 # include "is_integral.hpp"
+# include "enable_if.hpp"
 
 // Вопросы:
 // iterator base()?
@@ -240,9 +241,8 @@ public:
 		resize(n, val);
 	}
 	template <class InputIterator>
-	typename std::enable_if
+	typename ft::enable_if
 	< !ft::is_integral< InputIterator >::value, void >::type
-	// < std::__is_input_iterator<InputIterator>::value, void >::type
 	assign(InputIterator first, InputIterator last){
 		if (size_type(last - first) <= _capacity){
 			clear();
@@ -282,9 +282,8 @@ public:
 		_size += n;
 	}
 	template <class InputIterator>
-	typename std::enable_if
+	typename ft::enable_if
 	< !ft::is_integral<InputIterator>::value, void >::type
-	// < std::__is_input_iterator<InputIterator>::value, void >::type
 	insert(iterator position, InputIterator first, InputIterator last){
 		size_type n = (last - first);
 		while (_size + n >= _capacity)
