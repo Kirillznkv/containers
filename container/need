@@ -1,7 +1,7 @@
 vector (InputIterator first, InputIterator last,
 				const allocator_type& alloc = allocator_type(),
-				typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type* = 0) :
-		_size(0), _capacity(0), _alloc_data(alloc) {
+				typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type* = 0
+		) :_size(0), _capacity(0), _alloc_data(alloc) {
 			_array = _alloc_data.allocate(_capacity);
 			insert(begin(), first, last);
 		}
@@ -12,3 +12,7 @@ template <class InputIterator>
 
 
 Исключение приведения типа в resize
+
+base() in reverse_iterator
+
+operators in stack

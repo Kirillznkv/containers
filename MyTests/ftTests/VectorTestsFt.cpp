@@ -1,16 +1,15 @@
 #include "../../container/vector.hpp"
 #include "TestsUtils.hpp"
-#include "../../container/iterator_traits.hpp"
 
 template<class BidirIt>
 void my_reverse(BidirIt first, BidirIt last)
 {
-    typename ft::iterator_traits<BidirIt>::difference_type n = std::distance(first, last);
-    for (--n; n > 0; n -= 2) {
-        typename ft::iterator_traits<BidirIt>::value_type tmp = *first;
-        *first++ = *--last;
-        *last = tmp;
-    }
+	typename ft::iterator_traits<BidirIt>::difference_type n = std::distance(first, last);
+	for (--n; n > 0; n -= 2) {
+		typename ft::iterator_traits<BidirIt>::value_type tmp = *first;
+		*first++ = *--last;
+		*last = tmp;
+	}
 }
 
 void	vectorTestBaseFt(){
@@ -55,6 +54,11 @@ void	vectorTestBaseFt(){
 	ft::vector<int> ve1(2);
 	outSizes(ve1, fFtVector);
 	fFtVector<<ve1.front()<<std::endl;
+	//Test v1(Iter, Iter)
+	ft::vector<int> s21(ve.begin(), ve.end());
+	outSizes(s21, fFtVector);
+	fFtVector<<"front = "<<s21.front()<<std::endl;
+	//Test iterator_traits
 	fFtVector<<"---Vector-Test-Iterator_traits-(namespace:std)---"<<std::endl;
     {
 		ft::vector<int> v;
@@ -223,33 +227,48 @@ void	vectorTestModifiersFt(){
 	ft::vector<int>::iterator it = v1.insert(v1.begin(), 100);
 	for (int i = 0; i < (int)v1.size(); ++i)
 		fFtVector<<v1[i]<<" ";
-	fFtVector<<"\t"<<*it<<std::endl;
 	outSizes(v1, fFtVector);
+	fFtVector<<"\t"<<*it<<std::endl;
 	///////////////////// Test insert #2
 	v1.insert(v1.begin(), 5, 1);
 	for (int i = 0; i < (int)v1.size(); ++i)
 		fFtVector<<v1[i]<<" ";
-	fFtVector<<"\t"<<*it<<std::endl;
 	outSizes(v1, fFtVector);
 	///////////////////// Test insert #3
 	ft::vector<int> putVec1(10, 0);
 	v1.insert(v1.begin() + 1, putVec1.begin(), putVec1.end());
 	for (int i = 0; i < (int)v1.size(); ++i)
 		fFtVector<<v1[i]<<" ";
-	fFtVector<<"\t"<<*it<<std::endl;
 	outSizes(v1, fFtVector);
+	ft::vector<int> a, b;
+	a.insert(a.begin(), putVec1.begin(), putVec1.end());
+	b.insert(b.end(), putVec1.begin(), putVec1.end());
+	for (int i = 0; i < (int)a.size(); ++i)
+		fFtVector<<a[i]<<" ";
+	outSizes(a, fFtVector);
+	for (int i = 0; i < (int)b.size(); ++i)
+		fFtVector<<b[i]<<" ";
+	outSizes(b, fFtVector);
+
+	// try{
+	// 	ft::vector<int> c;
+	// 	c.insert(c.end() - 2, putVec1.begin(), putVec1.end());
+	// 	for (int i = 0; i < (int)c.size(); ++i)
+	// 		fFtVector<<c[i]<<" ";
+	// 	outSizes(c, fFtVector);
+	// } catch(std::exception &e){
+	// 	std::cerr<<e.what()<<std::endl;
+	// }
 	///////////////////// Test erase #1
 	ft::vector<int>::iterator itEr1 = v1.erase(v1.end() - 3);
 	for (int i = 0; i < (int)v1.size(); ++i)
 		fFtVector<<v1[i]<<" ";
-	fFtVector<<"\t"<<*it<<std::endl;
 	fFtVector<<*itEr1<<std::endl;
 	outSizes(v1, fFtVector);
 	///////////////////// Test erase #2
 	ft::vector<int>::iterator itEr12 = v1.erase(v1.begin(), v1.end() - 3);
 	for (int i = 0; i < (int)v1.size(); ++i)
 		fFtVector<<v1[i]<<" ";
-	fFtVector<<"\t"<<*it<<std::endl;
 	fFtVector<<*itEr12<<std::endl;
 	///////////////////// Test swap
 	{

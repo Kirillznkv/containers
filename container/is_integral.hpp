@@ -1,6 +1,8 @@
 #ifndef IS_INTEGRAL_HPP
 #define IS_INTEGRAL_HPP
 
+# include <stdio.h>
+
 namespace ft{
 
 struct true_type{

@@ -4,13 +4,14 @@
 # include <cmath>
 # include <iostream>
 # include <memory>
+
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
+# include "iterator_traits.hpp"
+# include "lexicographical_compare.hpp"
 # include "is_integral.hpp"
+# include "is_iterator.hpp"
 # include "enable_if.hpp"
-
-// Вопросы:
-// iterator base()?
 
 namespace ft{
 
@@ -43,30 +44,76 @@ private:
 	value_type	*_arr;
 	allocator_type	_alloc;
 
-	void	doublingCapacity(){
-		value_type *new_arr = _alloc.allocate(_capacity <<= 1);
+	void		doublingCapacity(){
+		_capacity = (!_capacity) ? (1) : (_capacity<<1);
+		value_type *new_arr = _alloc.allocate(_capacity);
 		for (size_type i = 0; i < _size; ++i){
 			_alloc.construct(new_arr + i, *(_arr + i));
 			_alloc.destroy(_arr + i);
 		}
-		_alloc.deallocate(_arr, _capacity>>1);
+		if (_capacity > 1)
+			_alloc.deallocate(_arr, _capacity>>1);
 		_arr = new_arr;
+	}
+	iterator	doublingCapacity(iterator save){
+		bool isNewIter = false;
+		_capacity = (!_capacity) ? (1) : (_capacity<<1);
+		value_type *new_arr = _alloc.allocate(_capacity);
+		for (size_type i = 0; i < _size; ++i){
+			_alloc.construct(new_arr + i, *(_arr + i));
+			_alloc.destroy(_arr + i);
+			if (!isNewIter && &(*save) == _arr + i){
+				save = iterator(new_arr);
+				isNewIter = true;
+			}
+		}
+		if (_capacity > 1)
+			_alloc.deallocate(_arr, _capacity>>1);
+		_arr = new_arr;
+		if (_size == 0)
+			save = iterator(_arr);
+		return (save);
+	}
+	iterator	reserve(size_type n, iterator save){
+		bool isNewIter = false;
+		if (n != _capacity){
+			value_type *new_arr = _alloc.allocate(n);
+			for (size_type i = 0; i < _size; ++i){
+				_alloc.construct(new_arr + i, *(_arr + i));
+				_alloc.destroy(_arr + i);
+				if (!isNewIter && &(*save) == _arr + i){
+					save = iterator(new_arr);
+					isNewIter = true;
+				}
+			}
+			if (_capacity)
+				_alloc.deallocate(_arr, _capacity);
+			_arr = new_arr;
+			_capacity = n;
+		}
+		if (_size == 0)
+			save = iterator(_arr);
+		return (save);
 	}
 public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	vector() : _size(0), _capacity(0), _arr(NULL){};
+	vector() : _size(0), _capacity(0){};
 	vector(size_type size, value_type val = value_type()) : _size(0), _capacity(0), _arr(NULL){
 		resize(size, val);
 	};
-	vector(const vector& copy){
-		this->_capacity = 0;
-		this->_size = 0;
-		this->_arr = NULL;
+	vector (const vector& copy) :_size(0), _capacity(0){
 		this->operator=(copy);
 	}
-	~vector() {
+	template <class InputIterator>
+	vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+			typename ft::enable_if<ft::is_iterator<InputIterator>::value>::type* = 0)
+			:_size(0), _capacity(1), _alloc(alloc){
+		_arr = _alloc.allocate(_capacity);
+		insert(begin(), first, last);
+	}
+	virtual ~vector() {
 		for (size_type i = 0; i < _size; ++i)
 			_alloc.destroy(_arr + i);
 		if (_capacity)
@@ -261,7 +308,7 @@ public:
 	////////////////////
 	iterator insert(iterator position, const value_type& val){
 		if (_size == _capacity)
-			doublingCapacity();
+			position = doublingCapacity(position);
 		for (iterator i = end() - 1; i >= position; --i){
 			_alloc.construct(&(*i) + 1, *i);
 			_alloc.destroy(&(*i));
@@ -271,8 +318,10 @@ public:
 		return (position);
 	}
 	void	insert(iterator position, size_type n, const value_type& val){
-		while (_size + n >= _capacity)
-			doublingCapacity();
+		// while (_size + n >= _capacity)
+		// 	position = doublingCapacity(position);
+		if (_size + n >= _capacity)
+			position = reserve(_size + n, position);//+n+1
 		for (iterator i = end() - 1; i >= position; --i){
 			_alloc.construct(&(*i) + n, *i);
 			_alloc.destroy(&(*i));
@@ -286,9 +335,11 @@ public:
 	< !ft::is_integral<InputIterator>::value, void >::type
 	insert(iterator position, InputIterator first, InputIterator last){
 		size_type n = (last - first);
-		while (_size + n >= _capacity)
-			doublingCapacity();
-		for (iterator i = end() - 1; i >= position; --i){
+		if (_size + n > _capacity)
+			position = reserve(_size + n, position);
+		while (_size + n > _capacity)
+			position = doublingCapacity(position);
+		for (iterator i = end() - 1; i >= position && _size; --i){
 			_alloc.construct(&(*i) + n, *i);
 			_alloc.destroy(&(*i));
 		}
