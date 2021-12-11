@@ -259,7 +259,7 @@ public:
 		}
 	}
 	void	resize(size_type n, value_type val = value_type()){
-		if (n < 0)
+		if ((signed)n < 0)
 			throw errorIndex();
 		if (_capacity >= n)
 			while (_size < n)

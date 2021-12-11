@@ -161,7 +161,7 @@ myvector contains: 100 200 300
 myvector contains: 1101 2202
 ---Vector-Test-Exept-(namespace:ft)---
 Error1: vector
-Error2: allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size
+Error2: vector
 ---Vector-Test-RelationalOperators-(namespace:ft)---
 1 0 1 1 0 0
 1 0 1 1 0 0
