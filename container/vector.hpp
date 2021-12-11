@@ -173,10 +173,10 @@ public:
 		return (_arr[i] > rVal.at(i));
 	}
 	bool	operator>=(const vector& rVal){
-		return (operator>(rVal) || operator==(rVal));
+		return (!operator<(rVal));
 	}
 	bool	operator<=(const vector& rVal){
-		return (operator<(rVal) || operator==(rVal));
+		return (!operator>(rVal));
 	}
 	reference	operator[](size_type i){
 		return (*(_arr + i));
