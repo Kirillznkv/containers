@@ -118,6 +118,15 @@ void	vectorTestListFt(){
 		v1.push_back(vec1[i]);
 	}
 	outSizes(v1, fFtVector);
+	ft::vector<ft::vector<int> > v2;
+	ft::vector<int> vec2[6];
+	for (int i = 0; i < 6; ++i){
+		for (int val = 9; val < 1000; val += 13 + i)
+			vec2[i].push_back(val);
+		v2.push_back(vec2[i]);
+	}
+	outSizes(v2, fFtVector);
+	boolTest(v1, v2, fFtVector);
 }
 
 void	vectorTestIteratorFt(){

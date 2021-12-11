@@ -1,7 +1,17 @@
 #include <stack>
 #include <sstream>
 #include "TestsUtils.hpp"
-// add == <= ...
+
+
+// template <typename T>
+// void boolTest(T v1, T v2, std::ofstream & out){
+// 	out			<<(int)(v1 == v2)<<" " \
+// 				<<(int)(v1 != v2)<<" " \
+// 				<<(int)(v1 <= v2)<<" " \
+// 				<<(int)(v1 >= v2)<<" " \
+// 				<<(int)(v1 < v2)<<" " \
+// 				<<(int)(v1 > v2)<<std::endl;
+// }
 
 // Empty, Size, Push, Pop, Top + copy constructor + operator=
 void stackTestIntStd(void){
@@ -92,4 +102,27 @@ void stackTestListStd(void){
 	fStdStack<<s1_copy2.size()<<std::endl;
 	fStdStack<<s1_copy2.empty()<<std::endl;
 	fStdStack<<(int)(s1_copy2.top().top() == s1_copy2.top().top())<<std::endl;
+	boolTest(s1, s1_copy, fStdStack);
+}
+
+void stackTestRelationalOperatorsStd(){
+	fStdStack<<"---Vector-Test-RelationalOperators-(namespace:std)---"<<std::endl;
+	std::stack<int> std1;
+	std::stack<int> std2;
+	std::stack<int> std11;
+	std::stack<int> std12;
+	boolTest(std1, std2, fStdStack);
+	std1.push(1);
+	std2.push(2);
+	std11.push(1);
+	std11.push(1);
+	std12.push(1);
+	std12.push(2);
+	///////////////////// Test == != < <= > >=
+	boolTest(std11, std11, fStdStack);
+	boolTest(std11, std12, fStdStack);
+	boolTest(std1, std11, fStdStack);
+	boolTest(std12, std11, fStdStack);
+	boolTest(std11, std1, fStdStack);
+	boolTest(std11, std2, fStdStack);
 }

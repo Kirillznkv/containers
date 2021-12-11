@@ -6,6 +6,7 @@
 void stackTestIntStd();
 void stackTestStringStd();
 void stackTestListStd();
+void stackTestRelationalOperatorsStd();
 
 //////////////////////////////
 /*----------Vector----------*/
@@ -26,6 +27,7 @@ void	stackTestStd() {
 	stackTestIntStd();
 	stackTestStringStd();
 	stackTestListStd();
+	stackTestRelationalOperatorsStd();
 	fStdStack.close();
 }
 void	vectorTestStd() {

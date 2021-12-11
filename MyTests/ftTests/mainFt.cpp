@@ -6,6 +6,7 @@
 void stackTestIntFt();
 void stackTestStringFt();
 void stackTestListFt();
+void stackTestRelationalOperatorsFt();
 
 //////////////////////////////
 /*----------Vector----------*/
@@ -26,6 +27,7 @@ void	stackTestFt() {
 	stackTestIntFt();
 	stackTestStringFt();
 	stackTestListFt();
+	stackTestRelationalOperatorsFt();
 	fFtStack.close();
 }
 void	vectorTestFt() {

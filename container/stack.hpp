@@ -30,6 +30,24 @@ public:
 	bool empty(void) const{ return c.isEmpty(); }
 	void push(const value_type& value) { c.push_back(value); }
 	void pop(void) { c.pop_back(); }
+	bool	operator==(const stack& rVal){
+		return (c.operator==(rVal.c));
+	}
+	bool	operator!=(const stack& rVal){
+		return (c.operator!=(rVal.c));
+	}
+	bool	operator<(const stack& rVal){
+		return (c.operator<(rVal.c));
+	}
+	bool	operator>(const stack& rVal){
+		return (c.operator>(rVal.c));
+	}
+	bool	operator>=(const stack& rVal){
+		return (c.operator>=(rVal.c));
+	}
+	bool	operator<=(const stack& rVal){
+		return (c.operator<=(rVal.c));
+	}
 };
 
 }

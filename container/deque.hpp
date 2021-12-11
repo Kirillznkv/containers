@@ -109,9 +109,54 @@ public:
 		return (_size);
 	}
 	/*----relational-operators----*/
-	//  bool operator==(const stack<value_type>& rhs){
-	// 	 return
-	//  }
+	bool	operator==(const deque& rVal){
+		if (this->size() != rVal.size())
+			return (false);
+		containerData *i = _data;
+		containerData *j = rVal._data;
+		while (i && j){
+			if (*(i->value) != *(j->value))
+				return (false);
+			i = i->next;
+			j = j->next;
+		}
+		return (true);
+	}
+	bool	operator!=(const deque& rVal){
+		return (!operator==(rVal));
+	}
+	bool	operator<(const deque& rVal){
+		containerData *i = _data;
+		containerData *j = rVal._data;
+		while (i && j && *(i->value) == *(j->value)){
+			i = i->next;
+			j = j->next;
+		}
+		if (!j)
+			return (false);
+		else if (!i)
+			return (true);
+		return (*(i->value) < *(j->value));
+	}
+	bool	operator>(const deque& rVal){
+		containerData *i = _data;
+		containerData *j = rVal._data;
+		while (i && j && *(i->value) == *(j->value)){
+			i = i->next;
+			j = j->next;
+		}
+		if (!i)
+			return (false);
+		else if (!j)
+			return (true);
+		return (*(i->value) > *(j->value));
+	}
+	bool	operator>=(const deque& rVal){
+		return (!operator<(rVal));
+	}
+	bool	operator<=(const deque& rVal){
+		return (!operator>(rVal));
+	}
 };
 
 }//end namespace ft

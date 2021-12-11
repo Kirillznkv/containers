@@ -77,6 +77,10 @@ max_size:	2305843009213693951
 size:		5
 capacity:	8
 max_size:	768614336404564650
+size:		6
+capacity:	8
+max_size:	768614336404564650
+0 1 0 1 0 1
 ---Vector-Test-Iterator-(namespace:std)---
 fghijklmnopqrstuvwxy
 fghijklmnopqrstuvwxy
