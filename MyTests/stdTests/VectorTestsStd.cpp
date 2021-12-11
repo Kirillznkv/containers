@@ -315,11 +315,26 @@ void vectorTestExeptStd(){
 	fStdVector<<"---Vector-Test-Exept-(namespace:std)---"<<std::endl;
 	///////////////////// Test at
 	std::vector<long long> v1;
+	try { fStdVector<<v1.at(-1)<<std::endl; }
+	catch (std::exception &e) { fStdVector<<"Error0: "<<e.what()<<std::endl; }
 	try { fStdVector<<v1.at(0)<<std::endl; }
 	catch (std::exception &e) { fStdVector<<"Error1: "<<e.what()<<std::endl; }
 	///////////////////// Test erase
 	try { v1.resize(-10, 12); }
 	catch (std::exception &e) { fStdVector<<"Error2: "<<e.what()<<std::endl; }
+	///////////////////// Test reserve
+	try {v1.reserve(-10);}
+	catch (std::exception &e) { fStdVector<<"Error3: "<<e.what()<<std::endl; }
+	///////////////////// Test Vector
+	try {std::vector<int> v(-1, 10);}
+	catch (std::exception &e) { fStdVector<<"Error4: "<<e.what()<<std::endl; }
+	///////////////////// Test insert
+	std::vector<int> v(5, 0);
+	try {v.insert(v.begin(), -10, 5);}
+	catch (std::exception &e) { fStdVector<<"Error5: "<<e.what()<<std::endl; }
+	///////////////////// Test assign
+	try {v.assign(-10, 5);}
+	catch (std::exception &e) { fStdVector<<"Error6: "<<e.what()<<std::endl; }
 }
 
 void vectorTestRelationalOperatorsStd(){

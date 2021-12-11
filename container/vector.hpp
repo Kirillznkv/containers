@@ -75,6 +75,8 @@ private:
 		return (save);
 	}
 	iterator	reserve(size_type n, iterator save){
+		if ((signed)n < 0)
+			throw errorIndex();
 		bool isNewIter = false;
 		if (n != _capacity){
 			value_type *new_arr = _alloc.allocate(n);
@@ -101,6 +103,8 @@ public:
 	////////////////////////
 	vector() : _size(0), _capacity(0){};
 	vector(size_type size, value_type val = value_type()) : _size(0), _capacity(0), _arr(NULL){
+		if ((signed)size < 0)
+			throw errorIndex();
 		resize(size, val);
 	};
 	vector (const vector& copy) :_size(0), _capacity(0){
@@ -236,12 +240,12 @@ public:
 			_alloc.destroy(this->_arr + --_size);
 	}
 	reference	at(size_type i){
-		if (i < 0 || i >= _size)
+		if ((signed)i < 0 || i >= _size)
 			throw errorIndex();
 		return (*(_arr + i));
 	}
 	const_reference	at(size_type i) const{
-		if (i < 0 || i >= _size)
+		if ((signed)i < 0 || i >= _size)
 			throw errorIndex();
 		return (*(_arr + i));
 	}
@@ -285,6 +289,8 @@ public:
 	/*-----Assign-----*/
 	////////////////////
 	void	assign(size_type n, const value_type &val){
+		if ((signed)n < 0)
+			throw errorIndex();
 		resize(n, val);
 	}
 	template <class InputIterator>
@@ -318,8 +324,8 @@ public:
 		return (position);
 	}
 	void	insert(iterator position, size_type n, const value_type& val){
-		// while (_size + n >= _capacity)
-		// 	position = doublingCapacity(position);
+		if ((signed)n < 0)
+			throw errorIndex();
 		if (_size + n >= _capacity)
 			position = reserve(_size + n, position);//+n+1
 		for (iterator i = end() - 1; i >= position; --i){

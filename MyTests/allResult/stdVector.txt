@@ -160,8 +160,13 @@ max_size:	4611686018427387903
 myvector contains: 100 200 300
 myvector contains: 1101 2202
 ---Vector-Test-Exept-(namespace:std)---
+Error0: vector
 Error1: vector
 Error2: vector
+Error3: allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size
+Error4: vector
+Error5: vector
+Error6: vector
 ---Vector-Test-RelationalOperators-(namespace:std)---
 1 0 1 1 0 0
 1 0 1 1 0 0
