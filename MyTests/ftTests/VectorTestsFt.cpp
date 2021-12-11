@@ -249,16 +249,6 @@ void	vectorTestModifiersFt(){
 	for (int i = 0; i < (int)b.size(); ++i)
 		fFtVector<<b[i]<<" ";
 	outSizes(b, fFtVector);
-
-	// try{
-	// 	ft::vector<int> c;
-	// 	c.insert(c.end() - 2, putVec1.begin(), putVec1.end());
-	// 	for (int i = 0; i < (int)c.size(); ++i)
-	// 		fFtVector<<c[i]<<" ";
-	// 	outSizes(c, fFtVector);
-	// } catch(std::exception &e){
-	// 	std::cerr<<e.what()<<std::endl;
-	// }
 	///////////////////// Test erase #1
 	ft::vector<int>::iterator itEr1 = v1.erase(v1.end() - 3);
 	for (int i = 0; i < (int)v1.size(); ++i)
@@ -345,4 +335,9 @@ void vectorTestRelationalOperatorsFt(){
 	std1.clear();
 	std2.clear();
 	boolTest(std1, std2, fFtVector);
+	fFtVector<<(int)ft::lexicographical_compare(std1.begin(), std1.end(), std2.begin(), std2.end())<<std::endl;
+	fFtVector<<(int)ft::lexicographical_compare(std11.begin(), std11.end(), std2.begin(), std2.end())<<std::endl;
+	fFtVector<<(int)ft::lexicographical_compare(std12.begin(), std12.end(), std2.begin(), std2.end())<<std::endl;
+	fFtVector<<(int)ft::lexicographical_compare(std2.begin(), std2.end(), std2.begin(), std2.end())<<std::endl;
+	fFtVector<<(int)ft::lexicographical_compare(std2.begin(), std2.end(), std12.begin(), std12.end())<<std::endl;
 }

@@ -250,15 +250,6 @@ void	vectorTestModifiersStd(){
 	for (int i = 0; i < (int)b.size(); ++i)
 		fStdVector<<b[i]<<" ";
 	outSizes(b, fStdVector);
-	// try{
-	// 	std::vector<int> c;
-	// 	c.insert(c.end() - 2, putVec1.begin(), putVec1.end());
-	// 	for (int i = 0; i < (int)c.size(); ++i)
-	// 		fStdVector<<c[i]<<" ";
-	// 	outSizes(c, fStdVector);
-	// } catch(std::exception &e){
-	// 	std::cerr<<e.what()<<std::endl;
-	// }
 	///////////////////// Test erase #1
 	std::vector<int>::iterator itEr1 = v1.erase(v1.end() - 3);
 	for (int i = 0; i < (int)v1.size(); ++i)
@@ -345,4 +336,9 @@ void vectorTestRelationalOperatorsStd(){
 	std1.clear();
 	std2.clear();
 	boolTest(std1, std2, fStdVector);
+	fStdVector<<(int)std::lexicographical_compare(std1.begin(), std1.end(), std2.begin(), std2.end())<<std::endl;
+	fStdVector<<(int)std::lexicographical_compare(std11.begin(), std11.end(), std2.begin(), std2.end())<<std::endl;
+	fStdVector<<(int)std::lexicographical_compare(std12.begin(), std12.end(), std2.begin(), std2.end())<<std::endl;
+	fStdVector<<(int)std::lexicographical_compare(std2.begin(), std2.end(), std2.begin(), std2.end())<<std::endl;
+	fStdVector<<(int)std::lexicographical_compare(std2.begin(), std2.end(), std12.begin(), std12.end())<<std::endl;
 }

@@ -167,3 +167,8 @@ Error2: allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size
 0 1 0 1 0 1
 0 1 1 0 1 0
 1 0 1 1 0 0
+0
+0
+0
+0
+1
