@@ -47,10 +47,20 @@ size:		2
 capacity:	2
 max_size:	4611686018427387903
 front = 1
----Vector-Test-Iterator_traits-(namespace:std)---
+---Vector-Test-Iterator_traits-(namespace:ft)---
 5 4 3 2 1 
 5 4 3 2 1 
 5 4 3 2 1 
+---Vector-Test-Pair-(namespace:ft)---
+1-2
+1hello
+2hello
+2hell
+0 1 0 1 0 1
+0 1 1 0 1 0
+0 1 0 1 0 1
+0 1 1 0 1 0
+10111
 ---Vector-Test-Double-(namespace:ft)---
 size:		145
 capacity:	256

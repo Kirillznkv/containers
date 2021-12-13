@@ -90,6 +90,35 @@ void	vectorTestBaseStd(){
 			fStdVector << a[n] << ' ';
 		fStdVector << '\n';
 	}
+	//Test pair
+	fStdVector<<"---Vector-Test-Pair-(namespace:std)---"<<std::endl;
+	{
+		std::pair<int, int> p;
+		p.first = 1;
+		p.second = -1;
+		std::pair<int, int> pp;
+		pp.first = 1;
+		pp.second = -2;
+		fStdVector<<pp.first<<pp.second<<std::endl;
+		std::pair<int, std::string> p2;
+		p2.first = 1;
+		p2.second = "hello";
+		fStdVector<<p2.first<<p2.second<<std::endl;
+		std::pair<int, std::string> p3;
+		p3.first = 2;
+		p3.second = "hello";
+		fStdVector<<p3.first<<p3.second<<std::endl;
+		std::pair<int, std::string> p4;
+		p4.first = 2;
+		p4.second = "hell";
+		fStdVector<<p4.first<<p4.second<<std::endl;
+		boolTest(p, pp, fStdVector);
+		boolTest(p2, p3, fStdVector);
+		boolTest(p3, p4, fStdVector);
+		boolTest(p2, p4, fStdVector);
+		std::pair<int, int> m = std::make_pair(10, 111);
+		fStdVector<<m.first<<m.second<<std::endl;
+	}
 }
 
 void	vectorTestDoubleStd(){

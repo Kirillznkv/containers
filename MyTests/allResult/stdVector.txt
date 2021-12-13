@@ -51,6 +51,16 @@ front = 1
 5 4 3 2 1 
 5 4 3 2 1 
 5 4 3 2 1 
+---Vector-Test-Pair-(namespace:std)---
+1-2
+1hello
+2hello
+2hell
+0 1 0 1 0 1
+0 1 1 0 1 0
+0 1 0 1 0 1
+0 1 1 0 1 0
+10111
 ---Vector-Test-Double-(namespace:std)---
 size:		145
 capacity:	256

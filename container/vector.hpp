@@ -12,6 +12,7 @@
 # include "is_integral.hpp"
 # include "is_iterator.hpp"
 # include "enable_if.hpp"
+# include "pair.hpp"
 
 namespace ft{
 

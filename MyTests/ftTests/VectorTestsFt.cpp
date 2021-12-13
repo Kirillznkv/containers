@@ -59,7 +59,7 @@ void	vectorTestBaseFt(){
 	outSizes(s21, fFtVector);
 	fFtVector<<"front = "<<s21.front()<<std::endl;
 	//Test iterator_traits
-	fFtVector<<"---Vector-Test-Iterator_traits-(namespace:std)---"<<std::endl;
+	fFtVector<<"---Vector-Test-Iterator_traits-(namespace:ft)---"<<std::endl;
     {
 		ft::vector<int> v;
 		v.push_back(1);
@@ -88,6 +88,35 @@ void	vectorTestBaseFt(){
 		for (int n = 0; n < 5;++n)
 			fFtVector << a[n] << ' ';
 		fFtVector << std::endl;
+	}
+	//Test pair
+	fFtVector<<"---Vector-Test-Pair-(namespace:ft)---"<<std::endl;
+	{
+		ft::pair<int, int> p;
+		p.first = 1;
+		p.second = -1;
+		ft::pair<int, int> pp;
+		pp.first = 1;
+		pp.second = -2;
+		fFtVector<<pp.first<<pp.second<<std::endl;
+		ft::pair<int, std::string> p2;
+		p2.first = 1;
+		p2.second = "hello";
+		fFtVector<<p2.first<<p2.second<<std::endl;
+		ft::pair<int, std::string> p3;
+		p3.first = 2;
+		p3.second = "hello";
+		fFtVector<<p3.first<<p3.second<<std::endl;
+		ft::pair<int, std::string> p4;
+		p4.first = 2;
+		p4.second = "hell";
+		fFtVector<<p4.first<<p4.second<<std::endl;
+		boolTest(p, pp, fFtVector);
+		boolTest(p2, p3, fFtVector);
+		boolTest(p3, p4, fFtVector);
+		boolTest(p2, p4, fFtVector);
+		ft::pair<int, int> m = ft::make_pair(10, 111);
+		fFtVector<<m.first<<m.second<<std::endl;
 	}
 }
 
