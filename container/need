@@ -1,1 +1,4 @@
-base() in reverse_iterator
+base() in reverse_iterator // в обычнов virtual
+
+operator[]
+operator->

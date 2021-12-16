@@ -1,8 +1,10 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+# include <iostream>
+
 # include "pair.hpp"
-#include <iostream>
+# include "iterator_map.hpp"
 
 namespace ft{
 
@@ -26,6 +28,12 @@ public:
     // typedef std::reverse_iterator<iterator>          reverse_iterator; // проблема с конструктором
     // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
 private:
+	typedef ft::node<value_type> node;
+	bool	is_nilNode(node *tmp){ return (tmp->value ? true : false); }
+private:
+	node		*_parent;
+	size_type	_size;
+	size_type	_max_size;
 public:
 };
 

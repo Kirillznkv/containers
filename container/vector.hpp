@@ -328,7 +328,7 @@ public:
 		if ((signed)n < 0)
 			throw errorIndex();
 		if (_size + n >= _capacity)
-			position = reserve(_size + n, position);//+n+1
+			position = reserve(_size + n, position);
 		for (iterator i = end() - 1; i >= position; --i){
 			_alloc.construct(&(*i) + n, *i);
 			_alloc.destroy(&(*i));
