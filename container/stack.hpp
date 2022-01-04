@@ -5,7 +5,7 @@
 
 namespace ft{
 
-template <class T, class Container = deque<T> >
+template <class T, class Container = ft::deque<T> >
 class stack{
 public:
 	typedef Container									container_type;
@@ -18,18 +18,18 @@ private:
 public:
 	stack(void) : c() {};
 	stack(const stack& copy){ this->operator=(copy); }
-	~stack(void) {}
+	~stack() {}
 	stack &operator=(const stack& op){
 		if (this == &op)
 			return (*this);
 		c.operator=(op.c);
 		return (*this);
 	}
-	size_type size(void) const{ return c.size(); }
-	reference top(void) const{ return c.back(); }
-	bool empty(void) const{ return c.isEmpty(); }
+	size_type size() const{ return c.size(); }
+	reference top() const{ return c.back(); }
+	bool empty() const{ return c.isEmpty(); }
 	void push(const value_type& value) { c.push_back(value); }
-	void pop(void) { c.pop_back(); }
+	void pop() { c.pop_back(); }
 	bool	operator==(const stack& rVal){
 		return (c.operator==(rVal.c));
 	}

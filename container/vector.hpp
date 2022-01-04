@@ -81,7 +81,7 @@ private:
 		bool isNewIter = false;
 		if (n != _capacity){
 			value_type *new_arr = _alloc.allocate(n);
-			for (size_type i = 0; i < _size; ++i){
+			for (size_type i = 0; i < _size && i < n; ++i){
 				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 				if (!isNewIter && &(*save) == _arr + i){
@@ -253,7 +253,7 @@ public:
 	void	reserve(size_type n){
 		if (n != _capacity){
 			value_type *new_arr = _alloc.allocate(n);
-			for (size_type i = 0; i < _size; ++i){
+			for (size_type i = 0; i < _size && i < n; ++i){
 				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
@@ -271,7 +271,7 @@ public:
 				push_back(val);
 		else{
 			value_type *new_arr = _alloc.allocate(n);
-			for (size_t i = 0; i < _size; ++i){
+			for (size_t i = 0; i < _size && i < n; ++i){
 				_alloc.construct(new_arr + i, *(_arr + i));
 				_alloc.destroy(_arr + i);
 			}
