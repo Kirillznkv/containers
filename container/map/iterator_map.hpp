@@ -2,18 +2,20 @@
 #define ITERATOR_MAP_HPP
 
 # include <iostream>
+# include "../utils.hpp"
 
 namespace ft{
 
 template<class T>
 struct node{
-	T			*value;
 	node		*parent;
 	node		*left;
 	node		*right;
+	T			value;
 
-	node() : value(NULL), parent(NULL), left(NULL), right(NULL){}
-	node(T *v, node *p, node *l, node *r) : value(v), parent(p), left(l), right(r){}
+	node() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
+	node(node *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
+	node(T v, node *p, node *l, node *r) : value(v), parent(p), left(l), right(r), _isNil(false){}
 	node(const node& copy) { this->operator=(copy); }
 	~node(){}
 	node& operator=(const node& op){
@@ -23,31 +25,26 @@ struct node{
 		right = op.right;
 		return (*this);
 	}
+private:
+	static const bool _isNil;
 };
 
-template <class T, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,
+template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
           class Pointer = T*, class Reference = T&>
 class myIteratorMap{
 public:
-    typedef ft::node<T>		value_type;
-    typedef Distance		difference_type;
-    typedef Pointer			pointer;
-    typedef Reference		reference;
-    typedef Category		iterator_category;
+	typedef ft::node<T>		value_type;
+	typedef Distance		difference_type;
+	typedef Pointer			pointer;
+	typedef Reference		reference;
+	typedef Category		iterator_category;
 protected:
-	bool isNotNil(value_type *val) { return ((val && val->right) ? false : true); }
+	bool isNil(const value_type &val) const { return (val._isNil); }
 protected:
 	value_type *pVal;
 public:
-    typedef ft::node<T>		value_type;
-    typedef Distance		difference_type;
-    typedef Pointer			pointer;
-    typedef Reference		reference;
-    typedef Category		iterator_category;
-	myIteratorMap() : pVal(NULL){}
-	myIteratorMap(value_type *val){
-		pVal = val;
-	}
+	myIteratorMap() : pVal(){}// need *?
+	myIteratorMap(value_type &val) : pval(val.value, val.parent, val.left, val.right){}
 	myIteratorMap(const myIteratorMap& copy){
 		this->operator=(copy);
 	}
@@ -59,53 +56,82 @@ public:
 		return (*this);
 	}
 	myIteratorMap &operator ++ (void){
-		value_type *res = pVal;
-		if (isNotNil(res->right)){
-			res = res->right;
-			while (isNotNil(res->left))
-				res = res->left;
+		value_type *res = pVal->right;
+		if (pVal->right){
+			pVal = pVal->right;
+			while (pVal->left)
+				pVal = pVal->left;
+			res = pVal;
 		}
 		else{
-			while (res->parent && (res->parent->right == res))
-				res = res->parent;
-			if (!(res->parent))
-				res = pVal->right;
+			while (pVal->parent && pVal->parent < pVal)
+				pVal = pVal->parent;
+			if (pVal->parent)
+				res = pVal;
 			else
-				res = res->parent;
+				pVal = res;
 		}
-		pVal = res;
-		return (*this);
+		return (myIteratorMap(res));
 	}
 	myIteratorMap operator ++ (int){
 		myIteratorMap it(pVal);
-		value_type *res = pVal;
-		if (isNotNil(res->right)){
-			res = res->right;
-			while (isNotNil(res->left))
-				res = res->left;
+		value_type *res = pVal->right;
+		if (pVal->right){
+			pVal = pVal->right;
+			while (pVal->left)
+				pVal = pVal->left;
+			res = pVal;
 		}
 		else{
-			while (res->parent && (res->parent->right == res))
-				res = res->parent;
-			if (!(res->parent))
-				res = pVal->right;
+			while (pVal->parent && pVal->parent < pVal)
+				pVal = pVal->parent;
+			if (pVal->parent)
+				res = pVal;
 			else
-				res = res->parent;
+				pVal = res;
 		}
-		pVal = res;
 		return (it);
 	}
 	myIteratorMap &operator -- (void){
-		--pVal;
-		return (*this);
+		value_type *res = pVal->left;
+		if (pVal->left){
+			pVal = pVal->left;
+			while (pVal->right)
+				pVal = pVal->right;
+			res = pVal;
+		}
+		else{
+			while (pVal->parent && pVal->parent > pVal)
+				pVal = pVal->parent;
+			if (pVal->parent)
+				res = pVal;
+			else
+				pVal = res;
+		}
+		return (myIteratorMap(res));
 	}
-	// myIteratorMap operator -- (int){
-	// 	myIteratorMap it(pVal--);
-	// 	return (it);
+	myIteratorMap operator -- (int){
+		myIteratorMap it(pVal);
+		value_type *res = pVal->left;
+		if (pVal->left){
+			pVal = pVal->left;
+			while (pVal->right)
+				pVal = pVal->right;
+			res = pVal;
+		}
+		else{
+			while (pVal->parent && pVal->parent > pVal)
+				pVal = pVal->parent;
+			if (pVal->parent)
+				res = pVal;
+			else
+				pVal = res;
+		}
+		return (it);
+	}
+	// virtual value_type&	operator* (){
+	// 	return (*pVal);
 	// }
-	virtual value_type&	operator* (){
-		return (*pVal);
-	}
 };
 
 }
