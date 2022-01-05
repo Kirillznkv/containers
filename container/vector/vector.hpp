@@ -7,12 +7,7 @@
 
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
-# include "iterator_traits.hpp"
-# include "lexicographical_compare.hpp"
-# include "is_integral.hpp"
-# include "is_iterator.hpp"
-# include "enable_if.hpp"
-# include "pair.hpp"
+# include "../utils.hpp"
 
 namespace ft{
 
