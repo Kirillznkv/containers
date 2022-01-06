@@ -2,3 +2,5 @@ base() in reverse_iterator // в обычнов virtual
 
 operator[]
 operator->
+
+reverse_iterator<Iterator> Не работает

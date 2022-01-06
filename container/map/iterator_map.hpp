@@ -129,9 +129,12 @@ public:
 		}
 		return (it);
 	}
-	// virtual value_type&	operator* (){
-	// 	return (*pVal);
-	// }
+	virtual value_type&	operator* (){
+		return (*pVal);
+	}
+	value_type *operator->() const{
+		return (pVal);
+	}
 };
 
 }
