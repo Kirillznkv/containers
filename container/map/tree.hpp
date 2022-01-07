@@ -1,7 +1,5 @@
-#ifndef MAP_HPP
-#define MAP_HPP
-
-# include <iostream>
+#ifndef TREE_HPP
+#define TREE_HPP
 
 # include "../utils.hpp"
 # include "iterator_map.hpp"
@@ -10,7 +8,7 @@ namespace ft{
 
 template <class Key, class T, class Compare = ft::less<Key>,
           class Allocator = std::allocator< pair< /*const */Key, T > > >
-class map{
+class tree{
 public:
 	typedef Key										    key_type;
 	typedef T										    mapped_type;
@@ -29,29 +27,72 @@ public:
     // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
 private:
 	typedef ft::node<value_type> node;
-	bool isNil(const value_type &val) const { return (val._isNil); }
 private:
-	node			*_parent;/////////////////////
+	node			*_parent;
 	size_type		_size;
+	allocator_type	_alloc;
+	Compare			_cmp;
 private:
+	bool isNil(const value_type &val) const{
+		return (val._isNil);
+	}
 	void removeOneNode(node *tmp){
-		
+		_alloc.destroy(tmp);
+		_alloc.deallocate(tmp, 1);
+	}
+	void removeTree(node *tmp){
+		if (tmp && !isNil(tmp->left))
+			removeTree(tmp->left);
+		else if (tmp)
+			removeOneNode(tmp->left);
+		if (tmp && !isNil(tmp->right))
+			removeTree(tmp->right);
+		else if (tmp)
+			removeOneNode(tmp->right);
+		if (tmp)
+			removeOneNode(tmp);
+	}
+	node *cloneNode(node *tmp, node *parent){
+		node *newNode;
+		newNode =_alloc.allocate(1);
+		_alloc.construct(newNode, node(tmp->value, parent));
+		return (newNode);
+	}
+	void copyTree(node **dest, node *srcs){
+		if (isNil(srcs)){
+			*dest = _alloc.allocate(1);
+			_alloc.construct(*dest, node((*dest)->parent), true);
+		}
+		else{
+			*dest = cloneNode(srcs, *dest ? (*dest)->parent : NULL);
+			if (!isNil(srcs->left))
+				copyTree(&((*dest)->left));
+			if (!isNil(srcs->right))
+				copyTree(&((*dest)->right));
+
+		}
+
 	}
 public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	map() : _parent(), _size(0){}
-	map(const map & copy){
+	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
+	tree(const tree & copy) : _parent(NULL), _size(0){
 		this->operator=(copy);
 	}
-	~map(){}//write it!!!
+	~tree(){
+		removeTree(_parent);
+	}
 	///////////////////////
 	/*-----Operators-----*/
 	///////////////////////
-	map &operator=(const map& op){
+	tree &operator=(const tree& op){
 		if (this == &op)
 			return (*this);
+		if (_size)
+			removeTree(_parent);
+		copyTree(&_parent, op._parent);
 		return (*this);
 	}
 };

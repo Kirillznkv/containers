@@ -15,7 +15,7 @@ struct node{
 
 	node() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
 	node(node *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
-	node(T v, node *p, node *l, node *r) : value(v), parent(p), left(l), right(r), _isNil(false){}
+	node(T v, node *p, node *l = NULL, node *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
 	node(const node& copy) { this->operator=(copy); }
 	~node(){}
 	node& operator=(const node& op){
