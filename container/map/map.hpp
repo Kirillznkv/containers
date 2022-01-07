@@ -8,7 +8,7 @@
 
 namespace ft{
 
-template <class Key, class T, class Compare = std::less<Key>, //ft::les...
+template <class Key, class T, class Compare = ft::less<Key>,
           class Allocator = std::allocator< pair< /*const */Key, T > > >
 class map{
 public:
@@ -23,7 +23,7 @@ public:
     typedef typename allocator_type::const_pointer      const_pointer;
     typedef typename allocator_type::size_type          size_type;
     typedef typename allocator_type::difference_type    difference_type;
-    // typedef implementation-defined                   iterator;
+    typedef myIteratorMap<value_type>                   iterator;
     // typedef implementation-defined                   const_iterator;
     // typedef std::reverse_iterator<iterator>          reverse_iterator; // проблема с конструктором
     // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
@@ -31,10 +31,29 @@ private:
 	typedef ft::node<value_type> node;
 	bool isNil(const value_type &val) const { return (val._isNil); }
 private:
-	node		*_parent;
-	size_type	_size;
-	size_type	_max_size;
+	node			*_parent;
+	size_type		_size;
+private:
+	void removeOneNode(node *tmp){
+		
+	}
 public:
+	////////////////////////
+	/*-----Constructs-----*/
+	////////////////////////
+	map() : _parent(), _size(0){}
+	map(const map & copy){
+		this->operator=(copy);
+	}
+	~map(){}//write it!!!
+	///////////////////////
+	/*-----Operators-----*/
+	///////////////////////
+	map &operator=(const map& op){
+		if (this == &op)
+			return (*this);
+		return (*this);
+	}
 };
 
 }

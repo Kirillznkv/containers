@@ -64,7 +64,7 @@ public:
 			res = pVal;
 		}
 		else{
-			while (pVal->parent && pVal->parent < pVal)
+			while (pVal->parent && pVal->parent->right == pVal)
 				pVal = pVal->parent;
 			if (pVal->parent)
 				res = pVal;
@@ -83,7 +83,7 @@ public:
 			res = pVal;
 		}
 		else{
-			while (pVal->parent && pVal->parent < pVal)
+			while (pVal->parent && pVal->parent->right == pVal)
 				pVal = pVal->parent;
 			if (pVal->parent)
 				res = pVal;
@@ -101,7 +101,7 @@ public:
 			res = pVal;
 		}
 		else{
-			while (pVal->parent && pVal->parent > pVal)
+			while (pVal->parent && pVal->parent->left == pVal)
 				pVal = pVal->parent;
 			if (pVal->parent)
 				res = pVal;
@@ -120,7 +120,7 @@ public:
 			res = pVal;
 		}
 		else{
-			while (pVal->parent && pVal->parent > pVal)
+			while (pVal->parent && pVal->parent->left == pVal)
 				pVal = pVal->parent;
 			if (pVal->parent)
 				res = pVal;

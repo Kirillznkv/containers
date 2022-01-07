@@ -147,6 +147,14 @@ ft::pair<T1,T2> make_pair( T1 first, T2 second ){
 	return (ft::pair<T1,T2>(first, second));
 }
 
+template <class T>
+struct less
+{
+	bool operator() (const T& x, const T& y) const {
+		return x < y;
+	}
+};
+
 }
 
 #endif
