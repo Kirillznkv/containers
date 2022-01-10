@@ -26,15 +26,16 @@ public:
     // typedef std::reverse_iterator<iterator>          reverse_iterator; // проблема с конструктором
     // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
 private:
-	typedef ft::node<value_type> node;
+	typedef ft::myNode<value_type> node;
 private:
-	node			*_parent;
-	size_type		_size;
-	allocator_type	_alloc;
-	Compare			_cmp;
+	node					*_parent;
+	size_type				_size;
+	std::allocator<node>	_alloc;
+	allocator_type			_allocVal;
+	Compare					_cmp;
 private:
-	bool isNil(const value_type &val) const{
-		return (val._isNil);
+	bool isNil(const node & tmp) const{
+		return (tmp.isNil());
 	}
 	void removeOneNode(node *tmp){
 		_alloc.destroy(tmp);
@@ -71,6 +72,17 @@ private:
 				copyTree(&((*dest)->right));
 
 		}
+	}
+	void addNode(node **dest, /*const */key_type& k, mapped_type t = mapped_type()){
+		*dest = _alloc.allocate(1);
+		node *tmp = *dest;
+		node a(ft::make_pair( k, t ), NULL);
+		_alloc.construct(tmp, a);
+	}
+	void addNil(node **dest){
+		*dest = _alloc.allocate(1);
+		node *tmp = *dest;
+		_alloc.construct(tmp, node(tmp, true));
 	}
 public:
 	////////////////////////
@@ -119,10 +131,48 @@ public:
 	/*-----Element-access-----*/
 	////////////////////////////
 	mapped_type& operator[] (/*const */key_type& k){
+		mapped_type *res;
 		if (_size == 0){
-			_parent = _alloc.allocate(1);
-			_alloc.construct(_parent, node(ft::make_pair( k, mapped_type() ), NULL))
+			addNode(&_parent, k);
+			addNil(&(_parent->left));
+			addNil(&(_parent->right));
+			_parent->right->parent = _parent;
+			_parent->left->parent = _parent;
+			_size++;
+			res = &(_parent->value.second);
 		}
+		else{
+			node *tmp = _parent;
+			while (!isNil(tmp)){
+				if (_cmp(tmp->value.first, k))
+					tmp = tmp->right;
+				else if (tmp->value.first == k)
+					break ;
+				else
+					tmp = tmp->left;
+			}
+			if (!isNil(tmp))
+				res = &(tmp->value.second);
+			else{
+				node *p = tmp->parent;
+				node **newTmp;
+				if (p->right == tmp)
+					newTmp = &(p->right);
+				else
+					newTmp = &(p->left);
+				_alloc.destroy(tmp);
+				_alloc.deallocate(tmp, 1);
+				addNode(newTmp, k);
+				tmp = *newTmp;
+				addNil(&(tmp->left));
+				addNil(&(tmp->right));
+				tmp->right->parent = tmp;
+				tmp->left->parent = tmp;
+				_size++;
+				res = &(tmp->value.second);
+			}
+		}
+		return (*res);
 	}
 };
 

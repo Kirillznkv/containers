@@ -7,44 +7,47 @@
 namespace ft{
 
 template<class T>
-struct node{
-	node		*parent;
-	node		*left;
-	node		*right;
+struct myNode{
+	myNode		*parent;
+	myNode		*left;
+	myNode		*right;
 	T			value;
 
-	node() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
-	node(node *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
-	node(T &v, node *p, node *l = NULL, node *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
-	node(const node& copy) { this->operator=(copy); }
-	~node(){}
-	node& operator=(const node& op){
+	myNode() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
+	myNode(myNode *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
+	myNode(const T &v, myNode *p, myNode *l = NULL, myNode *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
+	myNode(const myNode& copy) : _isNil(copy._isNil) { this->operator=(copy); }
+	~myNode(){}
+	myNode& operator=(const myNode& op){
 		value = op.value;
 		parent = op.parent;
 		left = op.left;
 		right = op.right;
 		return (*this);
 	}
+	bool isNil() const{
+		return (_isNil);
+	}
 private:
-	static const bool _isNil;
+	const bool _isNil;
 };
 
 template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
           class Pointer = T*, class Reference = T&>
 class myIteratorMap{
 public:
-	typedef ft::node<T>		value_type;
+	typedef ft::myNode<T>		value_type;
 	typedef Distance		difference_type;
 	typedef Pointer			pointer;
 	typedef Reference		reference;
 	typedef Category		iterator_category;
 protected:
-	bool isNil(const value_type &val) const { return (val._isNil); }
+	bool isNil(const value_type & tmp) const{ return (tmp.isNil()); }
 protected:
 	value_type *pVal;
 public:
 	myIteratorMap() : pVal(){}// need *?
-	myIteratorMap(value_type &val) : pval(val.value, val.parent, val.left, val.right){}
+	myIteratorMap(value_type &val) : pVal(val.value, val.parent, val.left, val.right){}
 	myIteratorMap(const myIteratorMap& copy){
 		this->operator=(copy);
 	}

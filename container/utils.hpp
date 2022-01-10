@@ -107,8 +107,8 @@ public:
 	~pair(){}
 
 	pair&	operator=(const pair<first_type, second_type>& op){
-		first = op.first();
-		second = op.second();
+		first = op.first;
+		second = op.second;
 		return (*this);
 	}
 

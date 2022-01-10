@@ -2,12 +2,16 @@
 #include <vector>///
 #include <iostream>
 
-using namespace std;
+#include "../../container/map/tree.hpp"
+
+// using namespace std;
 
 int main(){
-		map<char, int> m;
-		m['a'];
-		m['c'];
-		cout<<m.size()<<endl;
+	ft::tree<char, int> t;
+	char ch = 'c';
+	t[ch] = 1;
+	ch = 'f';
+	t[ch] = 5;
+	std::cout<<t[ch]<<"("<<t.size()<<")"<<std::endl;
 	return (0);
 }
