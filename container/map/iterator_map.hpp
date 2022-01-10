@@ -15,7 +15,7 @@ struct node{
 
 	node() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
 	node(node *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
-	node(T v, node *p, node *l = NULL, node *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
+	node(T &v, node *p, node *l = NULL, node *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
 	node(const node& copy) { this->operator=(copy); }
 	~node(){}
 	node& operator=(const node& op){
@@ -57,9 +57,9 @@ public:
 	}
 	myIteratorMap &operator ++ (void){
 		value_type *res = pVal->right;
-		if (pVal->right){
+		if (!isNil(pVal->right)){
 			pVal = pVal->right;
-			while (pVal->left)
+			while (!isNil(pVal->left))
 				pVal = pVal->left;
 			res = pVal;
 		}
@@ -76,9 +76,9 @@ public:
 	myIteratorMap operator ++ (int){
 		myIteratorMap it(pVal);
 		value_type *res = pVal->right;
-		if (pVal->right){
+		if (!isNil(pVal->right)){
 			pVal = pVal->right;
-			while (pVal->left)
+			while (!isNil(pVal->left))
 				pVal = pVal->left;
 			res = pVal;
 		}
@@ -94,9 +94,9 @@ public:
 	}
 	myIteratorMap &operator -- (void){
 		value_type *res = pVal->left;
-		if (pVal->left){
+		if (!isNil(pVal->left)){
 			pVal = pVal->left;
-			while (pVal->right)
+			while (!isNil(pVal->right))
 				pVal = pVal->right;
 			res = pVal;
 		}
@@ -113,9 +113,9 @@ public:
 	myIteratorMap operator -- (int){
 		myIteratorMap it(pVal);
 		value_type *res = pVal->left;
-		if (pVal->left){
+		if (!isNil(pVal->left)){
 			pVal = pVal->left;
-			while (pVal->right)
+			while (!isNil(pVal->right))
 				pVal = pVal->right;
 			res = pVal;
 		}

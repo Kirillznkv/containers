@@ -1,12 +1,13 @@
 #include <map>////
 #include <vector>///
+#include <iostream>
+
+using namespace std;
 
 int main(){
-	std::vector<int>::iterator it;
-	std::vector<int>::reverse_iterator it2;
-	{
-		std::map<int, int>::iterator it;
-		std::map<int, int>::reverse_iterator it2;
-	}
+		map<char, int> m;
+		m['a'];
+		m['c'];
+		cout<<m.size()<<endl;
 	return (0);
 }

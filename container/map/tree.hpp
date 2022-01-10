@@ -54,7 +54,7 @@ private:
 	}
 	node *cloneNode(node *tmp, node *parent){
 		node *newNode;
-		newNode =_alloc.allocate(1);
+		newNode = _alloc.allocate(1);
 		_alloc.construct(newNode, node(tmp->value, parent));
 		return (newNode);
 	}
@@ -71,14 +71,13 @@ private:
 				copyTree(&((*dest)->right));
 
 		}
-
 	}
 public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
-	tree(const tree & copy) : _parent(NULL), _size(0){
+	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _size(0), _cmp(comp), _alloc(alloc){}
+	tree(const tree & copy) : _size(0){
 		this->operator=(copy);
 	}
 	~tree(){
@@ -93,7 +92,37 @@ public:
 		if (_size)
 			removeTree(_parent);
 		copyTree(&_parent, op._parent);
+		_size = op._size;
 		return (*this);
+	}
+	//////////////////////
+	/*-----Capacity-----*/
+	//////////////////////
+	bool empty() const{
+		return (_size == 0);
+	}
+	size_type size() const{
+		return (_size);
+	}
+	size_type max_size() const{
+		size_type val = (pow(2, 64) / sizeof(value_type));
+		val--;
+		return (val);
+	}
+	///////////////////////
+	/*-----Allocator-----*/
+	///////////////////////
+	allocator_type get_allocator() const{
+		return (_alloc);
+	}
+	////////////////////////////
+	/*-----Element-access-----*/
+	////////////////////////////
+	mapped_type& operator[] (/*const */key_type& k){
+		if (_size == 0){
+			_parent = _alloc.allocate(1);
+			_alloc.construct(_parent, node(ft::make_pair( k, mapped_type() ), NULL))
+		}
 	}
 };
 
