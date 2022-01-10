@@ -42,7 +42,6 @@ public:
 	typedef Reference		reference;
 	typedef Category		iterator_category;
 protected:
-	bool isNil(const value_type & tmp) const{ return (tmp.isNil()); }
 protected:
 	value_type *pVal;
 public:
@@ -60,9 +59,9 @@ public:
 	}
 	myIteratorMap &operator ++ (void){
 		value_type *res = pVal->right;
-		if (!isNil(pVal->right)){
+		if (!(pVal->right->isNil())){
 			pVal = pVal->right;
-			while (!isNil(pVal->left))
+			while (!(pVal->left->isNil()))
 				pVal = pVal->left;
 			res = pVal;
 		}
@@ -79,9 +78,9 @@ public:
 	myIteratorMap operator ++ (int){
 		myIteratorMap it(pVal);
 		value_type *res = pVal->right;
-		if (!isNil(pVal->right)){
+		if (!(pVal->right->isNil())){
 			pVal = pVal->right;
-			while (!isNil(pVal->left))
+			while (!(pVal->left->isNil()))
 				pVal = pVal->left;
 			res = pVal;
 		}
@@ -97,9 +96,9 @@ public:
 	}
 	myIteratorMap &operator -- (void){
 		value_type *res = pVal->left;
-		if (!isNil(pVal->left)){
+		if (!(pVal->left->isNil())){
 			pVal = pVal->left;
-			while (!isNil(pVal->right))
+			while (!(pVal->right->isNil()))
 				pVal = pVal->right;
 			res = pVal;
 		}
@@ -116,9 +115,9 @@ public:
 	myIteratorMap operator -- (int){
 		myIteratorMap it(pVal);
 		value_type *res = pVal->left;
-		if (!isNil(pVal->left)){
+		if (!(pVal->left->isNil())){
 			pVal = pVal->left;
-			while (!isNil(pVal->right))
+			while (!(pVal->right->isNil()))
 				pVal = pVal->right;
 			res = pVal;
 		}

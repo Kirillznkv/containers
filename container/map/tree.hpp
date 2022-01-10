@@ -34,19 +34,16 @@ private:
 	allocator_type			_allocVal;
 	Compare					_cmp;
 private:
-	bool isNil(const node & tmp) const{
-		return (tmp.isNil());
-	}
 	void removeOneNode(node *tmp){
 		_alloc.destroy(tmp);
 		_alloc.deallocate(tmp, 1);
 	}
 	void removeTree(node *tmp){
-		if (tmp && !isNil(tmp->left))
+		if (tmp && !(tmp->left->isNil()))
 			removeTree(tmp->left);
 		else if (tmp)
 			removeOneNode(tmp->left);
-		if (tmp && !isNil(tmp->right))
+		if (tmp && !(tmp->right->isNil()))
 			removeTree(tmp->right);
 		else if (tmp)
 			removeOneNode(tmp->right);
@@ -143,7 +140,7 @@ public:
 		}
 		else{
 			node *tmp = _parent;
-			while (!isNil(tmp)){
+			while (!(tmp->isNil())){
 				if (_cmp(tmp->value.first, k))
 					tmp = tmp->right;
 				else if (tmp->value.first == k)
@@ -151,7 +148,7 @@ public:
 				else
 					tmp = tmp->left;
 			}
-			if (!isNil(tmp))
+			if (!(tmp->isNil()))
 				res = &(tmp->value.second);
 			else{
 				node *p = tmp->parent;
