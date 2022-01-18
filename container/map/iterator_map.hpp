@@ -36,17 +36,15 @@ template <class T = ft::pair<class Key, class Value>, class Category = std::forw
           class Pointer = T*, class Reference = T&>
 class myIteratorMap{
 public:
-	typedef ft::myNode<T>		value_type;
+	typedef T				value_type;
 	typedef Distance		difference_type;
 	typedef Pointer			pointer;
 	typedef Reference		reference;
 	typedef Category		iterator_category;
 protected:
-protected:
-	value_type *pVal;
+	ft::myNode<T> *pVal;
 public:
-	myIteratorMap() : pVal(){}// need *?
-	myIteratorMap(value_type &val) : pVal(val.value, val.parent, val.left, val.right){}
+	myIteratorMap(ft::myNode<T> *val = NULL) : pVal(val){}
 	myIteratorMap(const myIteratorMap& copy){
 		this->operator=(copy);
 	}
@@ -58,27 +56,28 @@ public:
 		return (*this);
 	}
 	myIteratorMap &operator ++ (void){
-		value_type *res = pVal->right;
-		if (!(pVal->right->isNil())){
+		ft::myNode<T> *nil = pVal->right;
+		if ((pVal->isNil()))
+			return (*this);
+		else if (!(pVal->right->isNil())){
 			pVal = pVal->right;
 			while (!(pVal->left->isNil()))
 				pVal = pVal->left;
-			res = pVal;
 		}
 		else{
 			while (pVal->parent && pVal->parent->right == pVal)
 				pVal = pVal->parent;
-			if (pVal->parent)
-				res = pVal;
-			else
-				pVal = res;
+			if (!(pVal->parent))
+				pVal = nil;
 		}
-		return (myIteratorMap(res));
+		return (*this);
 	}
 	myIteratorMap operator ++ (int){
 		myIteratorMap it(pVal);
-		value_type *res = pVal->right;
-		if (!(pVal->right->isNil())){
+		ft::myNode<T> *res = pVal->right;
+		if ((pVal->isNil()))
+			return (it);
+		else if (!(pVal->right->isNil())){
 			pVal = pVal->right;
 			while (!(pVal->left->isNil()))
 				pVal = pVal->left;
@@ -95,27 +94,28 @@ public:
 		return (it);
 	}
 	myIteratorMap &operator -- (void){
-		value_type *res = pVal->left;
-		if (!(pVal->left->isNil())){
+		ft::myNode<T> *nil = pVal->left;
+		if ((pVal->isNil()))
+			pVal = pVal->parent;
+		else if (!(pVal->left->isNil())){
 			pVal = pVal->left;
 			while (!(pVal->right->isNil()))
 				pVal = pVal->right;
-			res = pVal;
 		}
 		else{
 			while (pVal->parent && pVal->parent->left == pVal)
 				pVal = pVal->parent;
-			if (pVal->parent)
-				res = pVal;
-			else
-				pVal = res;
+			if (!(pVal->parent))
+				pVal = nil;
 		}
-		return (myIteratorMap(res));
+		return (*this);
 	}
 	myIteratorMap operator -- (int){
 		myIteratorMap it(pVal);
-		value_type *res = pVal->left;
-		if (!(pVal->left->isNil())){
+		ft::myNode<T> *res = pVal->left;
+		if ((pVal->isNil()))
+			pVal = pVal->parent;
+		else if (!(pVal->left->isNil())){
 			pVal = pVal->left;
 			while (!(pVal->right->isNil()))
 				pVal = pVal->right;
@@ -132,10 +132,10 @@ public:
 		return (it);
 	}
 	virtual value_type&	operator* (){
-		return (*pVal);
+		return (pVal->value);
 	}
 	value_type *operator->() const{
-		return (pVal);
+		return (&(pVal->value));
 	}
 };
 

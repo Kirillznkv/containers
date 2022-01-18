@@ -171,6 +171,31 @@ public:
 		}
 		return (*res);
 	}
+	///////////////////////
+	/*-----Iterators-----*/
+	///////////////////////
+	iterator begin(){
+		iterator it;
+		node *tmp = _parent;
+		if (_parent){
+			while (!(tmp->left->isNil()))
+				tmp = tmp->left;
+			it = iterator(tmp);
+		}
+		return (it);
+	}
+	iterator end(){
+		iterator it;
+		node *tmp = _parent;
+		if (_parent){
+			while (!(tmp->right->isNil())){
+				tmp = tmp->right;
+			}
+			 tmp = tmp->right;
+			it = iterator(tmp);
+		}
+		return (it);
+	}
 };
 
 }

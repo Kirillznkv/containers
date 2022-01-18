@@ -4,3 +4,7 @@ operator[]
 operator->
 
 reverse_iterator<Iterator> Не работает
+
+const pair
+
+const Iterator
