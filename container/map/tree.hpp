@@ -163,8 +163,9 @@ public:
 				tmp = *newTmp;
 				addNil(&(tmp->left));
 				addNil(&(tmp->right));
-				tmp->right->parent = tmp;
 				tmp->left->parent = tmp;
+				tmp->right->parent = tmp;
+				tmp->parent = p;
 				_size++;
 				res = &(tmp->value.second);
 			}

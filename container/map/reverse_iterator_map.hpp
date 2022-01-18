@@ -35,28 +35,14 @@ public:
 				pVal = pVal->parent;
 			if (!(pVal->parent))
 				pVal = nil;
+			else
+				pVal = pVal->parent;
 		}
 		return (*this);
 	}
 	myReverseIteratorMap operator ++ (int){
 		myReverseIteratorMap it(pVal);
-		ft::myNode<T> *res = pVal->left;
-		if ((pVal->isNil()))
-			return (it);
-		else if (!(pVal->left->isNil())){
-			pVal = pVal->left;
-			while (!(pVal->right->isNil()))
-				pVal = pVal->right;
-			res = pVal;
-		}
-		else{
-			while (pVal->parent && pVal->parent->left == pVal)
-				pVal = pVal->parent;
-			if (pVal->parent)
-				res = pVal;
-			else
-				pVal = res;
-		}
+		this->operator++();
 		return (it);
 	}
 	myReverseIteratorMap &operator -- (void){
@@ -73,28 +59,14 @@ public:
 				pVal = pVal->parent;
 			if (!(pVal->parent))
 				pVal = nil;
+			else
+				pVal = pVal->parent;
 		}
 		return (*this);
 	}
 	myReverseIteratorMap operator -- (int){
 		myReverseIteratorMap it(pVal);
-		ft::myNode<T> *res = pVal->right;
-		if ((pVal->isNil()))
-			pVal = pVal->parent;
-		else if (!(pVal->right->isNil())){
-			pVal = pVal->right;
-			while (!(pVal->left->isNil()))
-				pVal = pVal->left;
-			res = pVal;
-		}
-		else{
-			while (pVal->parent && pVal->parent->right == pVal)
-				pVal = pVal->parent;
-			if (pVal->parent)
-				res = pVal;
-			else
-				pVal = res;
-		}
+		this->operator--();
 		return (it);
 	}
 	myReverseIteratorMap &operator+=(int col){
