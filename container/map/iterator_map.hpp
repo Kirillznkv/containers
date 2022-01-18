@@ -16,20 +16,13 @@ struct myNode{
 	myNode() : value(), parent(NULL), left(NULL), right(NULL), _isNil(false){}
 	myNode(myNode *p, const bool  nil = false) : value(), parent(p), left(NULL), right(NULL), _isNil(nil){}
 	myNode(const T &v, myNode *p, myNode *l = NULL, myNode *r = NULL) : value(v), parent(p), left(l), right(r), _isNil(false){}
-	myNode(const myNode& copy) : _isNil(copy._isNil) { this->operator=(copy); }
 	~myNode(){}
-	myNode& operator=(const myNode& op){
-		value = op.value;
-		parent = op.parent;
-		left = op.left;
-		right = op.right;
-		return (*this);
-	}
 	bool isNil() const{
 		return (_isNil);
 	}
 private:
 	const bool _isNil;
+	myNode& operator=(const myNode& op){return (*this);}
 };
 
 template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key

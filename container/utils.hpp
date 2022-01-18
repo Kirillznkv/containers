@@ -103,7 +103,7 @@ public:
 public:
 	pair() : first(), second(){}
 	pair(const first_type& x, const second_type& y) : first(x), second(y){}
-	pair(const pair<first_type, second_type>& copy) : first(copy.first), second(copy.second){};
+	template<class U, class V> pair(const pair<U, V>& copy) : first(copy.first), second(copy.second){};
 	~pair(){}
 
 	pair&	operator=(const pair<first_type, second_type>& op){

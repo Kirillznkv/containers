@@ -7,12 +7,12 @@
 namespace ft{
 
 template <class Key, class T, class Compare = ft::less<Key>,
-          class Allocator = std::allocator< pair< /*const */Key, T > > >
+          class Allocator = std::allocator< pair< const Key, T > > >
 class tree{
 public:
 	typedef Key										    key_type;
 	typedef T										    mapped_type;
-	typedef ft::pair</*const */key_type, mapped_type>	value_type;
+	typedef ft::pair<const key_type, mapped_type>	value_type;
     typedef Compare                                     key_compare;
     typedef Allocator                                   allocator_type;
     typedef typename allocator_type::reference          reference;
@@ -70,11 +70,11 @@ private:
 
 		}
 	}
-	void addNode(node **dest, /*const */key_type& k, mapped_type t = mapped_type()){
+	void addNode(node **dest, const key_type& k, mapped_type t = mapped_type()){
 		*dest = _alloc.allocate(1);
 		node *tmp = *dest;
-		node a(ft::make_pair( k, t ), NULL);
-		_alloc.construct(tmp, a);
+		// node a(ft::make_pair( k, t ), NULL);
+		_alloc.construct(tmp, node(ft::make_pair( k, t ), NULL));
 	}
 	void addNil(node **dest){
 		*dest = _alloc.allocate(1);
@@ -127,7 +127,7 @@ public:
 	////////////////////////////
 	/*-----Element-access-----*/
 	////////////////////////////
-	mapped_type& operator[] (/*const */key_type& k){
+	mapped_type& operator[] (const key_type& k){
 		mapped_type *res;
 		if (_size == 0){
 			addNode(&_parent, k);
