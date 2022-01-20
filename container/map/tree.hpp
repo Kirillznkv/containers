@@ -3,6 +3,7 @@
 
 # include "../utils.hpp"
 # include "iterator_map.hpp"
+# include "reverse_iterator_map.hpp"
 
 namespace ft{
 
@@ -23,7 +24,7 @@ public:
     typedef typename allocator_type::difference_type    difference_type;
     typedef myIteratorMap<value_type>                   iterator;
     // typedef implementation-defined                   const_iterator;
-    // typedef std::reverse_iterator<iterator>          reverse_iterator; // проблема с конструктором
+    typedef myReverseIteratorMap<value_type>			reverse_iterator; // проблема с конструктором
     // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
 private:
 	typedef ft::myNode<value_type> node;
@@ -196,6 +197,12 @@ public:
 			it = iterator(tmp);
 		}
 		return (it);
+	}
+	reverse_iterator rbegin(){
+		return (reverse_iterator(end()));
+	}
+	reverse_iterator rend(){
+		return (reverse_iterator(begin()));
 	}
 };
 

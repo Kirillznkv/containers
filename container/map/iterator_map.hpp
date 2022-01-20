@@ -35,9 +35,10 @@ public:
 	typedef Reference		reference;
 	typedef Category		iterator_category;
 protected:
-	ft::myNode<T> *pVal;
+	typedef ft::myNode<value_type> node;
+	node *pVal;
 public:
-	myIteratorMap(ft::myNode<T> *val = NULL) : pVal(val){}
+	myIteratorMap(node *val = NULL) : pVal(val){}
 	myIteratorMap(const myIteratorMap& copy){
 		this->operator=(copy);
 	}
@@ -49,7 +50,7 @@ public:
 		return (*this);
 	}
 	myIteratorMap &operator ++ (void){
-		ft::myNode<T> *nil = pVal->right;
+		node *nil = pVal->right;
 		if ((pVal->isNil()))
 			return (*this);
 		else if (!(pVal->right->isNil())){
@@ -73,7 +74,7 @@ public:
 		return (it);
 	}
 	myIteratorMap &operator -- (void){
-		ft::myNode<T> *nil = pVal->left;
+		node *nil = pVal->left;
 		if ((pVal->isNil()))
 			pVal = pVal->parent;
 		else if (!(pVal->left->isNil())){

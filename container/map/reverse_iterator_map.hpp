@@ -7,10 +7,14 @@ namespace ft{
 
 template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
           class Pointer = T*, class Reference = T&>
-class myReverseIteratorMap : public myIteratorMap{
+class myReverseIteratorMap : public myIteratorMap<T, Category, Distance, Pointer, Reference>{
+protected:
+	typedef ft::myNode<T> node;
 public:
-	myReverseIteratorMap() : myIteratorMap(){}// need *?
-	myReverseIteratorMap(value_type &val) : pVal(val.value, val.parent, val.left, val.right){}
+	myReverseIteratorMap(node *val = NULL) : pVal(val){}
+	myReverseIteratorMap(const myIteratorMap<T, Category, Distance, Pointer, Reference>& copy){
+		this->operator=(copy);
+	}
 	myReverseIteratorMap(const myReverseIteratorMap& copy){
 		this->operator=(copy);
 	}
@@ -22,7 +26,7 @@ public:
 		return (*this);
 	}
 	myReverseIteratorMap &operator ++ (void){
-		ft::myNode<T> *nil = pVal->left;
+		node *nil = pVal->left;
 		if ((pVal->isNil()))
 			return(*this);
 		else if (!(pVal->left->isNil())){
@@ -46,7 +50,7 @@ public:
 		return (it);
 	}
 	myReverseIteratorMap &operator -- (void){
-		ft::myNode<T> *nil = pVal->right;
+		node *nil = pVal->right;
 		if ((pVal->isNil()))
 			pVal = pVal->parent;
 		else if (!(pVal->right->isNil())){
@@ -90,6 +94,16 @@ public:
 		for (int i = 0; i < col; ++i)
 			it.operator--();
 		return (it);
+	}
+	T&	operator* (){
+		myReverseIteratorMap it((*this) + 1);
+		return ((it.pVal)->value);
+	}
+	bool operator==(const myReverseIteratorMap& op){
+		return (pVal == op.pVal);
+	}
+	bool operator!=(const myReverseIteratorMap& op){
+		return (pVal != op.pVal);
 	}
 };
 
