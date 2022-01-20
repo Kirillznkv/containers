@@ -11,7 +11,7 @@ class myReverseIteratorMap : public myIteratorMap<T, Category, Distance, Pointer
 protected:
 	typedef ft::myNode<T> node;
 public:
-	myReverseIteratorMap(node *val = NULL) : pVal(val){}
+	myReverseIteratorMap(node *val = NULL) : myIteratorMap<T, Category, Distance, Pointer, Reference>(val){}
 	myReverseIteratorMap(const myIteratorMap<T, Category, Distance, Pointer, Reference>& copy){
 		this->operator=(copy);
 	}
@@ -22,54 +22,54 @@ public:
 	myReverseIteratorMap &operator=(const myReverseIteratorMap& op){
 		if (this == &op)
 			return (*this);
-		pVal = op.pVal;
+		this->pVal = op.pVal;
 		return (*this);
 	}
 	myReverseIteratorMap &operator ++ (void){
-		node *nil = pVal->left;
-		if ((pVal->isNil()))
+		node *nil = this->pVal->left;
+		if ((this->pVal->isNil()))
 			return(*this);
-		else if (!(pVal->left->isNil())){
-			pVal = pVal->left;
-			while (!(pVal->right->isNil()))
-				pVal = pVal->right;
+		else if (!(this->pVal->left->isNil())){
+			this->pVal = this->pVal->left;
+			while (!(this->pVal->right->isNil()))
+				this->pVal = this->pVal->right;
 		}
 		else{
-			while (pVal->parent && pVal->parent->left == pVal)
-				pVal = pVal->parent;
-			if (!(pVal->parent))
-				pVal = nil;
+			while (this->pVal->parent && this->pVal->parent->left == this->pVal)
+				this->pVal = this->pVal->parent;
+			if (!(this->pVal->parent))
+				this->pVal = nil;
 			else
-				pVal = pVal->parent;
+				this->pVal = this->pVal->parent;
 		}
 		return (*this);
 	}
 	myReverseIteratorMap operator ++ (int){
-		myReverseIteratorMap it(pVal);
+		myReverseIteratorMap it(this->pVal);
 		this->operator++();
 		return (it);
 	}
 	myReverseIteratorMap &operator -- (void){
-		node *nil = pVal->right;
-		if ((pVal->isNil()))
-			pVal = pVal->parent;
-		else if (!(pVal->right->isNil())){
-			pVal = pVal->right;
-			while (!(pVal->left->isNil()))
-				pVal = pVal->left;
+		node *nil = this->pVal->right;
+		if ((this->pVal->isNil()))
+			this->pVal = this->pVal->parent;
+		else if (!(this->pVal->right->isNil())){
+			this->pVal = this->pVal->right;
+			while (!(this->pVal->left->isNil()))
+				this->pVal = this->pVal->left;
 		}
 		else{
-			while (pVal->parent && pVal->parent->right == pVal)
-				pVal = pVal->parent;
-			if (!(pVal->parent))
-				pVal = nil;
+			while (this->pVal->parent && this->pVal->parent->right == this->pVal)
+				this->pVal = this->pVal->parent;
+			if (!(this->pVal->parent))
+				this->pVal = nil;
 			else
-				pVal = pVal->parent;
+				this->pVal = this->pVal->parent;
 		}
 		return (*this);
 	}
 	myReverseIteratorMap operator -- (int){
-		myReverseIteratorMap it(pVal);
+		myReverseIteratorMap it(this->pVal);
 		this->operator--();
 		return (it);
 	}
@@ -100,10 +100,10 @@ public:
 		return ((it.pVal)->value);
 	}
 	bool operator==(const myReverseIteratorMap& op){
-		return (pVal == op.pVal);
+		return (this->pVal == op.pVal);
 	}
 	bool operator!=(const myReverseIteratorMap& op){
-		return (pVal != op.pVal);
+		return (this->pVal != op.pVal);
 	}
 };
 

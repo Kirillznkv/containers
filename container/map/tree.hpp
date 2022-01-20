@@ -2,6 +2,7 @@
 #define TREE_HPP
 
 # include "../utils.hpp"
+# include <cmath>
 # include "iterator_map.hpp"
 # include "reverse_iterator_map.hpp"
 
