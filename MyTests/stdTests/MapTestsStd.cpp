@@ -6,20 +6,18 @@
 
 int main(){
   ft::tree<char,int> mymap;
-  char c;
+  ft::tree<char,int>::iterator itlow,itup;
 
-  mymap ['a']=101;
-  mymap ['c']=202;
-  mymap ['f']=303;
+  mymap['a']=20;
+  mymap['b']=40;
+  mymap['c']=60;
+  mymap['d']=80;
+  mymap['e']=100;
 
-  for (c='a'; c<'h'; c++)
-  {
-    std::cout << c;
-    if (mymap.count(c)>0)
-      std::cout << " is an element of mymap.\n";
-    else 
-      std::cout << " is not an element of mymap.\n";
-  }
+  itlow=mymap.lower_bound ('b');  // itlow points to b
+  itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+	std::cout<<itlow->first<<" "<<itup->first<<std::endl;
 
   return 0;
 }

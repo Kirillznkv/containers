@@ -263,6 +263,20 @@ public:
 		}
 		return 0;
 	}
+	iterator lower_bound (const key_type& k) {
+		iterator it = begin();
+		while (it != end() && _cmp(it->first, k))
+			++it;
+		return (it);
+	}
+	iterator upper_bound (const key_type& k) {
+		iterator it = begin();
+		while (it != end() && _cmp(it->first, k))
+			++it;
+		if (it != end() && it->first == k)
+			++it;
+		return (it);
+	}
 };
 
 }
