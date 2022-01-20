@@ -277,6 +277,9 @@ public:
 			++it;
 		return (it);
 	}
+	ft::pair<iterator,iterator> equal_range (const key_type& k) {
+		return (ft::make_pair(lower_bound(k), upper_bound(k)));
+	}
 };
 
 }
