@@ -200,10 +200,26 @@ public:
 		return (it);
 	}
 	reverse_iterator rbegin(){
-		return (reverse_iterator(end()));
+		reverse_iterator it;
+		node *tmp = _parent;
+		if (_parent){
+			while (!(tmp->right->isNil())){
+				tmp = tmp->right;
+			}
+			 tmp = tmp->right;
+			it = reverse_iterator(tmp);
+		}
+		return (it);
 	}
 	reverse_iterator rend(){
-		return (reverse_iterator(begin()));
+		reverse_iterator it;
+		node *tmp = _parent;
+		if (_parent){
+			while (!(tmp->left->isNil()))
+				tmp = tmp->left;
+			it = reverse_iterator(tmp);
+		}
+		return (it);
 	}
 };
 

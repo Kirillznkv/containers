@@ -12,9 +12,6 @@ protected:
 	typedef ft::myNode<T> node;
 public:
 	myReverseIteratorMap(node *val = NULL) : myIteratorMap<T, Category, Distance, Pointer, Reference>(val){}
-	myReverseIteratorMap(const myIteratorMap<T, Category, Distance, Pointer, Reference>& copy){
-		this->operator=((myReverseIteratorMap)copy);
-	}
 	myReverseIteratorMap(const myReverseIteratorMap& copy){
 		this->operator=(copy);
 	}
