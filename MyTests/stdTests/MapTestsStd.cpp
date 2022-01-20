@@ -5,20 +5,20 @@
 #include "../../container/map/tree.hpp"
 
 int main(){
-	std::map<std::string, int> m1;
-	ft::tree<std::string, int> m2;
+  std::map<char,int> mymap;
 
-	m1["hello10"] = 2;
-	m1["hello20"] = 3;
-	m1["hello15"] = 34234;
-	m2["hello10"] = 2;
-	m2["hello20"] = 3;
-	m2["hello15"] = 34234;
+  mymap['x']=1001;
+  mymap['y']=2002;
+  mymap['z']=3003;
 
-	for (std::map<std::string, int>::reverse_iterator it = m1.rbegin(); it != m1.rend(); ++it)
-		std::cout<<"["<<it->first<<"] = "<<it->second<<std::endl;
-	for (ft::tree<std::string, int>::reverse_iterator it = m2.rbegin(); it != m2.rend(); ++it)
-		std::cout<<"["<<it->first<<"] = "<<it->second<<std::endl;
+  std::cout << "mymap contains:\n";
 
-	return (0);
+  std::pair<char,int> highest = *mymap.rbegin();          // last element
+
+  std::map<char,int>::iterator it = mymap.begin();
+  do {
+    std::cout << it->first << " => " << it->second << '\n';
+  } while ( mymap.value_comp()(*it++, highest) );
+
+  return 0;
 }

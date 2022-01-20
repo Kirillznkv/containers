@@ -14,8 +14,9 @@ class tree{
 public:
 	typedef Key										    key_type;
 	typedef T										    mapped_type;
-	typedef ft::pair<const key_type, mapped_type>	value_type;
+	typedef ft::pair<const key_type, mapped_type>		value_type;
     typedef Compare                                     key_compare;
+    typedef ft::less<T>                                 value_compare;
     typedef Allocator                                   allocator_type;
     typedef typename allocator_type::reference          reference;
     typedef typename allocator_type::const_reference    const_reference;
@@ -34,7 +35,8 @@ private:
 	size_type				_size;
 	std::allocator<node>	_alloc;
 	allocator_type			_allocVal;
-	Compare					_cmp;
+	key_compare				_cmp;
+	value_compare			_valueCmp;
 private:
 	void removeOneNode(node *tmp){
 		_alloc.destroy(tmp);
@@ -220,6 +222,15 @@ public:
 			it = reverse_iterator(tmp);
 		}
 		return (it);
+	}
+	///////////////////////
+	/*-----Observers-----*/
+	///////////////////////
+	key_compare key_comp() const {
+		return (_cmp);
+	}
+	value_compare value_comp() const{
+		return (_valueCmp);
 	}
 };
 
