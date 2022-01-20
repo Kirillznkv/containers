@@ -247,6 +247,22 @@ public:
 		}
 		return (it);
 	}
+	size_type count (const key_type& k) const {
+		if (_size){
+			node *tmp = _parent;
+			while (!(tmp->isNil())){
+				if (_cmp(tmp->value.first, k))
+					tmp = tmp->right;
+				else if (tmp->value.first == k)
+					break ;
+				else
+					tmp = tmp->left;
+			}
+			if (!(tmp->isNil()))
+				return 1;
+		}
+		return 0;
+	}
 };
 
 }
