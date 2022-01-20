@@ -100,7 +100,7 @@ public:
 	virtual value_type&	operator* (){
 		return (pVal->value);
 	}
-	value_type *operator->() const{
+	virtual value_type *operator->() {
 		return (&(pVal->value));
 	}
 	bool operator==(const myIteratorMap& op){

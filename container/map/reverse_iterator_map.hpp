@@ -96,6 +96,10 @@ public:
 		myReverseIteratorMap it((*this) + 1);
 		return ((it.pVal)->value);
 	}
+	T	*operator->() {
+		myReverseIteratorMap it((*this) + 1);
+		return (&(it.pVal->value));
+	}
 	bool operator==(const myReverseIteratorMap& op){
 		return (this->pVal == op.pVal);
 	}
