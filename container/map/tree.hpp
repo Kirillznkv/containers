@@ -232,6 +232,21 @@ public:
 	value_compare value_comp() const{
 		return (_valueCmp);
 	}
+	///////////////////////
+	/*-----Observers-----*/
+	///////////////////////
+	iterator find (const key_type& k) {
+		iterator it(_parent);
+		while (it != end()) {
+			if (_cmp(it->first, k))
+				++it;
+			else if (it->first == k)
+				break ;
+			else
+				--it;
+		}
+		return (it);
+	}
 };
 
 }
