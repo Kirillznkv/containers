@@ -25,7 +25,7 @@ public:
 	myReverseIteratorMap &operator ++ (void){
 		node *nil = this->pVal->left;
 		if ((this->pVal->isNil()))
-			return(*this);
+			this->pVal = this->pVal->parent;
 		else if (!(this->pVal->left->isNil())){
 			this->pVal = this->pVal->left;
 			while (!(this->pVal->right->isNil()))
@@ -49,7 +49,7 @@ public:
 	myReverseIteratorMap &operator -- (void){
 		node *nil = this->pVal->right;
 		if ((this->pVal->isNil()))
-			this->pVal = this->pVal->parent;
+			return(*this);
 		else if (!(this->pVal->right->isNil())){
 			this->pVal = this->pVal->right;
 			while (!(this->pVal->left->isNil()))

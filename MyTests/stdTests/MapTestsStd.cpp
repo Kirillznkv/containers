@@ -27,9 +27,14 @@ int main(){
 
 	std::cout<<"------------------------------------------------"<<std::endl;
 	
-	for (std::map<std::string, int>::reverse_iterator it = m1.rbegin(); it != m1.rend(); ++it)
+	for (std::map<std::string, int>::reverse_iterator it = --m1.rend(); it != m1.rbegin(); --it)
 		std::cout<<"["<<(*it).first<<"] = "<<(*it).second<<std::endl;
-	for (ft::tree<std::string, int>::reverse_iterator it = m2.rbegin(); it != m2.rend(); ++it)
+	for (ft::tree<std::string, int>::reverse_iterator it = --m2.rend(); it != m2.rbegin(); --it)
+		std::cout<<"["<<(*it).first<<"] = "<<(*it).second<<std::endl;
+
+	for (std::map<std::string, int>::reverse_iterator it = --m1.rend(); it != m1.rbegin(); it--)
+		std::cout<<"["<<(*it).first<<"] = "<<(*it).second<<std::endl;
+	for (ft::tree<std::string, int>::reverse_iterator it = --m2.rend(); it != m2.rbegin(); it--)
 		std::cout<<"["<<(*it).first<<"] = "<<(*it).second<<std::endl;
 
 	return (0);
