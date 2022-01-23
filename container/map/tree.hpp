@@ -422,6 +422,30 @@ public:
 		for (iterator it = first++, it2 = first; it != last; it = it2, ++it2)
 			erase(it);
 	}
+	ft::pair<iterator,bool> insert (const value_type& val) {
+		node *tmp = _parent;
+		while (!(tmp->isNil())){
+			if (_cmp(tmp->value.first, val.first))
+				tmp = tmp->right;
+			else if (tmp->value.first == val.first)
+				break ;
+			else
+				tmp = tmp->left;
+		}
+		if (!(tmp->isNil()))
+			return (ft::pair<iterator,bool>(iterator(tmp), false));
+		this->operator[](val.first) = val.second;
+		tmp = _parent;
+		while (!(tmp->isNil())){
+			if (_cmp(tmp->value.first, val.first))
+				tmp = tmp->right;
+			else if (tmp->value.first == val.first)
+				break ;
+			else
+				tmp = tmp->left;
+		}
+		return (ft::pair<iterator,bool>(iterator(tmp), true));
+	}
 };
 
 }
