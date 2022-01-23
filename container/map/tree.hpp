@@ -446,6 +446,30 @@ public:
 		}
 		return (ft::pair<iterator,bool>(iterator(tmp), true));
 	}
+	iterator insert (iterator position, const value_type& val) {
+		node *tmp = _parent;
+		while (!(tmp->isNil())){
+			if (_cmp(tmp->value.first, val.first))
+				tmp = tmp->right;
+			else if (tmp->value.first == val.first)
+				break ;
+			else
+				tmp = tmp->left;
+		}
+		if (tmp->isNil()) {
+			this->operator[](val.first) = val.second;
+			tmp = _parent;
+			while (!(tmp->isNil())){
+				if (_cmp(tmp->value.first, val.first))
+					tmp = tmp->right;
+				else if (tmp->value.first == val.first)
+					break ;
+				else
+					tmp = tmp->left;
+			}
+		}
+		return (iterator(tmp));
+	}
 };
 
 }
