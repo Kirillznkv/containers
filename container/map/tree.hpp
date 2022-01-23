@@ -337,7 +337,6 @@ public:
 				removeOneNode(tmp);
 				notNilNode->parent = NULL;
 				_parent = notNilNode;
-				--_size;
 			}
 			else {
 				node **newTmp;
@@ -349,8 +348,8 @@ public:
 				removeOneNode(tmp);
 				notNilNode->parent = p;
 				*newTmp = notNilNode;
-				--_size;
 			}
+			--_size;
 		}
 		else {
 			node *replacement = tmp->left;
@@ -363,7 +362,14 @@ public:
 					newTmp = (p->right == tmp) ? (&(p->right)) : (&(p->left));
 				removeOneNode(replacement->left);
 				removeOneNode(replacement->right);
-				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
+				node **newNil;
+				if (replacement->parent->left == replacement)
+					newNil = &(replacement->parent->left);
+				else if (replacement->parent->right == replacement)
+					newNil = &(replacement->parent->right);
+				else
+					std::cout<<"FUUUUCK!!!"<<std::endl;
+//				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
 				addNil(newNil);
 				node *left = tmp->left;
 				node *right = tmp->right;
@@ -374,6 +380,7 @@ public:
 					replacement->parent = NULL;
 					_parent = replacement;
 				}
+				replacement->parent = p;
 				replacement->left = left;
 				replacement->right = right;
 				replacement->left->parent = replacement;
