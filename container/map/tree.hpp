@@ -89,7 +89,7 @@ public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _size(0), _cmp(comp), _alloc(alloc){}
+	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
 	tree(const tree & copy) : _size(0){
 		this->operator=(copy);
 	}
@@ -239,6 +239,8 @@ public:
 	///////////////////////
 	iterator find (const key_type& k) {
 		iterator it(_parent);
+		if (_parent == NULL)
+			return (it);
 		while (it != end()) {
 			if (_cmp(it->first, k))
 				++it;
@@ -252,7 +254,7 @@ public:
 	size_type count (const key_type& k) const {
 		if (_size){
 			node *tmp = _parent;
-			while (!(tmp->isNil())){
+			while (tmp && !(tmp->isNil())){
 				if (_cmp(tmp->value.first, k))
 					tmp = tmp->right;
 				else if (tmp->value.first == k)
@@ -260,7 +262,7 @@ public:
 				else
 					tmp = tmp->left;
 			}
-			if (!(tmp->isNil()))
+			if (tmp && !(tmp->isNil()))
 				return 1;
 		}
 		return 0;
@@ -300,7 +302,7 @@ public:
 	}
 	size_type erase (const key_type& k) {
 		node *tmp = _parent;
-		while (!(tmp->isNil())){
+		while (tmp && !(tmp->isNil())){
 			if (_cmp(tmp->value.first, k))
 				tmp = tmp->right;
 			else if (tmp->value.first == k)
@@ -308,9 +310,9 @@ public:
 			else
 				tmp = tmp->left;
 		}
-		if (tmp->isNil())
+		if (tmp && tmp->isNil())
 			return (0);
-		if (tmp->right->isNil() && tmp->left->isNil()) {
+		if (tmp && tmp->right->isNil() && tmp->left->isNil()) {
 			node *p = tmp->parent;
 			if (p == NULL) {
 				removeTree(tmp);
@@ -328,7 +330,7 @@ public:
 				--_size;
 			}
 		}
-		else if (tmp->right->isNil() || tmp->left->isNil()) {
+		else if (tmp && tmp->right->isNil() || tmp->left->isNil()) {
 			node *nilNode = tmp->right->isNil() ? tmp->right : tmp->left;
 			node *notNilNode = tmp->right->isNil() ? tmp->left : tmp->right;
 			node *p = tmp->parent;
@@ -351,7 +353,7 @@ public:
 			}
 			--_size;
 		}
-		else {
+		else if (tmp){
 			node *replacement = tmp->left;
 			while (!(replacement->right->isNil()))
 				replacement = replacement->right;
@@ -362,14 +364,7 @@ public:
 					newTmp = (p->right == tmp) ? (&(p->right)) : (&(p->left));
 				removeOneNode(replacement->left);
 				removeOneNode(replacement->right);
-				node **newNil;
-				if (replacement->parent->left == replacement)
-					newNil = &(replacement->parent->left);
-				else if (replacement->parent->right == replacement)
-					newNil = &(replacement->parent->right);
-				else
-					std::cout<<"FUUUUCK!!!"<<std::endl;
-//				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
+				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
 				addNil(newNil);
 				node *left = tmp->left;
 				node *right = tmp->right;
@@ -424,7 +419,7 @@ public:
 	}
 	ft::pair<iterator,bool> insert (const value_type& val) {
 		node *tmp = _parent;
-		while (!(tmp->isNil())){
+		while (tmp && !(tmp->isNil())){
 			if (_cmp(tmp->value.first, val.first))
 				tmp = tmp->right;
 			else if (tmp->value.first == val.first)
@@ -432,11 +427,11 @@ public:
 			else
 				tmp = tmp->left;
 		}
-		if (!(tmp->isNil()))
+		if (tmp && !(tmp->isNil()))
 			return (ft::pair<iterator,bool>(iterator(tmp), false));
 		this->operator[](val.first) = val.second;
 		tmp = _parent;
-		while (!(tmp->isNil())){
+		while (tmp && !(tmp->isNil())){
 			if (_cmp(tmp->value.first, val.first))
 				tmp = tmp->right;
 			else if (tmp->value.first == val.first)
@@ -448,7 +443,7 @@ public:
 	}
 	iterator insert (iterator position, const value_type& val) {
 		node *tmp = _parent;
-		while (!(tmp->isNil())){
+		while (tmp && !(tmp->isNil())){
 			if (_cmp(tmp->value.first, val.first))
 				tmp = tmp->right;
 			else if (tmp->value.first == val.first)
@@ -456,10 +451,10 @@ public:
 			else
 				tmp = tmp->left;
 		}
-		if (tmp->isNil()) {
+		if (tmp && tmp->isNil()) {
 			this->operator[](val.first) = val.second;
 			tmp = _parent;
-			while (!(tmp->isNil())){
+			while (tmp && !(tmp->isNil())){
 				if (_cmp(tmp->value.first, val.first))
 					tmp = tmp->right;
 				else if (tmp->value.first == val.first)
@@ -469,6 +464,10 @@ public:
 			}
 		}
 		return (iterator(tmp));
+	}
+	template <class InputIterator> void insert (InputIterator first, InputIterator last) {
+		for (InputIterator it = first; it != last; ++it)
+			insert(ft::make_pair(it->first, it->second));
 	}
 };
 

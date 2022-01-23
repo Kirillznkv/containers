@@ -8,10 +8,12 @@ int main(){
 	ft::tree<int, int> map;
 
 	map[1] = 1;
-	ft::tree<int, int>::iterator it = map.insert(map.begin(), ft::make_pair(1,2));
-	std::cout<<it->second<<" "<<map[1]<<std::endl;
-	// for (ft::tree<int, int>::iterator it = map.begin(); it != map.end(); ++it)
-	// 	std::cout<<it->first<<" "<<it->second<<std::endl;
+	map[2] = 2;
+	map[3] = 3;
+	ft::tree<int, int> map2;
+	map2.insert(map.begin(), map.end());
+	for (ft::tree<int, int>::iterator it = map2.begin(); it != map2.end(); ++it)
+		std::cout<<it->first<<" "<<it->second<<std::endl;
 	// std::cout<<map.size()<<std::endl;
 	return 0;
 }
