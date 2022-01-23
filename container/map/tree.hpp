@@ -414,6 +414,14 @@ public:
 		}
 		return (1);
 	}
+	void erase (iterator position) {
+		if (position != end())
+			erase(position->first);
+	}
+	void erase (iterator first, iterator last) {
+		for (iterator it = first++, it2 = first; it != last; it = it2, ++it2)
+			erase(it);
+	}
 };
 
 }
