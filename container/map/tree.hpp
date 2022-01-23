@@ -95,6 +95,8 @@ public:
 	}
 	~tree(){
 		removeTree(_parent);
+		_parent = NULL;
+		_size = 0;
 	}
 	///////////////////////
 	/*-----Operators-----*/
@@ -279,6 +281,131 @@ public:
 	}
 	ft::pair<iterator,iterator> equal_range (const key_type& k) {
 		return (ft::make_pair(lower_bound(k), upper_bound(k)));
+	}
+	///////////////////////
+	/*-----Modifiers-----*/
+	///////////////////////
+	void clear() {
+		removeTree(_parent);
+		_parent = NULL;
+		_size = 0;
+	}
+	void swap (tree &x) {
+		node *tmp = _parent;
+		_parent = x._parent;
+		x._parent = tmp;
+		size_type copySize = _size;
+		_size = x._size;
+		x._size = copySize;
+	}
+	size_type erase (const key_type& k) {
+		node *tmp = _parent;
+		while (!(tmp->isNil())){
+			if (_cmp(tmp->value.first, k))
+				tmp = tmp->right;
+			else if (tmp->value.first == k)
+				break ;
+			else
+				tmp = tmp->left;
+		}
+		if (tmp->isNil())
+			return (0);
+		if (tmp->right->isNil() && tmp->left->isNil()) {
+			node *p = tmp->parent;
+			if (p == NULL) {
+				removeTree(tmp);
+				_parent = NULL;
+				_size  = 0;
+			}
+			else {
+				node **newTmp;
+				if (p->left == tmp)
+					newTmp = &(p->left);
+				else
+					newTmp = &(p->right);
+				removeTree(tmp);
+				addNil(newTmp);
+				--_size;
+			}
+		}
+		else if (tmp->right->isNil() || tmp->left->isNil()) {
+			node *nilNode = tmp->right->isNil() ? tmp->right : tmp->left;
+			node *notNilNode = tmp->right->isNil() ? tmp->left : tmp->right;
+			node *p = tmp->parent;
+			if (p == NULL) {
+				removeOneNode(nilNode);
+				removeOneNode(tmp);
+				notNilNode->parent = NULL;
+				_parent = notNilNode;
+				--_size;
+			}
+			else {
+				node **newTmp;
+				if (p->left == tmp)
+					newTmp = &(p->left);
+				else
+					newTmp = &(p->right);
+				removeOneNode(nilNode);
+				removeOneNode(tmp);
+				notNilNode->parent = p;
+				*newTmp = notNilNode;
+				--_size;
+			}
+		}
+		else {
+			node *replacement = tmp->left;
+			while (!(replacement->right->isNil()))
+				replacement = replacement->right;
+			if (replacement->left->isNil()) {
+				node *p = tmp->parent;
+				node **newTmp;
+				if (p)
+					newTmp = (p->right == tmp) ? (&(p->right)) : (&(p->left));
+				removeOneNode(replacement->left);
+				removeOneNode(replacement->right);
+				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
+				addNil(newNil);
+				node *left = tmp->left;
+				node *right = tmp->right;
+				removeOneNode(tmp);
+				if (p)
+					*newTmp = replacement;
+				else {
+					replacement->parent = NULL;
+					_parent = replacement;
+				}
+				replacement->left = left;
+				replacement->right = right;
+				replacement->left->parent = replacement;
+				replacement->right->parent = replacement;
+				--_size;
+			}
+			else {
+				node *p = tmp->parent;
+				node **newTmp;
+				if (p)
+					newTmp = (p->right == tmp) ? (&(p->right)) : (&(p->left));
+				removeOneNode(replacement->right);
+				node **newNil = (replacement->parent->left == replacement) ? (&(replacement->parent->left)) : (&(replacement->parent->right));
+				*newNil = replacement->left;
+				replacement->left->parent = replacement->parent;
+				node *left = tmp->left;
+				node *right = tmp->right;
+				removeOneNode(tmp);
+				if (p)
+					*newTmp = replacement;
+				else {
+					replacement->parent = NULL;
+					_parent = replacement;
+				}
+				replacement->left = left;
+				replacement->right = right;
+				replacement->left->parent = replacement;
+				replacement->right->parent = replacement;
+				--_size;
+			}
+		}
+		return (1);
 	}
 };
 
