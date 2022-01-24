@@ -474,7 +474,10 @@ public:
 		}
 		return (ft::pair<iterator,bool>(iterator(tmp), true));
 	}
-	iterator insert (iterator position, const value_type& val) {
+	template <class InputIterator>
+	typename ft::enable_if
+	< !ft::is_integral<InputIterator>::value, iterator>::type
+	insert (InputIterator position, const value_type& val) {
 		node *tmp = _parent;
 		while (tmp && !(tmp->isNil())){
 			if (_cmp(tmp->value.first, val.first))
@@ -498,7 +501,10 @@ public:
 		}
 		return (iterator(tmp));
 	}
-	template <class InputIterator> void insert (InputIterator first, InputIterator last) {
+	template <class InputIterator>
+	typename ft::enable_if
+	< !ft::is_integral<InputIterator>::value, void >::type
+	insert (InputIterator first, InputIterator last) {
 		for (InputIterator it = first; it != last; ++it)
 			insert(ft::make_pair(it->first, it->second));
 	}
