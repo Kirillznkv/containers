@@ -15,6 +15,11 @@ public:
 	myReverseIterator(const myReverseIterator& copy){
 		this->operator=(copy);
 	}
+	myReverseIterator(const myIterator<T>& copy){
+		if (this == &copy)
+			return (*this);
+		this->pVal = copy.pVal;
+	}
 	~myReverseIterator(){};
 	myReverseIterator &operator=(const myReverseIterator& op){
 		if (this == &op)

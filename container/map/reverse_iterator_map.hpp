@@ -107,6 +107,9 @@ public:
 		return (this->pVal != op.pVal);
 	}
 	T &operator[](unsigned int __n) const {return *(*this + __n);}
+	myIteratorMap<T, Category, Distance, Pointer, Reference> base() {
+		return (myIteratorMap<T, Category, Distance, Pointer, Reference>(this->pVal));
+	}
 };
 
 }
