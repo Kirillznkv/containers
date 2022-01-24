@@ -106,6 +106,7 @@ public:
 	bool operator!=(const myReverseIteratorMap& op){
 		return (this->pVal != op.pVal);
 	}
+	T &operator[](unsigned int __n) const {return *(*this + __n);}
 };
 
 }
