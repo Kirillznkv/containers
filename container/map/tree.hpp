@@ -4,7 +4,9 @@
 # include "../utils.hpp"
 # include <cmath>
 # include "iterator_map.hpp"
+# include "const_iterator_map.hpp"
 # include "reverse_iterator_map.hpp"
+# include "const_reverse_iterator_map.hpp"
 
 namespace ft{
 
@@ -25,9 +27,9 @@ public:
     typedef typename allocator_type::size_type          size_type;
     typedef typename allocator_type::difference_type    difference_type;
     typedef myIteratorMap<value_type>                   iterator;
-    // typedef implementation-defined                   const_iterator;
+    typedef myConstIteratorMap<value_type>              const_iterator;
     typedef myReverseIteratorMap<value_type>			reverse_iterator; // проблема с конструктором
-    // typedef std::reverse_iterator<const_iterator>    const_reverse_iterator; // проблема с конструктором
+    typedef myConstReverseIteratorMap<value_type>    	const_reverse_iterator; // проблема с конструктором
 private:
 	typedef ft::myNode<value_type> node;
 private:

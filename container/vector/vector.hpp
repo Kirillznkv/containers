@@ -33,6 +33,7 @@ public:
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
 	typedef myIterator<T>								iterator;
+	typedef myIterator<const T>								const_iterator;
 	typedef myReverseIterator<T>						reverse_iterator;
 private:
 	size_type	_size;
