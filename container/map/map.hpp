@@ -95,6 +95,12 @@ public:
 	map(const map & copy) : _size(0){
 		this->operator=(copy);
 	}
+	template <class InputIterator>
+	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		: _parent(NULL), _size(0), _cmp(comp), _alloc(alloc) {
+		for (InputIterator it = first; it != last; ++it)
+			this->operator[it->first] = it->second;
+	}
 	~map(){
 		removeTree(_parent);
 		_parent = NULL;
