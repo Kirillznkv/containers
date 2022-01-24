@@ -79,6 +79,12 @@ public:
 	myIterator<T> base() const {
 		return (myIterator<T>(this->pVal));
 	}
+	T *operator->() {
+		return (this->pVal - 1);
+	}
+	T&	operator[] (int x){
+		return (*(this->pVal - x - 1));
+	}
 };
 
 }//end ft

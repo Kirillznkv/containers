@@ -84,6 +84,12 @@ public:
 	virtual T&	operator* (){
 		return (*pVal);
 	}
+	virtual T *operator->() {
+		return (pVal);
+	}
+	virtual T&	operator[] (int x){
+		return (*(pVal + x));
+	}
 };
 
 }
