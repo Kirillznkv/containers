@@ -22,5 +22,6 @@ void boolTest(T v1, T v2, std::ofstream & out){
 
 static std::ofstream fFtStack("allResult/ftStack.txt");
 static std::ofstream fFtVector("allResult/ftVector.txt");
+static std::ofstream fFtMap("allResult/ftMap.txt");
 
 #endif

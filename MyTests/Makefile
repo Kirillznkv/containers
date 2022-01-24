@@ -7,10 +7,10 @@ STD_FOLDER = ./stdTests/
 FT_FOLDER = ./ftTests/
 
 CPP_FILE_STD =		$(STD_FOLDER)mainStd.cpp $(STD_FOLDER)StackTestsStd.cpp \
-					$(STD_FOLDER)VectorTestsStd.cpp
+					$(STD_FOLDER)VectorTestsStd.cpp $(STD_FOLDER)MapTestsStd.cpp
 
 CPP_FILE_FT =		$(FT_FOLDER)mainFt.cpp $(FT_FOLDER)StackTestsFt.cpp \
-					$(FT_FOLDER)VectorTestsFt.cpp
+					$(FT_FOLDER)VectorTestsFt.cpp $(FT_FOLDER)MapTestsFt.cpp
 
 CPP_FILE_FINISH =	CompareTests.cpp
 

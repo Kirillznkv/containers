@@ -26,5 +26,6 @@ int		main(){
 	pclose(exFt);
 	compare("stdStack", "ftStack");
 	compare("stdVector", "ftVector");
+	compare("stdMap", "ftMap");
 	return (0);
 }

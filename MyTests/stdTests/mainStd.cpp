@@ -7,7 +7,6 @@ void stackTestIntStd();
 void stackTestStringStd();
 void stackTestListStd();
 void stackTestRelationalOperatorsStd();
-
 //////////////////////////////
 /*----------Vector----------*/
 //////////////////////////////
@@ -19,6 +18,11 @@ void vectorTestReverseIteratorStd();
 void vectorTestModifiersStd();
 void vectorTestExeptStd();
 void vectorTestRelationalOperatorsStd();
+///////////////////////////
+/*----------Map----------*/
+///////////////////////////
+void mapTestBaseStd();
+void mapTestIteratorStd();
 
 /////////////////////////////
 /*----------Tests----------*/
@@ -41,9 +45,15 @@ void	vectorTestStd() {
 	vectorTestRelationalOperatorsStd();
 	fStdVector.close();
 }
+void	mapTestStd() {
+	mapTestBaseStd();
+	mapTestIteratorStd();
+	fStdMap.close();
+}
 
 int		main() {
 	stackTestStd();
 	vectorTestStd();
+	mapTestStd();
 	return (0);
 }
