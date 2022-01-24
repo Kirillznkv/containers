@@ -1,5 +1,5 @@
-#ifndef TREE_HPP
-#define TREE_HPP
+#ifndef MAP_HPP
+#define MAP_HPP
 
 # include "../utils.hpp"
 # include <cmath>
@@ -12,7 +12,7 @@ namespace ft{
 
 template <class Key, class T, class Compare = ft::less<Key>,
           class Allocator = std::allocator< pair< const Key, T > > >
-class tree{
+class map{
 public:
 	typedef Key										    key_type;
 	typedef T										    mapped_type;
@@ -91,11 +91,11 @@ public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	tree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
-	tree(const tree & copy) : _size(0){
+	map(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
+	map(const map & copy) : _size(0){
 		this->operator=(copy);
 	}
-	~tree(){
+	~map(){
 		removeTree(_parent);
 		_parent = NULL;
 		_size = 0;
@@ -103,7 +103,7 @@ public:
 	///////////////////////
 	/*-----Operators-----*/
 	///////////////////////
-	tree &operator=(const tree& op){
+	map &operator=(const map& op){
 		if (this == &op)
 			return (*this);
 		if (_size)
@@ -253,6 +253,20 @@ public:
 		}
 		return (it);
 	}
+	const_iterator find (const key_type& k) const {
+		const_iterator it(_parent);
+		if (_parent == NULL)
+			return (it);
+		while (it != end()) {
+			if (_cmp(it->first, k))
+				++it;
+			else if (it->first == k)
+				break ;
+			else
+				--it;
+		}
+		return (it);
+	}
 	size_type count (const key_type& k) const {
 		if (_size){
 			node *tmp = _parent;
@@ -275,6 +289,12 @@ public:
 			++it;
 		return (it);
 	}
+	const_iterator lower_bound (const key_type& k) const {
+		const_iterator it = begin();
+		while (it != end() && _cmp(it->first, k))
+			++it;
+		return (it);
+	}
 	iterator upper_bound (const key_type& k) {
 		iterator it = begin();
 		while (it != end() && _cmp(it->first, k))
@@ -283,7 +303,18 @@ public:
 			++it;
 		return (it);
 	}
+	const_iterator upper_bound (const key_type& k) const {
+		const_iterator it = begin();
+		while (it != end() && _cmp(it->first, k))
+			++it;
+		if (it != end() && it->first == k)
+			++it;
+		return (it);
+	}
 	ft::pair<iterator,iterator> equal_range (const key_type& k) {
+		return (ft::make_pair(lower_bound(k), upper_bound(k)));
+	}
+	ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
 		return (ft::make_pair(lower_bound(k), upper_bound(k)));
 	}
 	///////////////////////
@@ -294,7 +325,7 @@ public:
 		_parent = NULL;
 		_size = 0;
 	}
-	void swap (tree &x) {
+	void swap (map &x) {
 		node *tmp = _parent;
 		_parent = x._parent;
 		x._parent = tmp;
