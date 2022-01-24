@@ -189,8 +189,8 @@ public:
 	//////////////////////////////////
 	iterator begin() { return (iterator(_arr)); }
 	iterator end() { return (iterator(_arr + _size)); }
-	reverse_iterator rbegin() { return (reverse_iterator(_arr + _size - 2)); }
-	reverse_iterator rend() { return (reverse_iterator(_arr - 2)); }
+	reverse_iterator rbegin() { return (reverse_iterator(_arr + _size)); }
+	reverse_iterator rend() { return (reverse_iterator(_arr)); }
 	const_reference	front() const { return (*_arr); }
 	reference	front() { return (*_arr); }
 	const_reference	back() const { return (_arr[_size - 1]); }

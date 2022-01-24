@@ -330,7 +330,7 @@ public:
 				--_size;
 			}
 		}
-		else if (tmp && tmp->right->isNil() || tmp->left->isNil()) {
+		else if (tmp && (tmp->right->isNil() || tmp->left->isNil())) {
 			node *nilNode = tmp->right->isNil() ? tmp->right : tmp->left;
 			node *notNilNode = tmp->right->isNil() ? tmp->left : tmp->right;
 			node *p = tmp->parent;

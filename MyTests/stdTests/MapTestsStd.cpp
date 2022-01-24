@@ -3,17 +3,26 @@
 #include <iostream>
 
 #include "../../container/map/tree.hpp"
+#include "../../container/vector/vector.hpp"
 
 int main(){
-	ft::tree<int, int> map;
+	ft::vector<int> vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+	vec.push_back(4);
+	ft::vector<int>::reverse_iterator it = vec.rbegin() + 2;
+	ft::vector<int>::iterator i = it.base();
+	std::cout<<*it<<" "<<*i<<std::endl;
 
-	map[1] = 1;
-	map[2] = 2;
-	map[3] = 3;
-	ft::tree<int, int> map2;
-	map2.insert(map.begin(), map.end());
-	for (ft::tree<int, int>::iterator it = map2.begin(); it != map2.end(); ++it)
-		std::cout<<it->first<<" "<<it->second<<std::endl;
-	// std::cout<<map.size()<<std::endl;
+
+	std::vector<int> vec1;
+	vec1.push_back(1);
+	vec1.push_back(2);
+	vec1.push_back(3);
+	vec1.push_back(4);
+	std::vector<int>::reverse_iterator it1 = vec1.rbegin() + 2;
+	std::vector<int>::iterator i1 = it1.base();
+	std::cout<<*it1<<" "<<*i1<<std::endl;
 	return 0;
 }

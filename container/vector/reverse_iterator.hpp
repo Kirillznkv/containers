@@ -74,7 +74,10 @@ public:
 		return (this->pVal < rVal.pVal);
 	}
 	T&	operator* (){
-		return (*(this->pVal + 1));
+		return (*(this->pVal - 1));
+	}
+	myIterator<T> base() const {
+		return (myIterator<T>(this->pVal));
 	}
 };
 
