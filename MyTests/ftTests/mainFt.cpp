@@ -25,6 +25,7 @@ void mapTestBaseFt();
 void mapTestIteratorFt();
 void mapTestObserversFt();
 void mapTestOperationsFt();
+void mapTestModifiersFt();
 
 /////////////////////////////
 /*----------Tests----------*/
@@ -52,6 +53,7 @@ void	mapTestFt() {
 	mapTestIteratorFt();
 	mapTestObserversFt();
 	mapTestOperationsFt();
+	mapTestModifiersFt();
 	fFtMap.close();
 }
 

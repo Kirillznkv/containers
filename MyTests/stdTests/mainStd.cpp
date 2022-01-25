@@ -25,6 +25,7 @@ void mapTestBaseStd();
 void mapTestIteratorStd();
 void mapTestObserversStd();
 void mapTestOperationsStd();
+void mapTestModifiersStd();
 
 /////////////////////////////
 /*----------Tests----------*/
@@ -52,6 +53,7 @@ void	mapTestStd() {
 	mapTestIteratorStd();
 	mapTestObserversStd();
 	mapTestOperationsStd();
+	mapTestModifiersStd();
 	fStdMap.close();
 }
 

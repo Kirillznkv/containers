@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
 
 #define TYPE_COLOR "\033[38;2;255;255;0m"
 #define RESET_COLOR "\033[38;2;255;255;255;48;2;30;30;30m"
@@ -21,9 +22,18 @@ void	compare(std::string fileName1, std::string fileName2){
 }
 
 int		main(){
-	FILE *exStd = popen("./stdExec", "r"), *exFt = popen("./FtExec", "r");
+	std::time_t t1 = std::time(nullptr);
+	FILE *exStd = popen("./stdExec", "r");
+	std::time_t t2 = std::time(nullptr);
 	pclose(exStd);
+	std::cout<<"stdTime = "<<std::time(&t2) - std::time(&t1)<<std::endl;
+
+	t1 = std::time(nullptr);
+	FILE *exFt = popen("./FtExec", "r");
+	t2 = std::time(nullptr);
 	pclose(exFt);
+	std::cout<<"ftTime = "<<std::time(&t2) - std::time(&t1)<<std::endl;
+
 	compare("stdStack", "ftStack");
 	compare("stdVector", "ftVector");
 	compare("stdMap", "ftMap");

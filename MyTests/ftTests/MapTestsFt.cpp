@@ -158,3 +158,96 @@ void	mapTestOperationsFt() {
 	fFtMap << ret.second->first << " => " << ret.second->second << '\n';
 	}
 }
+
+void	mapTestModifiersFt() {
+	fFtMap<<"---Map-Test-Modifiers-(namespace:ft)---"<<std::endl;
+	ft::map<int, int> map1;
+	ft::map<int, int> map2;
+	map1[0] = 0;
+	map1[1] = 1;
+	map1[2] = 2;
+	map1[3] = 3;
+	map1[4] = 4;
+	map1[5] = 5;
+
+	map2[-1] = -1;
+	map2[-2] = -2;
+	//swap
+	for (ft::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	for (ft::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	fFtMap<<map1.size()<<std::endl;
+	fFtMap<<map2.size()<<std::endl;
+	map1.swap(map2);
+	for (ft::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	for (ft::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	fFtMap<<map1.size()<<std::endl;
+	fFtMap<<map2.size()<<std::endl;
+	map2.swap(map1);
+	for (ft::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	for (ft::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	fFtMap<<map1.size()<<std::endl;
+	fFtMap<<map2.size()<<std::endl;
+	//erase
+	{
+	ft::map<char,int> mymap;
+	ft::map<char,int>::iterator it;
+	mymap['a']=10;
+	mymap['b']=20;
+	mymap['c']=30;
+	mymap['d']=40;
+	mymap['e']=50;
+	mymap['f']=60;
+
+	it=mymap.find('b');
+	mymap.erase (it);                   // erasing by iterator
+	mymap.erase ('c');                  // erasing by key
+	it=mymap.find ('e');
+	mymap.erase ( it, mymap.end() );    // erasing by range
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+	  fFtMap << it->first << " => " << it->second << '\n';
+	fFtMap<<mymap.size()<<std::endl;
+	}
+	//insert
+	{
+	ft::map<char,int> mymap;
+	// first insert function version (single parameter):
+	mymap.insert ( ft::pair<char,int>('a',100) );
+	mymap.insert ( ft::pair<char,int>('z',200) );
+	ft::pair<ft::map<char,int>::iterator,bool> ret;
+	ret = mymap.insert ( ft::pair<char,int>('z',500) );
+	if (ret.second==false) {
+	  fFtMap << "element 'z' already existed";
+	  fFtMap << " with a value of " << ret.first->second << '\n';
+	}
+	// second insert function version (with hint position):
+	ft::map<char,int>::iterator it = mymap.begin();
+	mymap.insert (it, ft::pair<char,int>('b',300));
+	mymap.insert (it, ft::pair<char,int>('c',400));
+	// third insert function version (range insertion):
+	ft::map<char,int> anothermap;
+	anothermap.insert(mymap.begin(),mymap.find('c'));
+	// showing contents:
+	fFtMap << "mymap contains:\n";
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+	  fFtMap << it->first << " => " << it->second << '\n';
+	fFtMap << "anothermap contains:\n";
+	for (it=anothermap.begin(); it!=anothermap.end(); ++it)
+	  fFtMap << it->first << " => " << it->second << '\n';
+	//clear
+	fFtMap << mymap.size() << '\n';
+	mymap.clear();
+	fFtMap << mymap.size() << '\n';
+	}
+}

@@ -158,3 +158,96 @@ void	mapTestOperationsStd() {
 	fStdMap << ret.second->first << " => " << ret.second->second << '\n';
 	}
 }
+
+void	mapTestModifiersStd() {
+	fStdMap<<"---Map-Test-Modifiers-(namespace:ft)---"<<std::endl;
+	std::map<int, int> map1;
+	std::map<int, int> map2;
+	map1[0] = 0;
+	map1[1] = 1;
+	map1[2] = 2;
+	map1[3] = 3;
+	map1[4] = 4;
+	map1[5] = 5;
+
+	map2[-1] = -1;
+	map2[-2] = -2;
+	//swap
+	for (std::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	for (std::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	fStdMap<<map1.size()<<std::endl;
+	fStdMap<<map2.size()<<std::endl;
+	map1.swap(map2);
+	for (std::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	for (std::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	fStdMap<<map1.size()<<std::endl;
+	fStdMap<<map2.size()<<std::endl;
+	map2.swap(map1);
+	for (std::map<int,int>::iterator it=map1.begin(); it!=map1.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	for (std::map<int,int>::iterator it=map2.begin(); it!=map2.end(); ++it) {
+		fStdMap << it->first << " => " << it->second << '\n';
+	}
+	fStdMap<<map1.size()<<std::endl;
+	fStdMap<<map2.size()<<std::endl;
+	//erase
+	{
+	std::map<char,int> mymap;
+	std::map<char,int>::iterator it;
+	mymap['a']=10;
+	mymap['b']=20;
+	mymap['c']=30;
+	mymap['d']=40;
+	mymap['e']=50;
+	mymap['f']=60;
+
+	it=mymap.find('b');
+	mymap.erase (it);                   // erasing by iterator
+	mymap.erase ('c');                  // erasing by key
+	it=mymap.find ('e');
+	mymap.erase ( it, mymap.end() );    // erasing by range
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+	  fStdMap << it->first << " => " << it->second << '\n';
+	fStdMap<<mymap.size()<<std::endl;
+	}
+	//insert
+	{
+	std::map<char,int> mymap;
+	// first insert function version (single parameter):
+	mymap.insert ( std::pair<char,int>('a',100) );
+	mymap.insert ( std::pair<char,int>('z',200) );
+	std::pair<std::map<char,int>::iterator,bool> ret;
+	ret = mymap.insert ( std::pair<char,int>('z',500) );
+	if (ret.second==false) {
+	  fStdMap << "element 'z' already existed";
+	  fStdMap << " with a value of " << ret.first->second << '\n';
+	}
+	// second insert function version (with hint position):
+	std::map<char,int>::iterator it = mymap.begin();
+	mymap.insert (it, std::pair<char,int>('b',300));
+	mymap.insert (it, std::pair<char,int>('c',400));
+	// third insert function version (range insertion):
+	std::map<char,int> anothermap;
+	anothermap.insert(mymap.begin(),mymap.find('c'));
+	// showing contents:
+	fStdMap << "mymap contains:\n";
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+	  fStdMap << it->first << " => " << it->second << '\n';
+	fStdMap << "anothermap contains:\n";
+	for (it=anothermap.begin(); it!=anothermap.end(); ++it)
+	  fStdMap << it->first << " => " << it->second << '\n';
+	//clear
+	fStdMap << mymap.size() << '\n';
+	mymap.clear();
+	fStdMap << mymap.size() << '\n';
+	}
+}
