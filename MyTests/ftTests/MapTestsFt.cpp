@@ -75,6 +75,7 @@ void	mapTestIteratorFt() {
 }
 
 void	mapTestObserversFt() {
+	fFtMap<<"---Map-Test-Observers-(namespace:ft)---"<<std::endl;
 	ft::map<std::string, int> map;
 	map["hello"] = 1;
 	map["world"] = 2;
@@ -92,6 +93,8 @@ void	mapTestObserversFt() {
 }
 
 void	mapTestOperationsFt() {
+	fFtMap<<"---Map-Test-Operations-(namespace:ft)---"<<std::endl;
+	//find
 	ft::map<std::string, int> map;
 	map["hello"] = 1;
 	map["world"] = 2;
@@ -112,4 +115,46 @@ void	mapTestOperationsFt() {
 		fFtMap<<it->first<<" = "<<it->second<<std::endl;
 	else
 		fFtMap<<"aaaaaaaaaa not found"<<std::endl;
+	//coount
+	ft::map<char,int> mymap;
+	char c;
+	mymap ['a']=101;
+	mymap ['c']=202;
+	mymap ['f']=303;
+	for (c='a'; c<'h'; c++)
+	{
+		fFtMap << c;
+		if (mymap.count(c)>0)
+			fFtMap << " is an element of mymap.\n";
+		else 
+			fFtMap << " is not an element of mymap.\n";
+	}
+	//lower_bound/upper_bound
+	{
+	ft::map<char,int> mymap;
+ 	ft::map<char,int>::iterator itlow,itup;
+	mymap['a']=20;
+	mymap['b']=40;
+	mymap['c']=60;
+	mymap['d']=80;
+	mymap['e']=100;
+	itlow=mymap.lower_bound ('b');
+	itup=mymap.upper_bound ('d');
+	mymap.erase(itlow,itup);
+	for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		fFtMap << it->first << " => " << it->second << '\n';
+	}
+	//equal_range
+	{
+	ft::map<char,int> mymap;
+	mymap['a']=10;
+	mymap['b']=20;
+	mymap['c']=30;
+	ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
+	ret = mymap.equal_range('b');
+	fFtMap << "lower bound points to: ";
+	fFtMap << ret.first->first << " => " << ret.first->second << '\n';
+	fFtMap << "upper bound points to: ";
+	fFtMap << ret.second->first << " => " << ret.second->second << '\n';
+	}
 }

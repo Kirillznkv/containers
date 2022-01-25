@@ -45,8 +45,21 @@ size = 4
 -1000 = -1000
 1000 = 1000
 10 = 10
+---Map-Test-Observers-(namespace:std)---
 key hello < key world
 value hello < value world
+---Map-Test-Operations-(namespace:std)---
 kv = 56
 world = 2
 aaaaaaaaaa not found
+a is an element of mymap.
+b is not an element of mymap.
+c is an element of mymap.
+d is not an element of mymap.
+e is not an element of mymap.
+f is an element of mymap.
+g is not an element of mymap.
+a => 20
+e => 100
+lower bound points to: b => 20
+upper bound points to: c => 30

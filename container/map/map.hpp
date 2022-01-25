@@ -246,31 +246,15 @@ public:
 	/*-----Observers-----*/
 	///////////////////////
 	iterator find (const key_type& k) {
-		iterator it(_parent);
-		if (_parent == NULL)
-			return (it);
-		while (it != end()) {
-			if (_cmp(it->first, k))
-				++it;
-			else if (it->first == k)
-				break ;
-			else
-				--it;
-		}
+		iterator it = begin();
+		while (it != end() && it->first != k)
+			++it;
 		return (it);
 	}
 	const_iterator find (const key_type& k) const {
-		const_iterator it(_parent);
-		if (_parent == NULL)
-			return (it);
-		while (it != end()) {
-			if (_cmp(it->first, k))
-				++it;
-			else if (it->first == k)
-				break ;
-			else
-				--it;
-		}
+		const_iterator it = begin();
+		while (it != end() && it->first != k)
+			++it;
 		return (it);
 	}
 	size_type count (const key_type& k) const {
