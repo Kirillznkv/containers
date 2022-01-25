@@ -24,6 +24,7 @@ void vectorTestRelationalOperatorsFt();
 void mapTestBaseFt();
 void mapTestIteratorFt();
 void mapTestObserversFt();
+void mapTestOperationsFt();
 
 /////////////////////////////
 /*----------Tests----------*/
@@ -50,6 +51,7 @@ void	mapTestFt() {
 	mapTestBaseFt();
 	mapTestIteratorFt();
 	mapTestObserversFt();
+	mapTestOperationsFt();
 	fFtMap.close();
 }
 

@@ -90,3 +90,26 @@ void	mapTestObserversStd() {
 	if (comp2(*it2, *it1))
 		fStdMap<<"value world < value hello"<<std::endl;
 }
+
+void	mapTestOperationsStd() {
+	std::map<std::string, int> map;
+	map["hello"] = 1;
+	map["world"] = 2;
+	map["home"] = 109;
+	map["kv"] = 56;
+	map["kazan"] = 22;
+	map["msk"] = 77;
+	std::map<std::string, int>::iterator it;
+	if ((it = map.find("kv")) != map.end())
+		fStdMap<<it->first<<" = "<<it->second<<std::endl;
+	else
+		fStdMap<<"kv not found"<<std::endl;
+	if ((it = map.find("world")) != map.end())
+		fStdMap<<it->first<<" = "<<it->second<<std::endl;
+	else
+		fStdMap<<"world not found"<<std::endl;
+	if ((it = map.find("aaaaaaaaaa")) != map.end())
+		fStdMap<<it->first<<" = "<<it->second<<std::endl;
+	else
+		fStdMap<<"aaaaaaaaaa not found"<<std::endl;
+}

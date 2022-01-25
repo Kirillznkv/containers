@@ -47,3 +47,5 @@ size = 4
 10 = 10
 key hello < key world
 value hello < value world
+kv = 56
+world = 2
