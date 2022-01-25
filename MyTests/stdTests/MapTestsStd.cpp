@@ -66,4 +66,27 @@ void	mapTestIteratorStd() {
 		fStdMap<<it->first<<" = "<<it->second<<std::endl;
 	for (std::map<int, int>::reverse_iterator it = map.rbegin(); it != map.rend(); it++)
 		fStdMap<<it->first<<" = "<<it->second<<std::endl;
+	for (std::map<int, int>::reverse_iterator it = map.rbegin(); it != map.rend(); ++it)
+		fStdMap<<(*it).first<<" = "<<(*it).second<<std::endl;
+	std::map<int, int>::reverse_iterator rev_iter = ++map.rbegin();
+	std::map<int, int>::iterator iter = rev_iter.base();
+	fStdMap<<iter->first<<" = "<<iter->second<<std::endl;
+	fStdMap<<rev_iter->first<<" = "<<rev_iter->second<<std::endl;
+}
+
+void	mapTestObserversStd() {
+	std::map<std::string, int> map;
+	map["hello"] = 1;
+	map["world"] = 2;
+	std::map<std::string, int>::key_compare comp = map.key_comp();
+	if (comp("hello", "world"))
+		fStdMap<<"key hello < key world"<<std::endl;
+	if (comp("world", "hello"))
+		fStdMap<<"key world < key hello"<<std::endl;
+	std::map<std::string, int>::value_compare comp2 = map.value_comp();
+	std::map<std::string, int>::iterator it1 = map.begin(), it2 = ++map.begin();
+	if (comp2(*it1, *it2))
+		fStdMap<<"value hello < value world"<<std::endl;
+	if (comp2(*it2, *it1))
+		fStdMap<<"value world < value hello"<<std::endl;
 }

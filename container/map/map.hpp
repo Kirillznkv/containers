@@ -18,7 +18,7 @@ public:
 	typedef T										    mapped_type;
 	typedef ft::pair<const key_type, mapped_type>		value_type;
     typedef Compare                                     key_compare;
-    typedef ft::less<T>                                 value_compare;
+    typedef ft::less<value_type>                        value_compare;
     typedef Allocator                                   allocator_type;
     typedef typename allocator_type::reference          reference;
     typedef typename allocator_type::const_reference    const_reference;

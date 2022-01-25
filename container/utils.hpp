@@ -112,32 +112,32 @@ public:
 		return (*this);
 	}
 
-	bool operator==(const pair<first_type, second_type>& op){
+	bool operator==(const pair<first_type, second_type>& op) const{
 		if (first == op.first && second == op.second)
 			return (true);
 		return (false);
 	}
-	bool operator<(const pair<first_type, second_type>& op){
+	bool operator<(const pair<first_type, second_type>& op) const{
 		if (first < op.first)
 			return (true);
 		if (first == op.first && second < op.second)
 			return (true);
 		return (false);
 	}
-	bool operator>(const pair<first_type, second_type>& op){
+	bool operator>(const pair<first_type, second_type>& op) const{
 		if (first > op.first)
 			return (true);
 		if (first == op.first && second > op.second)
 			return (true);
 		return (false);
 	}
-	bool operator!=(const pair<first_type, second_type>& op){
+	bool operator!=(const pair<first_type, second_type>& op) const{
 		return (!operator==(op));
 	}
-	bool operator<=(const pair<first_type, second_type>& op){
+	bool operator<=(const pair<first_type, second_type>& op) const{
 		return (!operator>(op));
 	}
-	bool operator>=(const pair<first_type, second_type>& op){
+	bool operator>=(const pair<first_type, second_type>& op) const{
 		return (!operator<(op));
 	}
 };
