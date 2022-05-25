@@ -228,9 +228,18 @@ public:
 		return (val);
 	}
 	void	swap(vector& x){
-		vector vec(*this);
-		this->operator=(x);
-		x.operator=(vec);
+		size_type	size = _size;
+		size_type	capacity = _capacity;
+		value_type	*arr = _arr;
+		allocator_type	alloc = _alloc;
+		_size = x._size;
+		_capacity = x._capacity;
+		_arr = x._arr;
+		_alloc = x._alloc;
+		x._size = size;
+		x._capacity = capacity;
+		x._arr = arr;
+		x._alloc = alloc;
 	}
 	void	clear(){
 		while (_size)
