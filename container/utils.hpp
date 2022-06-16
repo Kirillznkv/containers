@@ -11,14 +11,12 @@ namespace ft{
 /////////////////////
 /*---Is-Integral---*/
 /////////////////////
-
 struct true_type{
     static const bool	value = true;
 };
 struct false_type{
     static const bool	value = false;
 };
-
 template <class _Tp> struct is_integral				: public false_type {};
 template <>			struct is_integral<bool>		: public true_type {};
 template <>			struct is_integral<char>		: public true_type {};
@@ -34,7 +32,6 @@ template <>			struct is_integral<size_t>		: public true_type {};
 /////////////////////
 /*---Is-Iterator---*/
 /////////////////////
-
 template <class _Tp>		struct is_iterator								: public false_type {};
 template <class _T>			struct is_iterator< myIterator<_T> >			: public true_type {};
 template <class _T>			struct is_iterator< myReverseIterator<_T> >		: public true_type {};
@@ -42,7 +39,6 @@ template <class _T>			struct is_iterator< myReverseIterator<_T> >		: public true
 /////////////////////////
 /*---Iterator-Traits---*/
 /////////////////////////
-
 template<class MyIterator>
 struct iterator_traits
 {
@@ -52,7 +48,6 @@ struct iterator_traits
     typedef typename MyIterator::reference reference;
     typedef typename MyIterator::iterator_category iterator_category;
 };
-
 template<class T>
 struct iterator_traits<T*>
 {
@@ -66,9 +61,7 @@ struct iterator_traits<T*>
 ///////////////////
 /*---Enable-If---*/
 ///////////////////
-
 template< bool B, class T = void > struct enable_if;
-
 template<class T>
 struct enable_if<true, T>{
 	typedef T type;
@@ -77,11 +70,10 @@ struct enable_if<true, T>{
 //////////////////////
 /*---Less/Compare---*/
 //////////////////////
-
 template< class InputIt1, class InputIt2 >
 bool lexicographical_compare( InputIt1 first1, InputIt1 last1,
 								InputIt2 first2, InputIt2 last2 ){
-	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
+	for ( ; (first1 != last1) && (first2 != last2); ++first1, ++first2 ) {
 		if (*first1 < *first2) return true;
 		if (*first2 < *first1) return false;
 	}
@@ -91,7 +83,6 @@ bool lexicographical_compare( InputIt1 first1, InputIt1 last1,
 //////////////
 /*---Pair---*/
 //////////////
-
 template <class T1, class T2>
 struct pair{
 public:
@@ -101,7 +92,7 @@ public:
 	first_type	first;
 	second_type	second;
 public:
-	pair() : first(), second(){}
+	pair() {}
 	pair(const first_type& x, const second_type& y) : first(x), second(y){}
 	template<class U, class V> pair(const pair<U, V>& copy) : first(copy.first), second(copy.second){};
 	~pair(){}
