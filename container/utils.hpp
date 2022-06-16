@@ -90,7 +90,7 @@ public:
 	first_type	first;
 	second_type	second;
 public:
-	pair() {}
+	pair() : first(), second() {}
 	pair(const first_type& x, const second_type& y) : first(x), second(y) {}
 	template<class U, class V> pair(const pair<U, V>& copy) : first(copy.first), second(copy.second) {};
 	~pair() {}
