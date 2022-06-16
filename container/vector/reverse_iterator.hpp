@@ -3,82 +3,82 @@
 
 # include "iterator.hpp"
 
-namespace ft{
+namespace ft {
 
 template<typename T>
-class myReverseIterator : public myIterator<T>{
+class myReverseIterator : public myIterator<T> {
 public:
-	myReverseIterator() : myIterator<T>(){}
-	myReverseIterator(T *val){
+	myReverseIterator() : myIterator<T>() {}
+	myReverseIterator(T *val) {
 		this->pVal = val;
 	}
-	myReverseIterator(const myReverseIterator& copy){
+	myReverseIterator(const myReverseIterator& copy) {
 		this->operator=(copy);
 	}
-	myReverseIterator(const myIterator<T>& copy){
+	myReverseIterator(const myIterator<T>& copy) {
 		if (this == &copy)
 			return (*this);
 		this->pVal = copy.pVal;
 	}
-	~myReverseIterator(){};
-	myReverseIterator &operator=(const myReverseIterator& op){
+	~myReverseIterator() {};
+	myReverseIterator &operator=(const myReverseIterator& op) {
 		if (this == &op)
 			return (*this);
 		this->pVal = op.pVal;
 		return (*this);
 	}
-	myReverseIterator &operator ++ (void){
+	myReverseIterator &operator ++ (void) {
 		--this->pVal;
 		return (*this);
 	}
-	myReverseIterator operator ++ (int){
+	myReverseIterator operator ++ (int) {
 		myReverseIterator it(this->pVal--);
 		return (it);
 	}
-	myReverseIterator &operator -- (void){
+	myReverseIterator &operator -- (void) {
 		++this->pVal;
 		return (*this);
 	}
-	myReverseIterator operator -- (int){
+	myReverseIterator operator -- (int) {
 		myReverseIterator it(this->pVal++);
 		return (it);
 	}
-	myReverseIterator &operator -= (int rVal){
+	myReverseIterator &operator -= (int rVal) {
 		this->pVal += rVal;
 		return (*this);
 	}
-	myReverseIterator &operator += (int rVal){
+	myReverseIterator &operator += (int rVal) {
 		this->pVal -= rVal;
 		return (*this);
 	}
-	int	 operator - (const myReverseIterator& rVal) const{
+	int	 operator - (const myReverseIterator& rVal) const {
 		return (rVal.pVal - this->pVal);
 	}
-	myReverseIterator operator - (int rVal){
+	myReverseIterator operator - (int rVal) {
 		return (myReverseIterator(this->pVal + rVal));
 	}
-	myReverseIterator operator + (int rVal){
+	myReverseIterator operator + (int rVal) {
 		return (myReverseIterator(this->pVal - rVal));
 	}
-	bool operator == (const myReverseIterator& rVal) const{
+	bool operator == (const myReverseIterator& rVal) const {
 		return (this->pVal == rVal.pVal);
 	}
-	bool operator != (const myReverseIterator& rVal) const{
+	bool operator != (const myReverseIterator& rVal) const {
 		return (this->pVal != rVal.pVal);
 	}
-	bool operator <= (const myReverseIterator& rVal) const{
+	bool operator <= (const myReverseIterator& rVal) const {
 		return (this->pVal >= rVal.pVal);
 	}
-	bool operator >= (const myReverseIterator& rVal) const{
+	bool operator >= (const myReverseIterator& rVal) const {
 		return (this->pVal <= rVal.pVal);
 	}
-	bool operator < (const myReverseIterator& rVal) const{
+	bool operator < (const myReverseIterator& rVal) const {
 		return (this->pVal > rVal.pVal);
 	}
-	bool operator > (const myReverseIterator& rVal) const{
+	bool operator > (const myReverseIterator& rVal) const {
 		return (this->pVal < rVal.pVal);
 	}
-	T&	operator* (){
+	T&	operator* () {
 		return (*(this->pVal - 1));
 	}
 	myIterator<T> base() const {
@@ -87,11 +87,11 @@ public:
 	T *operator->() {
 		return (this->pVal - 1);
 	}
-	T&	operator[] (int x){
+	T&	operator[] (int x) {
 		return (*(this->pVal - x - 1));
 	}
 };
 
-}//end ft
+}
 
 #endif

@@ -10,7 +10,7 @@ template	<class T,
 			class Distance = ptrdiff_t,
 			class Pointer = T*,
 			class Reference = T&>
-class myIterator{
+class myIterator {
 protected:
 	T *pVal;
 public:
@@ -19,78 +19,78 @@ public:
     typedef Pointer   pointer;
     typedef Reference reference;
     typedef Category  iterator_category;
-	myIterator() : pVal(NULL){}
-	myIterator(T *val){
+	myIterator() : pVal(NULL) {}
+	myIterator(T *val) {
 		pVal = val;
 	}
-	myIterator(const myIterator& copy){
+	myIterator(const myIterator& copy) {
 		this->operator=(copy);
 	}
 	virtual ~myIterator(){};
-	myIterator &operator=(const myIterator& op){
+	myIterator &operator=(const myIterator& op) {
 		if (this == &op)
 			return (*this);
 		pVal = op.pVal;
 		return (*this);
 	}
-	myIterator &operator ++ (void){
+	myIterator &operator ++ (void) {
 		++pVal;
 		return (*this);
 	}
-	myIterator operator ++ (int){
+	myIterator operator ++ (int) {
 		myIterator it(pVal++);
 		return (it);
 	}
-	myIterator &operator -- (void){
+	myIterator &operator -- (void) {
 		--pVal;
 		return (*this);
 	}
-	myIterator operator -- (int){
+	myIterator operator -- (int) {
 		myIterator it(pVal--);
 		return (it);
 	}
-	myIterator &operator -= (int rVal){
+	myIterator &operator -= (int rVal) {
 		pVal -= rVal;
 		return (*this);
 	}
-	myIterator &operator += (int rVal){
+	myIterator &operator += (int rVal) {
 		pVal += rVal;
 		return (*this);
 	}
-	int	 operator - (const myIterator& rVal) const{
+	int	 operator - (const myIterator& rVal) const {
 		return (pVal - rVal.pVal);
 	}
-	myIterator operator - (int rVal){
+	myIterator operator - (int rVal) {
 		return (myIterator(pVal - rVal));
 	}
-	myIterator operator + (int rVal){
+	myIterator operator + (int rVal) {
 		return (myIterator(pVal + rVal));
 	}
-	bool operator == (const myIterator& rVal) const{
+	bool operator == (const myIterator& rVal) const {
 		return (pVal == rVal.pVal);
 	}
-	bool operator != (const myIterator& rVal) const{
+	bool operator != (const myIterator& rVal) const {
 		return (pVal != rVal.pVal);
 	}
-	bool operator <= (const myIterator& rVal) const{
+	bool operator <= (const myIterator& rVal) const {
 		return (pVal <= rVal.pVal);
 	}
-	bool operator >= (const myIterator& rVal) const{
+	bool operator >= (const myIterator& rVal) const {
 		return (pVal >= rVal.pVal);
 	}
-	bool operator < (const myIterator& rVal) const{
+	bool operator < (const myIterator& rVal) const {
 		return (pVal < rVal.pVal);
 	}
-	bool operator > (const myIterator& rVal) const{
+	bool operator > (const myIterator& rVal) const {
 		return (pVal > rVal.pVal);
 	}
-	virtual T&	operator* (){
+	virtual T&	operator* () {
 		return (*pVal);
 	}
 	virtual T *operator->() {
 		return (pVal);
 	}
-	virtual T&	operator[] (int x){
+	virtual T&	operator[] (int x) {
 		return (*(pVal + x));
 	}
 };
