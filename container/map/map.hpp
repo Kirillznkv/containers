@@ -8,13 +8,13 @@
 # include "reverse_iterator_map.hpp"
 # include "const_reverse_iterator_map.hpp"
 
-namespace ft{
+namespace ft {
 
 template	<class Key,
 			class T,
 			class Compare = ft::less<Key>,
 			class Allocator = std::allocator< pair< const Key, T > > >
-class map{
+class map {
 public:
 	typedef Key										    key_type;
 	typedef T										    mapped_type;
@@ -42,11 +42,11 @@ private:
 	key_compare				_cmp;
 	value_compare			_valueCmp;
 private:
-	void removeOneNode(node *tmp){
+	void removeOneNode(node *tmp) {
 		_alloc.destroy(tmp);
 		_alloc.deallocate(tmp, 1);
 	}
-	void removeTree(node *tmp){
+	void removeTree(node *tmp) {
 		if (tmp && !(tmp->left->isNil()))
 			removeTree(tmp->left);
 		else if (tmp)
@@ -58,18 +58,18 @@ private:
 		if (tmp)
 			removeOneNode(tmp);
 	}
-	node *cloneNode(node *tmp, node *parent){
+	node *cloneNode(node *tmp, node *parent) {
 		node *newNode;
 		newNode = _alloc.allocate(1);
 		_alloc.construct(newNode, node(tmp->value, parent));
-		return (newNode);
+		return newNode;
 	}
-	void copyTree(node **dest, node *srcs){
-		if (isNil(srcs)){
+	void copyTree(node **dest, node *srcs) {
+		if (isNil(srcs)) {
 			*dest = _alloc.allocate(1);
 			_alloc.construct(*dest, node((*dest)->parent), true);
 		}
-		else{
+		else {
 			*dest = cloneNode(srcs, *dest ? (*dest)->parent : NULL);
 			if (!isNil(srcs->left))
 				copyTree(&((*dest)->left));
@@ -78,13 +78,12 @@ private:
 
 		}
 	}
-	void addNode(node **dest, const key_type& k, mapped_type t = mapped_type()){
+	void addNode(node **dest, const key_type& k, mapped_type t = mapped_type()) {
 		*dest = _alloc.allocate(1);
 		node *tmp = *dest;
-		// node a(ft::make_pair( k, t ), NULL);
 		_alloc.construct(tmp, node(ft::make_pair( k, t ), NULL));
 	}
-	void addNil(node **dest){
+	void addNil(node **dest) {
 		*dest = _alloc.allocate(1);
 		node *tmp = *dest;
 		_alloc.construct(tmp, node(tmp, true));
@@ -93,8 +92,8 @@ public:
 	////////////////////////
 	/*-----Constructs-----*/
 	////////////////////////
-	map(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc){}
-	map(const map & copy) : _size(0){
+	map(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : _parent(NULL), _size(0), _cmp(comp), _alloc(alloc) {}
+	map(const map & copy) : _size(0) {
 		this->operator=(copy);
 	}
 	template <class InputIterator>
@@ -103,7 +102,7 @@ public:
 		for (InputIterator it = first; it != last; ++it)
 			this->operator[](it->first) = it->second;
 	}
-	~map(){
+	~map() {
 		removeTree(_parent);
 		_parent = NULL;
 		_size = 0;
@@ -111,41 +110,41 @@ public:
 	///////////////////////
 	/*-----Operators-----*/
 	///////////////////////
-	map &operator=(const map& op){
+	map &operator=(const map& op) {
 		if (this == &op)
-			return (*this);
+			return *this;
 		if (_size)
 			removeTree(_parent);
 		copyTree(&_parent, op._parent);
 		_size = op._size;
-		return (*this);
+		return *this;
 	}
 	//////////////////////
 	/*-----Capacity-----*/
 	//////////////////////
-	bool empty() const{
-		return (_size == 0);
+	bool empty() const {
+		return _size == 0;
 	}
-	size_type size() const{
-		return (_size);
+	size_type size() const {
+		return _size;
 	}
-	size_type max_size() const{
+	size_type max_size() const {
 		size_type val = (pow(2, 64) / sizeof(value_type));
 		val--;
-		return (val);
+		return val;
 	}
 	///////////////////////
 	/*-----Allocator-----*/
 	///////////////////////
-	allocator_type get_allocator() const{
-		return (_alloc);
+	allocator_type get_allocator() const {
+		return _alloc;
 	}
 	////////////////////////////
 	/*-----Element-access-----*/
 	////////////////////////////
-	mapped_type& operator[] (const key_type& k){
+	mapped_type& operator[] (const key_type& k) {
 		mapped_type *res;
-		if (_size == 0){
+		if (_size == 0) {
 			addNode(&_parent, k);
 			addNil(&(_parent->left));
 			addNil(&(_parent->right));
@@ -154,9 +153,9 @@ public:
 			_size++;
 			res = &(_parent->value.second);
 		}
-		else{
+		else {
 			node *tmp = _parent;
-			while (!(tmp->isNil())){
+			while (!(tmp->isNil())) {
 				if (_cmp(tmp->value.first, k))
 					tmp = tmp->right;
 				else if (tmp->value.first == k)
@@ -166,7 +165,7 @@ public:
 			}
 			if (!(tmp->isNil()))
 				res = &(tmp->value.second);
-			else{
+			else {
 				node *p = tmp->parent;
 				node **newTmp;
 				if (p->right == tmp)
@@ -186,46 +185,46 @@ public:
 				res = &(tmp->value.second);
 			}
 		}
-		return (*res);
+		return *res;
 	}
 	///////////////////////
 	/*-----Iterators-----*/
 	///////////////////////
-	iterator begin(){
+	iterator begin() {
 		iterator it;
 		node *tmp = _parent;
-		if (_parent){
+		if (_parent) {
 			while (!(tmp->left->isNil()))
 				tmp = tmp->left;
 			it = iterator(tmp);
 		}
-		return (it);
+		return it;
 	}
-	iterator end(){
+	iterator end() {
 		iterator it;
 		node *tmp = _parent;
 		if (_parent){
-			while (!(tmp->right->isNil())){
+			while (!(tmp->right->isNil())) {
 				tmp = tmp->right;
 			}
 			 tmp = tmp->right;
 			it = iterator(tmp);
 		}
-		return (it);
+		return it;
 	}
-	reverse_iterator rbegin(){
+	reverse_iterator rbegin() {
 		reverse_iterator it;
 		node *tmp = _parent;
-		if (_parent){
-			while (!(tmp->right->isNil())){
+		if (_parent) {
+			while (!(tmp->right->isNil())) {
 				tmp = tmp->right;
 			}
 			 tmp = tmp->right;
 			it = reverse_iterator(tmp);
 		}
-		return (it);
+		return it;
 	}
-	reverse_iterator rend(){
+	reverse_iterator rend() {
 		reverse_iterator it;
 		node *tmp = _parent;
 		if (_parent){
@@ -233,16 +232,16 @@ public:
 				tmp = tmp->left;
 			it = reverse_iterator(tmp);
 		}
-		return (it);
+		return it;
 	}
 	///////////////////////
 	/*-----Observers-----*/
 	///////////////////////
 	key_compare key_comp() const {
-		return (_cmp);
+		return _cmp;
 	}
-	value_compare value_comp() const{
-		return (_valueCmp);
+	value_compare value_comp() const {
+		return _valueCmp;
 	}
 	///////////////////////
 	/*-----Observers-----*/
@@ -251,13 +250,13 @@ public:
 		iterator it = begin();
 		while (it != end() && it->first != k)
 			++it;
-		return (it);
+		return it;
 	}
 	const_iterator find (const key_type& k) const {
 		const_iterator it = begin();
 		while (it != end() && it->first != k)
 			++it;
-		return (it);
+		return it;
 	}
 	size_type count (const key_type& k) const {
 		if (_size){
@@ -279,13 +278,13 @@ public:
 		iterator it = begin();
 		while (it != end() && _cmp(it->first, k))
 			++it;
-		return (it);
+		return it;
 	}
 	const_iterator lower_bound (const key_type& k) const {
 		const_iterator it = begin();
 		while (it != end() && _cmp(it->first, k))
 			++it;
-		return (it);
+		return it;
 	}
 	iterator upper_bound (const key_type& k) {
 		iterator it = begin();
@@ -293,7 +292,7 @@ public:
 			++it;
 		if (it != end() && it->first == k)
 			++it;
-		return (it);
+		return it;
 	}
 	const_iterator upper_bound (const key_type& k) const {
 		const_iterator it = begin();
@@ -301,13 +300,13 @@ public:
 			++it;
 		if (it != end() && it->first == k)
 			++it;
-		return (it);
+		return it;
 	}
 	ft::pair<iterator,iterator> equal_range (const key_type& k) {
-		return (ft::make_pair(lower_bound(k), upper_bound(k)));
+		return ft::make_pair(lower_bound(k), upper_bound(k));
 	}
 	ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
-		return (ft::make_pair(lower_bound(k), upper_bound(k)));
+		return ft::make_pair(lower_bound(k), upper_bound(k));
 	}
 	///////////////////////
 	/*-----Modifiers-----*/
@@ -327,7 +326,7 @@ public:
 	}
 	size_type erase (const key_type& k) {
 		node *tmp = _parent;
-		while (tmp && !(tmp->isNil())){
+		while (tmp && !(tmp->isNil())) {
 			if (_cmp(tmp->value.first, k))
 				tmp = tmp->right;
 			else if (tmp->value.first == k)
@@ -432,7 +431,7 @@ public:
 				--_size;
 			}
 		}
-		return (1);
+		return 1;
 	}
 	void erase (iterator position) {
 		if (position != end())
@@ -444,7 +443,7 @@ public:
 	}
 	ft::pair<iterator,bool> insert (const value_type& val) {
 		node *tmp = _parent;
-		while (tmp && !(tmp->isNil())){
+		while (tmp && !(tmp->isNil())) {
 			if (_cmp(tmp->value.first, val.first))
 				tmp = tmp->right;
 			else if (tmp->value.first == val.first)
@@ -464,7 +463,7 @@ public:
 			else
 				tmp = tmp->left;
 		}
-		return (ft::pair<iterator,bool>(iterator(tmp), true));
+		return ft::pair<iterator,bool>(iterator(tmp), true);
 	}
 	template <class InputIterator>
 	typename ft::enable_if
@@ -491,7 +490,7 @@ public:
 					tmp = tmp->left;
 			}
 		}
-		return (iterator(tmp));
+		return iterator(tmp);
 	}
 	template <class InputIterator>
 	typename ft::enable_if
