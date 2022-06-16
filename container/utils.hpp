@@ -6,15 +6,15 @@
 # include "vector/iterator.hpp"
 # include "vector/reverse_iterator.hpp"
 
-namespace ft{
+namespace ft {
 
 /////////////////////
 /*---Is-Integral---*/
 /////////////////////
-struct true_type{
+struct true_type {
     static const bool	value = true;
 };
-struct false_type{
+struct false_type {
     static const bool	value = false;
 };
 template <class _Tp> struct is_integral				: public false_type {};
@@ -40,8 +40,7 @@ template <class _T>			struct is_iterator< myReverseIterator<_T> >		: public true
 /*---Iterator-Traits---*/
 /////////////////////////
 template<class MyIterator>
-struct iterator_traits
-{
+struct iterator_traits {
     typedef typename MyIterator::difference_type difference_type;
     typedef typename MyIterator::value_type value_type;
     typedef typename MyIterator::pointer pointer;
@@ -49,8 +48,7 @@ struct iterator_traits
     typedef typename MyIterator::iterator_category iterator_category;
 };
 template<class T>
-struct iterator_traits<T*>
-{
+struct iterator_traits<T*> {
     typedef ptrdiff_t difference_type;
     typedef T value_type;
     typedef T* pointer;
@@ -63,7 +61,7 @@ struct iterator_traits<T*>
 ///////////////////
 template< bool B, class T = void > struct enable_if;
 template<class T>
-struct enable_if<true, T>{
+struct enable_if<true, T> {
 	typedef T type;
 };
 
@@ -72,7 +70,7 @@ struct enable_if<true, T>{
 //////////////////////
 template< class InputIt1, class InputIt2 >
 bool lexicographical_compare( InputIt1 first1, InputIt1 last1,
-								InputIt2 first2, InputIt2 last2 ){
+								InputIt2 first2, InputIt2 last2 ) {
 	for ( ; (first1 != last1) && (first2 != last2); ++first1, ++first2 ) {
 		if (*first1 < *first2) return true;
 		if (*first2 < *first1) return false;
@@ -84,7 +82,7 @@ bool lexicographical_compare( InputIt1 first1, InputIt1 last1,
 /*---Pair---*/
 //////////////
 template <class T1, class T2>
-struct pair{
+struct pair {
 public:
 	typedef T1 first_type;
 	typedef T2 second_type;
@@ -93,54 +91,53 @@ public:
 	second_type	second;
 public:
 	pair() {}
-	pair(const first_type& x, const second_type& y) : first(x), second(y){}
-	template<class U, class V> pair(const pair<U, V>& copy) : first(copy.first), second(copy.second){};
-	~pair(){}
+	pair(const first_type& x, const second_type& y) : first(x), second(y) {}
+	template<class U, class V> pair(const pair<U, V>& copy) : first(copy.first), second(copy.second) {};
+	~pair() {}
 
-	pair&	operator=(const pair<first_type, second_type>& op){
+	pair&	operator=(const pair<first_type, second_type>& op) {
 		first = op.first;
 		second = op.second;
 		return (*this);
 	}
 
-	bool operator==(const pair<first_type, second_type>& op) const{
+	bool operator==(const pair<first_type, second_type>& op) const {
 		if (first == op.first && second == op.second)
 			return (true);
 		return (false);
 	}
-	bool operator<(const pair<first_type, second_type>& op) const{
+	bool operator<(const pair<first_type, second_type>& op) const {
 		if (first < op.first)
 			return (true);
 		if (first == op.first && second < op.second)
 			return (true);
 		return (false);
 	}
-	bool operator>(const pair<first_type, second_type>& op) const{
+	bool operator>(const pair<first_type, second_type>& op) const {
 		if (first > op.first)
 			return (true);
 		if (first == op.first && second > op.second)
 			return (true);
 		return (false);
 	}
-	bool operator!=(const pair<first_type, second_type>& op) const{
+	bool operator!=(const pair<first_type, second_type>& op) const {
 		return (!operator==(op));
 	}
-	bool operator<=(const pair<first_type, second_type>& op) const{
+	bool operator<=(const pair<first_type, second_type>& op) const {
 		return (!operator>(op));
 	}
-	bool operator>=(const pair<first_type, second_type>& op) const{
+	bool operator>=(const pair<first_type, second_type>& op) const {
 		return (!operator<(op));
 	}
 };
 
 template< class T1, class T2 >
-ft::pair<T1,T2> make_pair( T1 first, T2 second ){
+ft::pair<T1,T2> make_pair( T1 first, T2 second ) {
 	return (ft::pair<T1,T2>(first, second));
 }
 
 template <class T>
-struct less
-{
+struct less {
 	bool operator() (const T& x, const T& y) const {
 		return x < y;
 	}
