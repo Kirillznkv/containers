@@ -14,9 +14,9 @@ namespace ft {
 ///////////////////////
 /*-----Exception-----*/
 ///////////////////////
-class errorIndex: public std::exception{
+class errorIndex: public std::exception {
 public:
-	const char* what(void) const _NOEXCEPT{
+	const char* what(void) const _NOEXCEPT {
 		return "vector";
 	}
 };
@@ -33,7 +33,7 @@ public:
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
 	typedef myIterator<T>								iterator;
-	typedef myIterator<const T>								const_iterator;
+	typedef myIterator<const T>							const_iterator;
 	typedef myReverseIterator<T>						reverse_iterator;
 private:
 	size_type	_size;
@@ -41,7 +41,7 @@ private:
 	value_type	*_arr;
 	allocator_type	_alloc;
 
-	void		doublingCapacity(){
+	void		doublingCapacity() {
 		_capacity = (!_capacity) ? (1) : (_capacity<<1);
 		value_type *new_arr = _alloc.allocate(_capacity);
 		for (size_type i = 0; i < _size; ++i){
@@ -59,7 +59,7 @@ private:
 		for (size_type i = 0; i < _size; ++i){
 			_alloc.construct(new_arr + i, *(_arr + i));
 			_alloc.destroy(_arr + i);
-			if (!isNewIter && &(*save) == _arr + i){
+			if (!isNewIter && &(*save) == _arr + i) {
 				save = iterator(new_arr);
 				isNewIter = true;
 			}
