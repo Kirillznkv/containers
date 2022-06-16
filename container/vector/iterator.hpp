@@ -5,8 +5,11 @@
 
 namespace ft{
 
-template <class T, class Category = std::random_access_iterator_tag, class Distance = ptrdiff_t,
-          class Pointer = T*, class Reference = T&>
+template	<class T,
+			class Category = std::random_access_iterator_tag,
+			class Distance = ptrdiff_t,
+			class Pointer = T*,
+			class Reference = T&>
 class myIterator{
 protected:
 	T *pVal;

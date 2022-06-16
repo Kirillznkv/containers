@@ -25,8 +25,11 @@ private:
 	myNode& operator=(const myNode& op){return (*this);}
 };
 
-template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
-          class Pointer = T*, class Reference = T&>
+template	<class T = ft::pair<class Key, class Value>,
+			class Category = std::forward_iterator_tag,
+			class Distance = ptrdiff_t,
+			class Pointer = T*,
+			class Reference = T&>
 class myIteratorMap{
 public:
 	typedef T				value_type;

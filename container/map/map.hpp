@@ -10,8 +10,10 @@
 
 namespace ft{
 
-template <class Key, class T, class Compare = ft::less<Key>,
-          class Allocator = std::allocator< pair< const Key, T > > >
+template	<class Key,
+			class T,
+			class Compare = ft::less<Key>,
+			class Allocator = std::allocator< pair< const Key, T > > >
 class map{
 public:
 	typedef Key										    key_type;
@@ -28,8 +30,8 @@ public:
     typedef typename allocator_type::difference_type    difference_type;
     typedef myIteratorMap<value_type>                   iterator;
     typedef myConstIteratorMap<value_type>              const_iterator;
-    typedef myReverseIteratorMap<value_type>			reverse_iterator; // проблема с конструктором
-    typedef myConstReverseIteratorMap<value_type>    	const_reverse_iterator; // проблема с конструктором
+    typedef myReverseIteratorMap<value_type>			reverse_iterator;
+    typedef myConstReverseIteratorMap<value_type>    	const_reverse_iterator;
 private:
 	typedef ft::myNode<value_type> node;
 private:

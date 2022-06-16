@@ -5,8 +5,11 @@
 
 namespace ft{
 
-template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
-          class Pointer = const T*, class Reference = const T&>
+template	<class T = ft::pair<class Key, class Value>,
+			class Category = std::forward_iterator_tag,
+			class Distance = ptrdiff_t,
+			class Pointer = const T*,
+			class Reference = const T&>
 class myConstReverseIteratorMap : public myConstIteratorMap<T, Category, Distance, Pointer, Reference>{
 protected:
 	typedef ft::myNode<T> node;

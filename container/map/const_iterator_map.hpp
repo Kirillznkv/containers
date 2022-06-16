@@ -7,8 +7,11 @@
 
 namespace ft{
 
-template <class T = ft::pair<class Key, class Value>, class Category = std::forward_iterator_tag, class Distance = ptrdiff_t,//add const to Key
-          class Pointer = const T*, class Reference = const T&>
+template	<class T = ft::pair<class Key, class Value>,
+			class Category = std::forward_iterator_tag,
+			class Distance = ptrdiff_t,
+			class Pointer = const T*,
+			class Reference = const T&>
 class myConstIteratorMap{
 public:
 	typedef T				value_type;
