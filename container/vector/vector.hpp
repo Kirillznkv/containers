@@ -125,7 +125,7 @@ public:
 	///////////////////////
 	vector &operator=(const vector& op) {
 		if (this == &op)
-			return (*this);
+			return *this;
 		while (_size)
 			_alloc.destroy(this->_arr + --_size);
 		if (this->_capacity){
@@ -139,16 +139,16 @@ public:
 			for (size_type i = 0; i < this->_size; ++i)
 				_alloc.construct(this->_arr + i, *(op._arr + i));
 		}
-		return (*this);
+		return *this;
 	}
 	bool	operator==(const vector& rVal) {
 		if (this->size() != rVal.size())
-			return (false);
+			return false;
 		int i = -1;
 		while (++i < (int)_size)
 			if (_arr[i] != rVal.at(i))
 				return (false);
-		return (true);
+		return true;
 	}
 	bool	operator!=(const vector& rVal) {
 		return (!operator==(rVal));
@@ -158,44 +158,44 @@ public:
 		while (i < (int)_size && i < (int)rVal.size() && _arr[i] == rVal.at(i))
 			i++;
 		if (i == (int)rVal.size())
-			return (false);
+			return false;
 		else if (i == (int)_size)
-			return (true);
-		return (_arr[i] < rVal.at(i));
+			return true;
+		return _arr[i] < rVal.at(i);
 	}
 	bool	operator>(const vector& rVal) {
 		int i = 0;
 		while (i < (int)_size && i < (int)rVal.size() && _arr[i] == rVal.at(i))
 			i++;
 		if (i == (int)_size)
-			return (false);
+			return false;
 		else if (i == (int)rVal.size())
 			return (true);
-		return (_arr[i] > rVal.at(i));
+		return _arr[i] > rVal.at(i);
 	}
 	bool	operator>=(const vector& rVal) {
-		return (!operator<(rVal));
+		return !operator<(rVal);
 	}
 	bool	operator<=(const vector& rVal) {
-		return (!operator>(rVal));
+		return !operator>(rVal);
 	}
 	reference	operator[](size_type i) {
-		return (*(_arr + i));
+		return *(_arr + i);
 	}
 	const_reference	operator[](size_type i) const {
-		return (*(_arr + i));
+		return *(_arr + i);
 	}
 	//////////////////////////////////
 	/*-----begin-end-front-back-----*/
 	//////////////////////////////////
-	iterator begin() { return (iterator(_arr)); }
-	iterator end() { return (iterator(_arr + _size)); }
-	reverse_iterator rbegin() { return (reverse_iterator(_arr + _size)); }
-	reverse_iterator rend() { return (reverse_iterator(_arr)); }
-	const_reference	front() const { return (*_arr); }
-	reference	front() { return (*_arr); }
-	const_reference	back() const { return (_arr[_size - 1]); }
-	reference	back() { return (_arr[_size - 1]); }
+	iterator begin() { return iterator(_arr); }
+	iterator end() { return iterator(_arr + _size); }
+	reverse_iterator rbegin() { return reverse_iterator(_arr + _size); }
+	reverse_iterator rend() { return reverse_iterator(_arr); }
+	const_reference	front() const { return *_arr; }
+	reference	front() { return *_arr; }
+	const_reference	back() const { return _arr[_size - 1]; }
+	reference	back() { return _arr[_size - 1]; }
 	///////////////////////
 	/*-----Functions-----*/
 	///////////////////////

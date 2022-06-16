@@ -31,67 +31,67 @@ public:
 		if (this == &op)
 			return (*this);
 		pVal = op.pVal;
-		return (*this);
+		return *this;
 	}
 	myIterator &operator ++ (void) {
 		++pVal;
-		return (*this);
+		return *this;
 	}
 	myIterator operator ++ (int) {
 		myIterator it(pVal++);
-		return (it);
+		return it;
 	}
 	myIterator &operator -- (void) {
 		--pVal;
-		return (*this);
+		return *this;
 	}
 	myIterator operator -- (int) {
 		myIterator it(pVal--);
-		return (it);
+		return it;
 	}
 	myIterator &operator -= (int rVal) {
 		pVal -= rVal;
-		return (*this);
+		return *this;
 	}
 	myIterator &operator += (int rVal) {
 		pVal += rVal;
-		return (*this);
+		return *this;
 	}
 	int	 operator - (const myIterator& rVal) const {
-		return (pVal - rVal.pVal);
+		return pVal - rVal.pVal;
 	}
 	myIterator operator - (int rVal) {
-		return (myIterator(pVal - rVal));
+		return myIterator(pVal - rVal);
 	}
 	myIterator operator + (int rVal) {
-		return (myIterator(pVal + rVal));
+		return myIterator(pVal + rVal);
 	}
 	bool operator == (const myIterator& rVal) const {
-		return (pVal == rVal.pVal);
+		return pVal == rVal.pVal;
 	}
 	bool operator != (const myIterator& rVal) const {
-		return (pVal != rVal.pVal);
+		return pVal != rVal.pVal;
 	}
 	bool operator <= (const myIterator& rVal) const {
-		return (pVal <= rVal.pVal);
+		return pVal > rVal.pVal;
 	}
 	bool operator >= (const myIterator& rVal) const {
-		return (pVal >= rVal.pVal);
+		return pVal >= rVal.pVal;
 	}
 	bool operator < (const myIterator& rVal) const {
-		return (pVal < rVal.pVal);
+		return pVal < rVal.pVal;
 	}
 	bool operator > (const myIterator& rVal) const {
-		return (pVal > rVal.pVal);
+		return pVal > rVal.pVal;
 	}
 	virtual T&	operator* () {
-		return (*pVal);
+		return *pVal;
 	}
 	virtual T *operator->() {
-		return (pVal);
+		return pVal;
 	}
 	virtual T&	operator[] (int x) {
-		return (*(pVal + x));
+		return *(pVal + x);
 	}
 };
 
